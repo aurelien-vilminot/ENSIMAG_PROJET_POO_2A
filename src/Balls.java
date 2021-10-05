@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class Balls {
     private ArrayList<Point> ballsList = new ArrayList<Point>();
+    private ArrayList<int[]> posInit = new ArrayList<int[]>();
 
     public Balls() {
         for (int i = 0 ; i < 10 ; ++i) {
@@ -11,7 +12,9 @@ public class Balls {
     }
 
     void translate(int dx, int dy) {
-
+        for (Point ball : this.ballsList) {
+            ball.translate(dx, dy);
+        }
     }
 
     void reInit() {
@@ -22,7 +25,7 @@ public class Balls {
     public String toString() {
         String strToReturn = null;
         for (Point ball : this.ballsList) {
-            strToReturn = ball.x + ';' + ball.y + "\n";
+            strToReturn += ball.x + ";" + ball.y + "\n";
         }
         return strToReturn;
     }
