@@ -6,8 +6,16 @@ public class Balls {
     private ArrayList<int[]> posInit = new ArrayList<int[]>();
 
     public Balls() {
-        for (int i = 0 ; i < 10 ; ++i) {
+        for (int i = 0; i < 10; ++i) {
             ballsList.add(new Point(i, 0));
+            posInit.add(new int[]{i, 0});
+        }
+    }
+
+    public Balls(Point... tab) {
+        for (Point ball : tab) {
+            ballsList.add(ball);
+            posInit.add(new int[]{ball.x, ball.y});
         }
     }
 
@@ -18,12 +26,18 @@ public class Balls {
     }
 
     void reInit() {
+        for (int i = 0; i < this.ballsList.size(); i++) {
+            translateInit(ballsList.get(i), posInit.get(i));
+        }
+    }
 
+    private void translateInit(Point ball, int[] pos) {
+        ball.move(pos[0], pos[1]);
     }
 
     @Override
     public String toString() {
-        String strToReturn = null;
+        String strToReturn = "";
         for (Point ball : this.ballsList) {
             strToReturn += ball.x + ";" + ball.y + "\n";
         }
