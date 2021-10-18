@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class Grid {
 	private Cell[][] cellArray;
@@ -78,33 +79,14 @@ public class Grid {
 		ArrayList<Cell> nArray = new ArrayList<Cell>();
 		int w = this.width - 1;
 		int h = this.height - 1;
-
-		if (x != 0) {
-			nArray.add(cellArray[x - 1][y]);
-			if (y != 0) {
-				nArray.add(cellArray[x - 1][y - 1]);
-			}
-			if (y != w) {
-				nArray.add(cellArray[x - 1][y + 1]);
-			}
-		}
-		if (y != 0) {
-			nArray.add(cellArray[x][y - 1]);
-			if (x != h) {
-				nArray.add(cellArray[x + 1][y - 1]);
-			}
-		}
-		if (x != h) {
-			nArray.add(cellArray[x + 1][y]);
-			if (y != h) {
-				nArray.add(cellArray[x + 1][y + 1]);
-
-			}
-		}
-		if (y != h) {
-			nArray.add(cellArray[x][y + 1]);
-		}
-
+		nArray.add(this.cellArray[Math.floorMod(x-1, h)][Math.floorMod(y-1, w)]); // topLeft
+		nArray.add(this.cellArray[Math.floorMod(x-1, h)][y]); // top
+		nArray.add(this.cellArray[Math.floorMod(x-1, h)][Math.floorMod(y+1, w)]); // topRight
+		nArray.add(this.cellArray[x][Math.floorMod(y+1, w)]); // right
+		nArray.add(this.cellArray[Math.floorMod(x+1, h)][Math.floorMod(y+1, w)]); // bottomRight
+		nArray.add(this.cellArray[Math.floorMod(x+1, h)][y]); // bottom
+		nArray.add(this.cellArray[Math.floorMod(x+1, h)][Math.floorMod(y-1, w)]); // bottomLeft
+		nArray.add(this.cellArray[x][Math.floorMod(y-1, w)]); // left
 		return nArray;
 	}
 
