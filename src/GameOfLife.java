@@ -25,7 +25,7 @@ public class GameOfLife {
 			Cell c0 = this.cellArray[c.x][c.y];
 			c0.x = c.x;
 			c0.y = c.y;
-			c0.alive = c.alive;
+			c0.state = c.state;
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class GameOfLife {
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; i < this.width; j++) {
 				Cell c0 = this.initArray[i][j];
-				this.cellArray[i][j] = new Cell(c0.x, c0.y, c0.alive);
+				this.cellArray[i][j] = new Cell(c0.x, c0.y, c0.state);
 			}
 		}
 	}
