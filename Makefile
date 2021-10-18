@@ -32,6 +32,8 @@ testBalls:
 testBallsSimulator:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBallsSimulator.java; java -classpath bin:bin/gui.jar TestBallsSimulator
 
+testGameOfLife:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestGameOfLife.java; java -classpath bin:bin/gui.jar TestGameOfLife
 
 # Execution:
 # on peut taper directement la ligne de commande :
