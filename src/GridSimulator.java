@@ -6,32 +6,34 @@ import gui.Simulable;
 import java.awt.*;
 
 public class GridSimulator implements Simulable {
-	private Grid grid;
+	private static final String BORDERCOLOR = "#0000ff";
+
 	private GUISimulator gui;
-	private int width;
-	private int height;
 
-	private int nbCellule;
+	private Grid grid;
 	private int cellSize;
-
 	private int linesCell;
 	private int columCell;
 
 	private String gameName;
 
-	public GridSimulator(GUISimulator gui, String gameName, int cellSize, Cell... tab) {
+	public GridSimulator(GUISimulator gui, String gameName, int cellSize, Cell... cells) {
 		this.gui = gui;
-		this.width = gui.getPanelWidth();
-		this.height = gui.getPanelHeight();
 
+		// Calculate the colums and lines number depending on cell size
 		this.cellSize = cellSize;
-		this.columCell = this.width / this.cellSize;
-		this.linesCell = this.height / this.cellSize;
+		this.columCell = this.gui.getPanelWidth() / this.cellSize;
+		this.linesCell = this.gui.getPanelHeight() / this.cellSize;
 
+		// Check dimensions
+		if (this.cellSize < 1 || this.columCell < 1 || this.linesCell < 1) {
+			throw new IllegalArgumentException("You must enter correct sizes for cells and window");
+		}
+
+		// Init the game
+		// The player must init cells using "cells" parameter
 		this.gameName = gameName;
-
-		this.grid = new Grid(this.linesCell, this.columCell, this.gameName, tab);
-
+		this.grid = new Grid(this.linesCell, this.columCell, this.gameName, cells);
 	}
 
 	public void draw() {
@@ -41,8 +43,8 @@ public class GridSimulator implements Simulable {
 		for (int i = 0; i < this.linesCell; i++) {
 			for (int j = 0; j < this.columCell; j++) {
 				String cellColor = cellArray[i][j].getCellColor();
-				gui.addGraphicalElement(new Rectangle(j * this.cellSize + padding, i * this.cellSize + padding,
-						Color.decode("#0000ff"), Color.decode(cellColor), this.cellSize));
+				gui.addGraphicalElement(new Rectangle(i * this.cellSize + padding, j * this.cellSize + padding,
+						Color.decode(BORDERCOLOR), Color.decode(cellColor), this.cellSize));
 			}
 		}
 	}

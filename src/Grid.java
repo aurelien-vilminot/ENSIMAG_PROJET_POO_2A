@@ -1,6 +1,4 @@
-import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Grid {
 	private Cell[][] cellArray;
@@ -9,7 +7,7 @@ public class Grid {
 	private int width;
 	private int stepNumber = 0;
 
-	public Grid(int height, int width, String gameName, Cell... tab) {
+	public Grid(int height, int width, String gameName, Cell... cells) {
 		this.cellArray = new Cell[height][width];
 		this.initArray = new Cell[height][width];
 		this.height = height;
@@ -18,21 +16,24 @@ public class Grid {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				switch (gameName) {
-				case "Conway":
-					this.cellArray[i][j] = new CellConway(i, j, 0);
-					this.initArray[i][j] = new CellConway(i, j, 0);
-					break;
-				case "Immigration":
-					this.cellArray[i][j] = new CellImmigration(i, j, 0);
-					this.initArray[i][j] = new CellImmigration(i, j, 0);
-					break;
-				default:
-					// TODO: Exception
-					System.out.println("!!! THE GAME DOESN'T EXIST !!!");
+					case "Conway":
+						this.cellArray[i][j] = new CellConway(i, j, 0);
+						this.initArray[i][j] = new CellConway(i, j, 0);
+						break;
+					case "Immigration":
+						this.cellArray[i][j] = new CellImmigration(i, j, 0);
+						this.initArray[i][j] = new CellImmigration(i, j, 0);
+						break;
+					default:
+						// TODO: Exception
+						System.out.println("!!! THE GAME DOESN'T EXIST !!!");
 				}
 			}
 		}
-		for (Cell c : tab) {
+		for (Cell c : cells) {
+			if (c.x > this.width - 1 || c.y > this.height - 1) {
+				throw new IllegalArgumentException("Init cells must be placed into the grid");
+			}
 			this.cellArray[c.x][c.y].state = c.state;
 			this.initArray[c.x][c.y].state = c.state;
 		}
@@ -59,15 +60,15 @@ public class Grid {
 			for (int j = 0; j < width; j++) {
 				Cell c0 = this.initArray[i][j];
 				switch (gameName) {
-				case "Conway":
-					this.cellArray[i][j] = new CellConway(c0.x, c0.y, c0.state);
-					break;
-				case "Immigration":
-					this.cellArray[i][j] = new CellImmigration(c0.x, c0.y, c0.state);
-					break;
-				default:
-					// TODO: Exception
-					System.out.println("!!! THE GAME DOESN'T EXIST !!!");
+					case "Conway":
+						this.cellArray[i][j] = new CellConway(c0.x, c0.y, c0.state);
+						break;
+					case "Immigration":
+						this.cellArray[i][j] = new CellImmigration(c0.x, c0.y, c0.state);
+						break;
+					default:
+						// TODO: Exception
+						System.out.println("!!! THE GAME DOESN'T EXIST !!!");
 				}
 			}
 		}
