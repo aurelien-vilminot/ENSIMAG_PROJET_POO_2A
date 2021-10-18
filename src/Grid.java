@@ -18,66 +18,95 @@ public class Grid {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				switch (gameName) {
-					case "Conway":
-						this.cellArray[i][j] = new CellConway(i, j);
-						this.initArray[i][j] = new CellConway(i, j);
-						break;
-					case "Immigration":
-						this.cellArray[i][j] = new CellImmigration(i, j, 0);
-						this.initArray[i][j] = new CellImmigration(i, j, 0);
-						break;
-					default:
-						// TODO: Exception
-						System.out.println("!!! THE GAME DOESN'T EXIST !!!");
+				case "Conway":
+					this.cellArray[i][j] = new CellConway(i, j, 0);
+					this.initArray[i][j] = new CellConway(i, j, 0);
+					break;
+				case "Immigration":
+					this.cellArray[i][j] = new CellImmigration(i, j, 0);
+					this.initArray[i][j] = new CellImmigration(i, j, 0);
+					break;
+				default:
+					// TODO: Exception
+					System.out.println("!!! THE GAME DOESN'T EXIST !!!");
 				}
 			}
 		}
 		for (Cell c : tab) {
-			Cell c0 = this.cellArray[c.x][c.y];
-			c0.state = c.state;
+			this.cellArray[c.x][c.y].state = c.state;
+			this.initArray[c.x][c.y].state = c.state;
 		}
 	}
-	
+
 	public Cell[][] getCellArray() {
 		return this.cellArray;
 	}
-	
+
 	public int getHeight() {
 		return this.height;
 	}
-	
+
 	public int getWidth() {
 		return this.width;
 	}
-	
+
 	public int getStep() {
 		return this.stepNumber;
 	}
 
-	public void reInit() {
-		for (int i = 0; i < this.height; i++) {
-			for (int j = 0; j < this.width; j++) {
+	public void reInit(String gameName) {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
 				Cell c0 = this.initArray[i][j];
-				this.cellArray[i][j] = new Cell(c0.x, c0.y, c0.state);
+				switch (gameName) {
+				case "Conway":
+					this.cellArray[i][j] = new CellConway(c0.x, c0.y, c0.state);
+					break;
+				case "Immigration":
+					this.cellArray[i][j] = new CellImmigration(c0.x, c0.y, c0.state);
+					break;
+				default:
+					// TODO: Exception
+					System.out.println("!!! THE GAME DOESN'T EXIST !!!");
+				}
 			}
 		}
 	}
 
-	
 	public ArrayList<Cell> getNeighbours(int x, int y) {
 		ArrayList<Cell> nArray = new ArrayList<Cell>();
-		if (x == 0){
-			if (y == 0) {
-				nArray.add(cellArray[x][y+1]);
-				nArray.add(cellArray[x+1][y-1]);
-				nArray.add(cellArray[x+1][y]);
-				nArray.add(cellArray[x+1][y+1]);
+		int w = this.width - 1;
+		int h = this.height - 1;
+
+		if (x != 0) {
+			nArray.add(cellArray[x - 1][y]);
+			if (y != 0) {
+				nArray.add(cellArray[x - 1][y - 1]);
+			}
+			if (y != w) {
+				nArray.add(cellArray[x - 1][y + 1]);
 			}
 		}
-		// TODO
+		if (y != 0) {
+			nArray.add(cellArray[x][y - 1]);
+			if (x != h) {
+				nArray.add(cellArray[x + 1][y - 1]);
+			}
+		}
+		if (x != h) {
+			nArray.add(cellArray[x + 1][y]);
+			if (y != h) {
+				nArray.add(cellArray[x + 1][y + 1]);
+
+			}
+		}
+		if (y != h) {
+			nArray.add(cellArray[x][y + 1]);
+		}
+
 		return nArray;
 	}
-	
+
 	public void step() {
 		int[][] stateArray = new int[this.height][this.width];
 
@@ -97,7 +126,7 @@ public class Grid {
 	}
 
 	public String getCellColor(int x, int y) {
-			return this.cellArray[y][x].getCellColor();
+		return this.cellArray[x][y].getCellColor();
 	}
 
 	@Override
@@ -111,9 +140,11 @@ public class Grid {
 					res += "X";
 				}
 			}
-			if (i != this.height-1) { res += "\n"; }
+			if (i != this.height - 1) {
+				res += "\n";
+			}
 		}
-		return "TODO";
+		return res;
 	}
 
 }
