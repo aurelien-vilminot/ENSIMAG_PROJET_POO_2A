@@ -4,7 +4,7 @@ public class CellConway extends Cell {
 	public CellConway(int x, int y) {
 		super(x, y);
 	}
-	
+
 	public CellConway(int x, int y, int state) {
 		super(x, y, state);
 	}
@@ -27,13 +27,13 @@ public class CellConway extends Cell {
 			// Rule 2: Any dead cell with three live neighbours becomes a live cell
 			newState = 1;
 		} else {
-			// Rule 3: All other live cells die in the next generation. Similarly, all other dead cells stay dead
+			// Rule 3: All other live cells die in the next generation. Similarly, all other
+			// dead cells stay dead
 			newState = 0;
 		}
 		return newState;
 	}
 
-	//@Override
 	public String getCellColor() {
 		if (this.state == 0) {
 			return "#F2F2F2";
