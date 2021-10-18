@@ -6,7 +6,7 @@ import gui.Simulable;
 import java.awt.*;
 
 public class GridSimulator implements Simulable {
-	private static final String BORDERCOLOR = "#0000ff";
+	private static final String BORDERCOLOR = "#aaaaaa";
 
 	private GUISimulator gui;
 
