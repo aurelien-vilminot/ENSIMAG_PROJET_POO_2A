@@ -27,9 +27,13 @@ public class GridSimulator implements Simulable {
         this.linesCell = this.height / this.cellSize;
 
         this.grid = new Grid(this.linesCell, this.columCell, gameName, tab);
+
     }
 
     public void draw() {
+        // ICI CELL N'EST PLUS UNE CELLCONWAY
+        System.out.println(this.grid.getCellArray()[0][0] instanceof CellConway);
+
         Cell[][] cellArray = this.grid.getCellArray();
         int widthPadding = 0;
         int heightPadding = 0;
@@ -52,6 +56,7 @@ public class GridSimulator implements Simulable {
 
     @Override
     public void restart() {
+        System.out.println("Je suis restart");
         this.grid.reInit();
         gui.reset();
         this.draw();
