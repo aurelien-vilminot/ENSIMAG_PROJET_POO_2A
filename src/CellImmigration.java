@@ -2,17 +2,24 @@ import java.util.ArrayList;
 
 public class CellImmigration extends Cell {
 	protected static int n = 0;
+	private static String[] stateColor;
 
 	public CellImmigration(int x, int y, int state) {
 		super(x, y, state);
 		if (n == 0) {
-			System.out.println("!!! DEFINE n WITH setN STATIC METHOD !!!");
+			throw new IllegalArgumentException("State number must be defined with setN() static method");
 		}
 	}
 
 	// User has to define n using this static method
 	public static void setN(int n0) {
 		n = n0;
+		stateColor = new String[n];
+		int stepColor = 255 / n;
+		for (int i = 0 ; i < n ; i++) {
+			// TODO: attenuation de couleur. La couleur doit être stockée en hexa ("#FFFFF") directement dans stateColor
+			//stateColor[] = ;
+		}
 	}
 
 	public int nextState(ArrayList<Cell> neighbours) {
@@ -37,7 +44,6 @@ public class CellImmigration extends Cell {
 	}
 
 	public String getCellColor() {
-		// TODO
-		return "";
+		return stateColor[this.state];
 	}
 }
