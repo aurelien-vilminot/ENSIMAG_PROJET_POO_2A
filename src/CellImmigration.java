@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.ArrayList;
 
 public class CellImmigration extends Cell {
@@ -18,8 +17,10 @@ public class CellImmigration extends Cell {
 	// User has to define n using this static method
 	public static void setN(int n0) {
 		n = n0;
+
+		// Define colors depending steps
 		stateColor = new String[n];
-		int stepAlpha = 255 / n;
+		int stepAlpha = 255 / (n-1);
 		for (int i = 0 ; i < n ; i++) {
 			int scaledColor = 255 - (i*stepAlpha);
 			stateColor[i] = String.format("#%02x%02x%02x", scaledColor, scaledColor, scaledColor);

@@ -1,12 +1,11 @@
 import gui.GUISimulator;
-import gui.Oval;
 import gui.Rectangle;
 import gui.Simulable;
 
 import java.awt.*;
 
 public class GridSimulator implements Simulable {
-	private static final String BORDERCOLOR = "#aaaaaa";
+	private static final String BORDERCOLOR = "#FCBACB";
 
 	private GUISimulator gui;
 
