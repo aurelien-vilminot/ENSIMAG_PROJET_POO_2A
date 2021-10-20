@@ -21,7 +21,8 @@ public class CellImmigration extends Cell {
 		stateColor = new String[n];
 		int stepAlpha = 255 / n;
 		for (int i = 0 ; i < n ; i++) {
-			stateColor[i] = String.format("#%02x%02x%02x", 255 - (i*stepAlpha), 255 - (i*stepAlpha), 255 - (i*stepAlpha));
+			int scaledColor = 255 - (i*stepAlpha);
+			stateColor[i] = String.format("#%02x%02x%02x", scaledColor, scaledColor, scaledColor);
 		}
 	}
 
