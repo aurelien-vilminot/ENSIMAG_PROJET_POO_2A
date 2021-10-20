@@ -38,6 +38,9 @@ testGameOfLife:
 testImmigration:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestImmigration.java; java -classpath bin:bin/gui.jar TestImmigration
 
+testSchelling:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSchelling.java; java -classpath bin:bin/gui.jar TestSchelling
+
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin TestGUI

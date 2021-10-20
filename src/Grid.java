@@ -25,6 +25,10 @@ public class Grid {
 						this.cellArray[i][j] = new CellImmigration(i, j, 0);
 						this.initArray[i][j] = new CellImmigration(i, j, 0);
 						break;
+					case "Schelling":
+						this.cellArray[i][j] = new CellSchelling(i, j, 0);
+						this.initArray[i][j] = new CellSchelling(i, j, 0);
+						break;
 					default:
 						// TODO: Exception
 						System.out.println("!!! THE GAME DOESN'T EXIST !!!");
@@ -66,6 +70,9 @@ public class Grid {
 						break;
 					case "Immigration":
 						this.cellArray[i][j] = new CellImmigration(c0.x, c0.y, c0.state);
+						break;
+					case "Schelling":
+						this.cellArray[i][j] = new CellSchelling(c0.x, c0.y, c0.state);
 						break;
 					default:
 						// TODO: Exception

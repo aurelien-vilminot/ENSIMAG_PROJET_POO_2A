@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class CellImmigration extends Cell {
-	protected static int n = 0;
+	private static int n = 0;
 	private static String[] stateColor;
 
 	public CellImmigration(int x, int y, int state) {
