@@ -8,6 +8,13 @@ public class Grid {
 	private int width;
 	private int stepNumber = 0;
 
+	/* 
+	Création d'une grille contenant les cellules spécifique au jeu souhaité
+	int height = hauteur  de la grille
+	int width = largeur de la grille
+	String gameName = nom du jeu, utiliser les créer le bon type de cellules, règles du jeu ...
+	Cell... cells = cellules constituants la grille
+	*/
 	public Grid(int height, int width, String gameName, Cell... cells) {
 		this.cellArray = new Cell[height][width];
 		this.initArray = new Cell[height][width];
@@ -44,6 +51,7 @@ public class Grid {
 		}
 	}
 
+	/* récupération des attributs privés */
 	public Cell[][] getCellArray() {
 		return this.cellArray;
 	}
@@ -60,6 +68,7 @@ public class Grid {
 		return this.stepNumber;
 	}
 
+	/* Réinitialisation de la grille contenant les cellules du jeu souhaité */
 	public void reInit(String gameName) {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
@@ -82,6 +91,11 @@ public class Grid {
 		}
 	}
 
+	/* 
+	Renvoie la liste des voisins d'une cellule donnée, en faisant attention si la ceullule se trouve sur les bords ou non.
+	int x = position de la cellule sur la grille
+	int y = position de la cellule sur la grille
+	*/
 	public ArrayList<Cell> getNeighbours(int x, int y) {
 		ArrayList<Cell> nArray = new ArrayList<Cell>();
 		int w = this.width - 1;
@@ -97,6 +111,9 @@ public class Grid {
 		return nArray;
 	}
 
+	/* 
+	Fait avancer d'un pas le jeu actuel, en mettant à jour les états des différentes cellules
+	*/
 	public void step() {
 		int[][] stateArray = new int[this.height][this.width];
 

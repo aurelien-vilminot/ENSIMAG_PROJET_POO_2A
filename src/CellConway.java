@@ -1,14 +1,21 @@
 import java.util.ArrayList;
 
+
 public class CellConway extends Cell {
+	/* construction des cellules spécifiques à Conway */
 	public CellConway(int x, int y) {
 		super(x, y);
 	}
 
+	/* construction des cellules spécifiques à Conway */
 	public CellConway(int x, int y, int state) {
 		super(x, y, state);
 	}
 
+	/* 
+	Donne le prochain état de la cellule sur laquelle on appelle la méthode
+	ArrayList<Cell> neighbours = la liste de cellule des voisins 
+	*/
 	@Override
 	public int nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
@@ -34,6 +41,7 @@ public class CellConway extends Cell {
 		return newState;
 	}
 
+	/* retourne la couleur selon l'état de la cellule */
 	public String getCellColor() {
 		if (this.state == 0) {
 			return "#F2F2F2";
