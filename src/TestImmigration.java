@@ -8,10 +8,10 @@ public class TestImmigration {
         CellImmigration.setN(3);
         CellImmigration[] cellImmigrations = {
                 new CellImmigration(3, 3, 1),
-                new CellImmigration(5, 3, 1),
-                new CellImmigration(4, 4, 1),
+                new CellImmigration(5, 3, 2),
+                new CellImmigration(4, 4, 2),
                 new CellImmigration(5, 4, 1),
-                new CellImmigration(4, 5, 1),
+                new CellImmigration(4, 5, 2),
 
         };
         gui.setSimulable(new GridSimulator(gui, "Immigration", 50, cellImmigrations));

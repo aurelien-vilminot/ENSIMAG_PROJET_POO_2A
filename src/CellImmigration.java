@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 public class CellImmigration extends Cell {
@@ -15,10 +16,12 @@ public class CellImmigration extends Cell {
 	public static void setN(int n0) {
 		n = n0;
 		stateColor = new String[n];
-		int stepColor = 255 / n;
+		int stepAlpha = 255 / n;
+		int alpha = 255;
 		for (int i = 0 ; i < n ; i++) {
-			// TODO: attenuation de couleur. La couleur doit être stockée en hexa ("#FFFFF") directement dans stateColor
-			//stateColor[] = ;
+			Color scaledColor = new Color(255,255,255, alpha);
+			stateColor[i] = String.format("#%02x%02x%02x", scaledColor.getRed(), scaledColor.getGreen(), scaledColor.getBlue());
+			alpha -= stepAlpha;
 		}
 	}
 
