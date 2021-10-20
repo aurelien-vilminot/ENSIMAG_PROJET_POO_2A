@@ -10,6 +10,9 @@ public class CellImmigration extends Cell {
 		if (n == 0) {
 			throw new IllegalArgumentException("State number must be defined with setN() static method");
 		}
+		if (state >= n) {
+			throw new IllegalArgumentException("State number must be inferior to n");
+		}
 	}
 
 	// User has to define n using this static method
@@ -25,7 +28,7 @@ public class CellImmigration extends Cell {
 	public int nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
 		int newState;
-		int next = (this.state + 1) % (this.n);
+		int next = (this.state + 1) % (n);
 
 		for (Cell c : neighbours) {
 			if (c.state == next) {
@@ -33,7 +36,7 @@ public class CellImmigration extends Cell {
 			}
 		}
 
-		if (nbLivingN > 3) {
+		if (nbLivingN >= 3) {
 			// A cell in state k becomes k + 1 (mod n) if and only if it has 3+ neighbours
 			// in state k + 1 (mod n)
 			newState = next;
