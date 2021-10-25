@@ -16,6 +16,10 @@ public class TestSchelling {
                 new CellSchelling(4, 2, 2),
                 new CellSchelling(9, 5, 2),
                 new CellSchelling(1, 9, 2),
+                new CellSchelling(7, 7, 2),
+                new CellSchelling(8, 7, 1),
+                new CellSchelling(8, 8, 1),
+                new CellSchelling(7, 8, 1),
         };
         gui.setSimulable(new GridSimulator(gui, "Schelling", 50, cellSchellings));
     }

@@ -27,10 +27,12 @@ public class CellImmigration extends Cell {
 		}
 	}
 
-	public int nextState(ArrayList<Cell> neighbours) {
+	public ArrayList<Integer> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
-		int newState;
 		int next = (this.state + 1) % (n);
+		ArrayList<Integer> coordStateArray = new ArrayList<Integer>();
+		coordStateArray.add(this.x);
+		coordStateArray.add(this.y);
 
 		for (Cell c : neighbours) {
 			if (c.state == next) {
@@ -41,11 +43,11 @@ public class CellImmigration extends Cell {
 		if (nbLivingN >= 3) {
 			// A cell in state k becomes k + 1 (mod n) if and only if it has 3+ neighbours
 			// in state k + 1 (mod n)
-			newState = next;
+			coordStateArray.add(next);
 		} else {
-			newState = this.state;
+			coordStateArray.add(this.state);
 		}
-		return newState;
+		return coordStateArray;
 	}
 
 	public String getCellColor() {

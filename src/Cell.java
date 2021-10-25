@@ -26,9 +26,9 @@ public class Cell {
 	Donne le prochain état de la cellule sur laquelle on appelle la méthode, méthode créee pour être override par les classes héritées
 	ArrayList<Cell> neighbours = la liste de cellule des voisins 
 	 */
-	public int nextState(ArrayList<Cell> neighbours) {
+	public ArrayList<Integer> nextState(ArrayList<Cell> neighbours) {
 		System.out.println("!!! nextState: YOU SHOULD NOT BE USING ME !!!");
-		return 0;
+		return null;
 	}
 
 	/* 

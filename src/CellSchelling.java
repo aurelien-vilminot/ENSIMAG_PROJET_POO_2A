@@ -43,36 +43,43 @@ public class CellSchelling extends Cell {
         // First color corresponds to a free lodgment
         colors.add("#FFFFFF");
 
+        // Add unique color in the color array
         Random random = new Random();
         for (int i = 1 ; i < c ; i++) {
             String randomColor;
             do {
                 randomColor = String.format("#%02x%02x%02x", random.nextInt(256), random.nextInt(256), random.nextInt(256));
-            } while (colors.contains(randomColor));
+            } while (colors.contains(randomColor) && !Objects.equals(randomColor, "#FFFFFF"));
             colors.add(randomColor);
         }
     }
 
+    // TODO : trouver une structure adaptée (tuple ?)
     @Override
-    public int nextState(ArrayList<Cell> neighbours) {
-        int nbLivingN = 0;
-        int newState;
+    public ArrayList<Integer> nextState(ArrayList<Cell> neighbours) {
+        int nbNeighboors = 0;
+        ArrayList<Integer> coordStateArray = new ArrayList<Integer>();
+        coordStateArray.add(this.x);
+        coordStateArray.add(this.y);
 
         for (Cell c : neighbours) {
             if (c.state != this.state && c.state != 0) {
-                nbLivingN++;
+                ++nbNeighboors;
             }
         }
 
-        if (nbLivingN > K) {
+        if (nbNeighboors > K) {
             CellSchelling newCellLodgement = freeLodgment.remove();
             freeLodgment.add(this);
-            newCellLodgement.state = this.state;
-            newState = 0;
+
+            coordStateArray.add(0);
+            coordStateArray.add(newCellLodgement.x);
+            coordStateArray.add(newCellLodgement.y);
+            coordStateArray.add(this.state);
         } else {
-            newState = this.state;
+            coordStateArray.add(this.state);
         }
-        return newState;
+        return coordStateArray;
     }
 
     public String getCellColor() {
