@@ -2,7 +2,7 @@ import java.util.*;
 
 public class CellSchelling extends Cell {
     private static int K=0;
-    private static Queue<CellSchelling> freeLodgment = new LinkedList<CellSchelling>();
+    private static ArrayList<int[]> freeLodgment = new ArrayList<>();
     private static ArrayList<String> colors;
 
     public CellSchelling(int x, int y) {
@@ -13,7 +13,16 @@ public class CellSchelling extends Cell {
         if (colors == null) {
             throw new IllegalArgumentException("Colors number must be defined with setColors() static method");
         }
-        freeLodgment.add(this);
+
+        int[] newElement = new int[]{this.x, this.y};
+        if (!freeLodgment.isEmpty()) {
+            int[] lastElement = freeLodgment.get(freeLodgment.size() - 1);
+            if (!Arrays.equals(lastElement, newElement)) {
+                freeLodgment.add(newElement);
+            }
+        } else {
+            freeLodgment.add(newElement);
+        }
     }
 
     public CellSchelling(int x, int y, int state) {
@@ -26,7 +35,15 @@ public class CellSchelling extends Cell {
         }
 
         if (state == 0) {
-            freeLodgment.add(this);
+            int[] newElement = new int[]{this.x, this.y};
+            if (!freeLodgment.isEmpty()) {
+                int[] lastElement = freeLodgment.get(freeLodgment.size() - 1);
+                if (!Arrays.equals(lastElement, newElement)) {
+                    freeLodgment.add(newElement);
+                }
+            } else {
+                freeLodgment.add(newElement);
+            }
         }
     }
 
@@ -56,11 +73,9 @@ public class CellSchelling extends Cell {
 
     // TODO : trouver une structure adaptée (tuple ?)
     @Override
-    public ArrayList<Integer> nextState(ArrayList<Cell> neighbours) {
+    public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
         int nbNeighboors = 0;
-        ArrayList<Integer> coordStateArray = new ArrayList<Integer>();
-        coordStateArray.add(this.x);
-        coordStateArray.add(this.y);
+        ArrayList<int[]> coordStateArray = new ArrayList<int[]>();
 
         for (Cell c : neighbours) {
             if (c.state != this.state && c.state != 0) {
@@ -69,15 +84,16 @@ public class CellSchelling extends Cell {
         }
 
         if (nbNeighboors > K) {
-            CellSchelling newCellLodgement = freeLodgment.remove();
-            freeLodgment.add(this);
+            // Get the first free lodgement and remove it of freeLodgment static variable
+            int[] newCellLodgementCoord = freeLodgment.get(0);
+            freeLodgment.remove(0);
 
-            coordStateArray.add(0);
-            coordStateArray.add(newCellLodgement.x);
-            coordStateArray.add(newCellLodgement.y);
-            coordStateArray.add(this.state);
+            freeLodgment.add(new int[]{this.x, this.y});
+
+            coordStateArray.add(new int[]{this.x, this.y, 0});
+            coordStateArray.add(new int[]{newCellLodgementCoord[0], newCellLodgementCoord[1], this.state});
         } else {
-            coordStateArray.add(this.state);
+            coordStateArray.add(new int[]{this.x, this.y, this.state});
         }
         return coordStateArray;
     }

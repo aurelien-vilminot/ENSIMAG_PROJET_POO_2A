@@ -119,14 +119,13 @@ public class Grid {
 
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				// coordStates[0] = x coord of the first cell
-				// coordStates[1] = y coord of the first cell
-				// coordStates[2] = state of the first cell
-				// coordStates[3] = x coord of the second cell
+				// coordStates[0][0] = x coord of the first cell
+				// coordStates[0][1] = y coord of the first cell
+				// coordStates[0][2] = state of the first cell
 				// ...
-				ArrayList<Integer> coordStates = this.cellArray[i][j].nextState(getNeighbours(i, j));
-				for (int k = 0 ; k < coordStates.size() ; k++) {
-					stateArray[coordStates.get(k)][coordStates.get(++k)] = coordStates.get(++k);
+				ArrayList<int[]> coordStates = this.cellArray[i][j].nextState(getNeighbours(i, j));
+				for (int[] cell : coordStates) {
+					stateArray[cell[0]][cell[1]] = cell[2];
 				}
 			}
 		}
