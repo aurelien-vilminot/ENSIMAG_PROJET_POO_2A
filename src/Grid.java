@@ -6,9 +6,8 @@ public class Grid {
 	private Cell[][] initArray;
 	private int height;
 	private int width;
-	private int stepNumber = 0;
 
-	/* 
+	/*
 	Création d'une grille contenant les cellules spécifique au jeu souhaité
 	int height = hauteur  de la grille
 	int width = largeur de la grille
@@ -23,22 +22,19 @@ public class Grid {
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
+				this.initArray[i][j] = new Cell(i, j, 0);
 				switch (gameName) {
 					case "Conway":
 						this.cellArray[i][j] = new CellConway(i, j, 0);
-						this.initArray[i][j] = new CellConway(i, j, 0);
 						break;
 					case "Immigration":
 						this.cellArray[i][j] = new CellImmigration(i, j, 0);
-						this.initArray[i][j] = new CellImmigration(i, j, 0);
 						break;
 					case "Schelling":
 						this.cellArray[i][j] = new CellSchelling(i, j, 0);
-						this.initArray[i][j] = new CellSchelling(i, j, 0);
 						break;
 					default:
-						// TODO: Exception
-						System.out.println("!!! THE GAME DOESN'T EXIST !!!");
+						throw new IllegalArgumentException("!!! THE GAME DOESN'T EXIST !!!");
 				}
 			}
 		}
@@ -46,8 +42,8 @@ public class Grid {
 			if (c.x > this.width - 1 || c.y > this.height - 1) {
 				throw new IllegalArgumentException("Init cells must be placed into the grid");
 			}
-			this.cellArray[c.x][c.y].state = c.state;
-			this.initArray[c.x][c.y].state = c.state;
+			this.cellArray[c.x][c.y].setState(c.getState());
+			this.initArray[c.x][c.y].setState(c.getState());
 		}
 	}
 
@@ -64,37 +60,19 @@ public class Grid {
 		return this.width;
 	}
 
-	public int getStep() {
-		return this.stepNumber;
-	}
-
 	/* Réinitialisation de la grille contenant les cellules du jeu souhaité */
-	public void reInit(String gameName) {
+	public void reInit() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				Cell c0 = this.initArray[i][j];
-				switch (gameName) {
-					case "Conway":
-						this.cellArray[i][j] = new CellConway(c0.x, c0.y, c0.state);
-						break;
-					case "Immigration":
-						this.cellArray[i][j] = new CellImmigration(c0.x, c0.y, c0.state);
-						break;
-					case "Schelling":
-						this.cellArray[i][j] = new CellSchelling(c0.x, c0.y, c0.state);
-						break;
-					default:
-						// TODO: Exception
-						System.out.println("!!! THE GAME DOESN'T EXIST !!!");
-				}
+				this.cellArray[i][j].setState(this.initArray[i][j].getState());
 			}
 		}
 	}
 
-	/* 
-	Renvoie la liste des voisins d'une cellule donnée, en faisant attention si la ceullule se trouve sur les bords ou non.
-	int x = position de la cellule sur la grille
-	int y = position de la cellule sur la grille
+	/*
+	Returns the list of neighbours of a given cell, paying attention whether the cell is on the edges or not.
+	int x = position of the cell on the grid
+	int y = position of the cell on the grid
 	*/
 	public ArrayList<Cell> getNeighbours(int x, int y) {
 		ArrayList<Cell> nArray = new ArrayList<Cell>();
@@ -111,12 +89,13 @@ public class Grid {
 		return nArray;
 	}
 
-	/* 
-	Fait avancer d'un pas le jeu actuel, en mettant à jour les états des différentes cellules
+	/*
+	Step forward the current game, updating the states of the different cells.
 	*/
 	public void step() {
-		int[][] stateArray = new int[this.height][this.width];
+		ArrayList<int[]> stateList = new ArrayList<int[]>();
 
+		// For each cell, add to stateList the modified states
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
 				// coordStates[0][0] = x coord of the first cell
@@ -124,19 +103,17 @@ public class Grid {
 				// coordStates[0][2] = state of the first cell
 				// ...
 				ArrayList<int[]> coordStates = this.cellArray[i][j].nextState(getNeighbours(i, j));
-				for (int[] cell : coordStates) {
-					stateArray[cell[0]][cell[1]] = cell[2];
-				}
+				stateList.addAll(coordStates);
 			}
 		}
 
 		// Change states after
-		for (int i = 0; i < this.height; i++) {
-			for (int j = 0; j < this.width; j++) {
-				this.cellArray[i][j].state = stateArray[i][j];
-			}
+		for (int[] cell : stateList) {
+			int xCoord = cell[0];
+			int yCoord = cell[1];
+			int state = cell[2];
+			this.cellArray[xCoord][yCoord].setState(state);
 		}
-		this.stepNumber++;
 	}
 
 	public String getCellColor(int x, int y) {
@@ -145,20 +122,15 @@ public class Grid {
 
 	@Override
 	public String toString() {
-		String res = "";
+		StringBuilder res = new StringBuilder();
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				if (this.cellArray[i][j].state == 0) {
-					res += "O";
-				} else {
-					res += "X";
-				}
+				res.append(this.cellArray[j][i].getState());
 			}
 			if (i != this.height - 1) {
-				res += "\n";
+				res.append("\n");
 			}
 		}
-		return res;
+		return res.toString();
 	}
-
 }

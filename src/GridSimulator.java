@@ -53,6 +53,7 @@ public class GridSimulator implements Simulable {
 						Color.decode(BORDERCOLOR), Color.decode(cellColor), this.cellSize));
 			}
 		}
+		System.out.println(this.grid);
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class GridSimulator implements Simulable {
 
 	@Override
 	public void restart() {
-		this.grid.reInit(this.gameName);
+		this.grid.reInit();
 		gui.reset();
 		this.draw();
 	}

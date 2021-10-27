@@ -12,13 +12,11 @@ public class CellConway extends Cell {
 		super(x, y, state);
 	}
 
-	/* 
-	Donne le prochain état de la cellule sur laquelle on appelle la méthode
-	ArrayList<Cell> neighbours = la liste de cellule des voisins 
-	*/
+	// Returns the list of states that have changed (can be empty)
 	@Override
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
+		int newState;
 		ArrayList<int[]> coordStateArray = new ArrayList<int[]>();
 
 		for (Cell c : neighbours) {
@@ -29,14 +27,17 @@ public class CellConway extends Cell {
 
 		if (this.state == 1 && (nbLivingN == 2 || nbLivingN == 3)) {
 			// Rule 1: Any live cell with two or three live neighbours survives
-			coordStateArray.add(new int[]{this.x, this.y, 1});
+			newState = 1;
 		} else if (this.state == 0 && nbLivingN == 3) {
 			// Rule 2: Any dead cell with three live neighbours becomes a live cell
-			coordStateArray.add(new int[]{this.x, this.y, 1});
+			newState = 1;
 		} else {
 			// Rule 3: All other live cells die in the next generation. Similarly, all other
 			// dead cells stay dead
-			coordStateArray.add(new int[]{this.x, this.y, 0});
+			newState = 0;
+		}
+		if (this.state != newState) {
+			coordStateArray.add(new int[]{this.x, this.y, newState});
 		}
 		return coordStateArray;
 	}

@@ -5,7 +5,7 @@ import java.awt.*;
 public class TestSchelling {
     public static void main(String[] args) {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
-        CellSchelling.setK(2);
+        CellSchelling.setK(1);
         CellSchelling.setColors(4);
         CellSchelling[] cellSchellings = {
                 new CellSchelling(1, 1, 3),

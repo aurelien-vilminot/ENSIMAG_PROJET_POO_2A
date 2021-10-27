@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class Cell {
-	public int x;
-	public int y;
-	public int state = 0;
+	protected int x;
+	protected int y;
+	protected int state = 0;
 
 	/* 
 	Construction d'une cellule non spécifiée
@@ -22,10 +22,34 @@ public class Cell {
 		this.state = state;
 	}
 
+	public int getX() {
+		return this.x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getState() {
+		return this.state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
 	/*
-	Donne le prochain état de la cellule sur laquelle on appelle la méthode, méthode créee pour être override par les classes héritées
-	ArrayList<Cell> neighbours = la liste de cellule des voisins 
-	 */
+        Donne le prochain état de la cellule sur laquelle on appelle la méthode, méthode créee pour être override par les classes héritées
+        ArrayList<Cell> neighbours = la liste de cellule des voisins
+         */
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		System.out.println("!!! nextState: YOU SHOULD NOT BE USING ME !!!");
 		return null;

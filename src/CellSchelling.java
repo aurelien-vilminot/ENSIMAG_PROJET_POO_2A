@@ -15,14 +15,7 @@ public class CellSchelling extends Cell {
         }
 
         int[] newElement = new int[]{this.x, this.y};
-        if (!freeLodgment.isEmpty()) {
-            int[] lastElement = freeLodgment.get(freeLodgment.size() - 1);
-            if (!Arrays.equals(lastElement, newElement)) {
-                freeLodgment.add(newElement);
-            }
-        } else {
-            freeLodgment.add(newElement);
-        }
+        freeLodgment.add(newElement);
     }
 
     public CellSchelling(int x, int y, int state) {
@@ -36,15 +29,21 @@ public class CellSchelling extends Cell {
 
         if (state == 0) {
             int[] newElement = new int[]{this.x, this.y};
-            if (!freeLodgment.isEmpty()) {
-                int[] lastElement = freeLodgment.get(freeLodgment.size() - 1);
-                if (!Arrays.equals(lastElement, newElement)) {
-                    freeLodgment.add(newElement);
-                }
-            } else {
-                freeLodgment.add(newElement);
-            }
+            freeLodgment.add(newElement);
         }
+    }
+
+    @Override
+    public void setState(int state) {
+        if (state != this.state) {
+            if (state == 0) {
+                freeLodgment.add(new int[]{this.x, this.y});
+            } else {
+                freeLodgment.removeIf(freeCell -> freeCell[0] == this.x && freeCell[1] == this.y);
+            }
+
+        }
+        super.setState(state);
     }
 
     // User has to define K using this static method
@@ -71,7 +70,6 @@ public class CellSchelling extends Cell {
         }
     }
 
-    // TODO : trouver une structure adaptée (tuple ?)
     @Override
     public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
         int nbNeighboors = 0;
@@ -92,8 +90,6 @@ public class CellSchelling extends Cell {
 
             coordStateArray.add(new int[]{this.x, this.y, 0});
             coordStateArray.add(new int[]{newCellLodgementCoord[0], newCellLodgementCoord[1], this.state});
-        } else {
-            coordStateArray.add(new int[]{this.x, this.y, this.state});
         }
         return coordStateArray;
     }

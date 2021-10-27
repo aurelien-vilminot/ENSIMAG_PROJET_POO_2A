@@ -27,6 +27,8 @@ public class CellImmigration extends Cell {
 		}
 	}
 
+	// Returns the list of states that have changed (can be empty)
+	@Override
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
 		int next = (this.state + 1) % (n);
@@ -42,8 +44,6 @@ public class CellImmigration extends Cell {
 			// A cell in state k becomes k + 1 (mod n) if and only if it has 3+ neighbours
 			// in state k + 1 (mod n)
 			coordStateArray.add(new int[]{this.x, this.y, next});
-		} else {
-			coordStateArray.add(new int[]{this.x, this.y, this.state});
 		}
 		return coordStateArray;
 	}
