@@ -51,16 +51,14 @@ public class Cell {
         ArrayList<Cell> neighbours = la liste de cellule des voisins
          */
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
-		System.out.println("!!! nextState: YOU SHOULD NOT BE USING ME !!!");
-		return null;
+		throw new IllegalCallerException("This method should not be using. Consider it abstract.");
 	}
 
 	/* 
 	Création d'une méthode qui retroune la couleur qui sera ensuite override
 	*/
 	public String getCellColor() {
-		System.out.println("!!! getCellColor: YOU SHOULD NOT BE USING ME !!!");
-		return "";
+		throw new IllegalCallerException("This method should not be using. Consider it abstract.");
 	}
 
 	@Override

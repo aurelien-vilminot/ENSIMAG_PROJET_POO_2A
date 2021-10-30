@@ -47,7 +47,6 @@ public class Grid {
 		}
 	}
 
-	/* récupération des attributs privés */
 	public Cell[][] getCellArray() {
 		return this.cellArray;
 	}

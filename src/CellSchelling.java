@@ -82,14 +82,19 @@ public class CellSchelling extends Cell {
         }
 
         if (nbNeighboors > K) {
-            // Get the first free lodgement and remove it of freeLodgment static variable
-            int[] newCellLodgementCoord = freeLodgment.get(0);
-            freeLodgment.remove(0);
+            try {
+                // Get the first free lodgement and remove it of freeLodgment static variable
+                int[] newCellLodgementCoord = freeLodgment.get(0);
+                freeLodgment.remove(0);
 
-            freeLodgment.add(new int[]{this.x, this.y});
+                // Add the current cell to freeLodgment
+                freeLodgment.add(new int[]{this.x, this.y});
 
-            coordStateArray.add(new int[]{this.x, this.y, 0});
-            coordStateArray.add(new int[]{newCellLodgementCoord[0], newCellLodgementCoord[1], this.state});
+                coordStateArray.add(new int[]{this.x, this.y, 0});
+                coordStateArray.add(new int[]{newCellLodgementCoord[0], newCellLodgementCoord[1], this.state});
+            } catch (IndexOutOfBoundsException exception) {
+                System.out.println("There are no more free lodgment available");
+            }
         }
         return coordStateArray;
     }

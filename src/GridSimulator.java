@@ -36,8 +36,12 @@ public class GridSimulator implements Simulable {
 			throw new IllegalArgumentException("You must enter correct sizes for cells and window");
 		}
 
+		// Check if there are init cells into cells
+		if (cells.length == 0) {
+			throw new IllegalArgumentException("You must init some cells to play");
+		}
+
 		// Init the game
-		// The player must init cells using "cells" parameter
 		this.gameName = gameName;
 		this.grid = new Grid(this.linesCell, this.columCell, this.gameName, cells);
 	}
@@ -53,7 +57,6 @@ public class GridSimulator implements Simulable {
 						Color.decode(BORDERCOLOR), Color.decode(cellColor), this.cellSize));
 			}
 		}
-		System.out.println(this.grid);
 	}
 
 	@Override
