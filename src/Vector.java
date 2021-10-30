@@ -12,9 +12,9 @@ public class Vector {
 
     /**
      * 
-     * @param v1 : Vector1
-     * @param v2 : Vector 2
-     * @return the sum of the 2 vectors in a new Vector
+     * @param v1
+     * @param v2
+     * @return Sum of the 2 vectors in a new Vector
      */
     public static Vector add(Vector v1, Vector v2) {
         return new Vector(v1.getX() + v2.getX(), v1.getY() + v2.getY());
@@ -22,26 +22,28 @@ public class Vector {
 
     /**
      *
-     * @param v1 : Vector1
-     * @param v2 : Vector 2
-     * @return the substraction of the 2 vectors in a new Vector
+     * @param v1
+     * @param v2
+     * @return Substraction of the 2 vectors in a new Vector
      */
     public static Vector sub(Vector v1, Vector v2) {
         return new Vector(v1.getX() - v2.getX(), v1.getY() - v2.getY());
     }
 
     /**
+     * Sum the vector to itself and modify directly its value
      *
-     * @param v :Sum the vector to itself and modify directly its value
+     * @param v
      */
     public void add(Vector v) {
         this.setX(this.getX() + v.getX());
         this.setY(this.getY() + v.getY());
     }
 
-    /**
+	/**
+     * Substract the vector to itself and modify directly its value
      *
-     * @param v :Substract the vector to itself and modify directly its value
+     * @param v
      */
     public void sub(Vector v) {
         this.setX(this.getX() - v.getX());
@@ -51,14 +53,22 @@ public class Vector {
 
 
     /**
+     * Modify and multiply all the values of the vector by m
      *
-     * @param m : multiply and modify all the values of the vector on which we apply the methods by b by m
+     * @param m
      */
     public void mult(float m) {
         this.x *= m;
         this.y *= m;
     }
-
+    
+    
+    /**
+     * 
+     * @param v1
+     * @param v2
+     * @return Distance between points represented by *v1* and *v2*
+     */
     public static float distance(Vector v1, Vector v2) {
         return (float) Math.sqrt(Math.pow(v1.getX() - v2.getX(), 2) + Math.pow(v1.getY() - v2.getY(), 2));
     }
@@ -78,4 +88,10 @@ public class Vector {
     public void setY(float y) {
         this.y = y;
     }
+    
+
+    @Override
+	public String toString() {
+		return "{x=" + x + ", y=" + y + "}";
+	}
 }
