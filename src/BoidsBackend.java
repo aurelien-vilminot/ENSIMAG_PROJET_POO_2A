@@ -6,7 +6,6 @@ public class BoidsBackend {
     private ArrayList<Boids> boidsInitList = new ArrayList<>();
 
     public BoidsBackend(Boids... boids) {
-        // this.boidsList.addAll(Arrays.asList(boids));
         for (Boids b : boids) {
             boidsList.add(new Boids(b.getPosition().getX(), b.getPosition().getY(), b.getRadius()));
             boidsInitList.add(new Boids(b.getPosition().getX(), b.getPosition().getY(), b.getRadius()));
@@ -71,6 +70,7 @@ public class BoidsBackend {
                 }
             }
         }
+        f.mult(1 / (float) 20);
         return f;
     }
 
@@ -108,7 +108,7 @@ public class BoidsBackend {
             Vector f2 = rule2(b, this.boidsList);
             Vector f3 = rule3(b, this.boidsList);
             // Calculate new acceleration
-            b.getAcceleration().add(f1);
+            b.setAcceleration(f1);
             b.getAcceleration().add(f2);
             b.getAcceleration().add(f3);
         }
