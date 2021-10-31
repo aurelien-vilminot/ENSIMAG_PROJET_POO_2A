@@ -6,31 +6,23 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BoidsSimulator implements Simulable {
-    private static final String BORDERCOLOR = "#FFFFFF";
-    private static final String BOIDCOLOR = "#0000FF";
-    private static final String BACKGROUNDCOLOR = "#FF0000";
-    private static final int BOIDSIZE = 5;
+    private static final Color borderColor = Color.decode("#FFFFFF");
+    private static final Color boidColor = Color.decode("#0000FF");
+    private static final int boidSize = 20;
+    private static final float borderWidth = 3;
 
     private GUISimulator gui;
     private BoidsBackend boidsBackend;
 
-    private Rectangle background;
-
     public BoidsSimulator(GUISimulator gui, Boids ...boids) {
         this.gui = gui;
         this.boidsBackend = new BoidsBackend(boids);
-        this.background = new Rectangle(0, 0, Color.decode(BACKGROUNDCOLOR),
-                Color.decode(BACKGROUNDCOLOR), gui.getPanelWidth());
     }
 
     public void draw() {
-        gui.addGraphicalElement(this.background);
-
         ArrayList<Boids> boidsList = this.boidsBackend.getBoidsList();
         for (Boids boid : boidsList) {
-            Vector position = boid.getPosition();
-            gui.addGraphicalElement(new Rectangle((int) position.getX(), (int) position.getY(),
-                    Color.decode(BORDERCOLOR), Color.decode(BOIDCOLOR), BOIDSIZE));
+            gui.addGraphicalElement(new Triangle(boidSize, boid.getPosition(), boid.getVelocity(), borderColor, boidColor, borderWidth));
         }
     }
 
