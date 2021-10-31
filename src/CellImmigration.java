@@ -1,9 +1,19 @@
 import java.util.ArrayList;
 
+/**
+ * Class of cells corresponding to the game of 'Immigration', inherited from Cells.
+ */
 public class CellImmigration extends Cell {
 	private static int n = 0;
 	private static String[] stateColor;
 
+	/**
+	 * Constructor of a cell for to the game of 'Immigration', using one of the constructor
+	 * of the mother class.
+	 * @param x : coordonate on axis X.
+	 * @param y : coordonate on axis Y.
+	 * @param state : state of the cell create.
+	 */
 	public CellImmigration(int x, int y, int state) {
 		super(x, y, state);
 		if (n == 0) {
@@ -14,7 +24,12 @@ public class CellImmigration extends Cell {
 		}
 	}
 
-	// User has to define n using this static method
+
+
+	/**
+	 * User has to define n using this static method.
+	 * @param n0 : number of color of the game.
+	 */
 	public static void setN(int n0) {
 		n = n0;
 
@@ -27,7 +42,7 @@ public class CellImmigration extends Cell {
 		}
 	}
 
-	// Returns the list of states that have changed (can be empty)
+
 	@Override
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
@@ -48,6 +63,7 @@ public class CellImmigration extends Cell {
 		return coordStateArray;
 	}
 
+	@Override
 	public String getCellColor() {
 		return stateColor[this.state];
 	}

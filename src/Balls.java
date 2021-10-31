@@ -2,16 +2,29 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.lang.Math;
 
+/**
+ * Class Balls :
+ * Definition of the Balls which will be used by BallsSimulator .
+ * Here, we decide that the balls have a speed of 10 on X and 5 on y.
+ *
+ * @param ballsList : An ArrayList of Point which gives the position of all the Balls of the list.
+ * @param velList : An ArrayList which gives the speed of the balls of the list.
+ * @param posInit : An ArrayList used to initialize of the position of the Balls at the beginning.
+ *
+ *
+ */
 public class Balls {
     private ArrayList<Point> ballsList = new ArrayList<Point>();
     private ArrayList<float[]> velList = new ArrayList<float[]>();
     private ArrayList<int[]> posInit = new ArrayList<int[]>();
 
-    // Def des vélocité
+
     private int velX = 10;
     private int velY = 5;
 
-    // Constructeur 1
+    /**
+     * 1st constructor of Balls without any parameters.
+     */
     public Balls() {
         for (int i = 0; i < 10; ++i) {
             ballsList.add(new Point(i, 0));
@@ -20,7 +33,10 @@ public class Balls {
         }
     }
 
-    // Constructeur 2
+    /**
+     * overloading of the constructor of Balls taking coordonates of the ball we will create in parameters
+     * @param tab : List of coordonates with value on X et Y.
+     */
     public Balls(Point... tab) {
         for (Point ball : tab) {
             ballsList.add(ball);
@@ -33,21 +49,34 @@ public class Balls {
         return ballsList;
     }
 
-    // Translate les balles d'une valeur donnée
+    /**
+     * Translate a ball from the coordonates given in parameters.
+     * @param dx : value of the translation on X
+     * @param dy : value of the translation on Y
+     */
     void translate(int dx, int dy) {
         for (Point ball : this.ballsList) {
             ball.translate(dx, dy);
         }
     }
 
-    // Initialisation des balles
+    /**
+     * Initialized the coordonates of the List of Balls with the initial the values of
+     * the list "posInit".
+     */
     void reInit() {
         for (int i = 0; i < this.ballsList.size(); i++) {
             translateInit(ballsList.get(i), posInit.get(i));
         }
     }
 
-    // On fait bouger les balles
+    /**
+     * Take a step forward of the all the balls in the list of balls.
+     * Corresponding to the changement applied on the balls with the button next of the simulation.
+     * @param dt : step of time used to adavance
+     * @param width : width of the window where balls move
+     * @param height : height of the window where balls move
+     */
     void step(float dt, int width, int height) {
         for (int i = 0; i < this.ballsList.size(); i++) {
             Point pos = this.ballsList.get(i);
@@ -68,6 +97,12 @@ public class Balls {
         }
     }
 
+    /**
+     * Initialise the position the postition of the ball given in paramameter on the position
+     * choose also given in parameter.
+     * @param ball : Ball which coordinates will change.
+     * @param pos : integer coordonate on X et on Y of the new position.
+     */
     private void translateInit(Point ball, int[] pos) {
         ball.move(pos[0], pos[1]);
     }

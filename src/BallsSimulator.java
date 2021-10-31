@@ -6,13 +6,21 @@ import gui.Simulable;
 import gui.GUISimulator;
 import gui.Oval;
 
+/**
+ * Class BallsSimulator :
+ *  Definition of the class who implements the interface Simulable for the game composed of balls.
+ *   ??????
+ */
 public class BallsSimulator implements Simulable {
     private Balls balls;
     private GUISimulator gui;
     private int width;
     private int height;
 
-    // Constructeur
+    /**
+     * Constructor of the interface we will simulate.
+     * @param window : window of simulation.
+     */
     public BallsSimulator(GUISimulator window) {
         this.gui = window;
         this.width = window.getPanelWidth();
@@ -35,6 +43,9 @@ public class BallsSimulator implements Simulable {
         return this.balls.getBallsList();
     }
 
+    /**
+     * Draw the balls with different colors.
+     */
     public void draw() {
         String[] tab = {"#ff0000", "#00ff00", "#0000ff"};
         int i = 0;

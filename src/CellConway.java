@@ -1,18 +1,31 @@
 import java.util.ArrayList;
 
-
+/**
+ * Class of cells corresponding to the game of Conway, inherited from Cells.
+ */
 public class CellConway extends Cell {
-	/* construction des cellules spécifiques à Conway */
+	/**
+	 * 1st constructor of a cell for to the game of life on Conway, using one of the constructor
+	 * of the mother class.
+	 * @param x : coordonate on axis X.
+	 * @param y : coordonate on axis Y.
+	 */
 	public CellConway(int x, int y) {
 		super(x, y);
 	}
 
-	/* construction des cellules spécifiques à Conway */
+	/**
+	 * Another constructor overload of a cell for to the game of life on Conway,
+	 * using one of the constructor of the mother class.
+	 * @param x : coordonate on axis X.
+	 * @param y : coordonate on axis Y.
+	 * @param state : state of the cell create.
+	 */
 	public CellConway(int x, int y, int state) {
 		super(x, y, state);
 	}
 
-	// Returns the list of states that have changed (can be empty)
+
 	@Override
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
@@ -24,7 +37,6 @@ public class CellConway extends Cell {
 				nbLivingN++;
 			}
 		}
-
 		if (this.state == 1 && (nbLivingN == 2 || nbLivingN == 3)) {
 			// Rule 1: Any live cell with two or three live neighbours survives
 			newState = 1;
@@ -42,7 +54,7 @@ public class CellConway extends Cell {
 		return coordStateArray;
 	}
 
-	/* retourne la couleur selon l'état de la cellule */
+	@Override
 	public String getCellColor() {
 		if (this.state == 0) {
 			return "#F2F2F2";

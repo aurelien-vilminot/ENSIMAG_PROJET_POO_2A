@@ -1,10 +1,21 @@
 import java.util.*;
 
+/**
+ * Class of cells corresponding to the game of Schelling, inherited from Cells.
+ */
 public class CellSchelling extends Cell {
     private static int K=0;
     private static ArrayList<int[]> freeLodgment = new ArrayList<>();
     private static ArrayList<String> colors;
 
+    /**
+     * 1st constructor of a cell for to the game of Schelling, using one of the constructor
+     * of the mother class.
+     * State is not specified, the cell is considered as free, so add the the list of free lodgement.
+     * @param x : coordonate on axis X.
+     * @param y : coordonate on axis Y.
+     * @throws Exception if the number K of the class is 0 or if the list of color is Null.
+     */
     public CellSchelling(int x, int y) {
         super(x, y);
         if (K == 0) {
@@ -18,6 +29,15 @@ public class CellSchelling extends Cell {
         freeLodgment.add(newElement);
     }
 
+    /**
+     * 1st constructor of a cell for to the game of Schelling, using one of the constructor
+     * of the mother class.
+     * @param x : coordonate on axis X.
+     * @param y : coordonate on axis Y.
+     * @param state : state of the cell create, if the state is 0, we add the lodgment to the list
+     *              of free lodgement.
+     * @throws Exception if the number K of the class is 0 or if the list of color is Null.
+     */
     public CellSchelling(int x, int y, int state) {
         super(x, y, state);
         if (K == 0) {
@@ -46,7 +66,11 @@ public class CellSchelling extends Cell {
         super.setState(state);
     }
 
-    // User has to define K using this static method
+    /**
+     * User has to define K the number of different colors of lodgemet.
+     * @param k : number of color of the game.
+     * @throws exception if the number is strictly superior to 8.
+     */
     public static void setK(int k) {
         if (k > 8) {
             throw new IllegalArgumentException("Neighbors number must be lower than 9");
@@ -54,6 +78,10 @@ public class CellSchelling extends Cell {
         K = k;
     }
 
+    /**
+     * Define the colors of the different lodgements and fill a list of the colors.
+     * @param c : number of colors.
+     */
     public static void setColors(int c) {
         colors = new ArrayList<String>();
         // First color corresponds to a free lodgment
@@ -99,6 +127,7 @@ public class CellSchelling extends Cell {
         return coordStateArray;
     }
 
+    @Override
     public String getCellColor() {
         return colors.get(this.state);
     }
