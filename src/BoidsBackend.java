@@ -1,15 +1,20 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class BoidsBackend {
     private ArrayList<Boids> boidsList = new ArrayList<>();
     private ArrayList<Boids> boidsInitList = new ArrayList<>();
+    // Width of area
+    private int xMax, yMax;
 
-    public BoidsBackend(Boids... boids) {
+    public BoidsBackend(int xMax, int yMax, Boids... boids) {
+        this.boidsList.addAll(Arrays.asList(boids));
         for (Boids b : boids) {
-            boidsList.add(new Boids(b.getPosition().getX(), b.getPosition().getY(), b.getRadius()));
-            boidsInitList.add(new Boids(b.getPosition().getX(), b.getPosition().getY(), b.getRadius()));
+            this.boidsInitList.add(new Boids(b.getPosition().getX(), b.getPosition().getY(), b.getDetectionRadius()));
         }
+        this.xMax = xMax;
+        this.yMax = yMax;
     }
 
     public ArrayList<Boids> getBoidsList() {
@@ -21,13 +26,12 @@ public class BoidsBackend {
             Boids currentBoid = boidsList.get(i);
             Boids initBoid = boidsInitList.get(i);
             currentBoid.setPosition(initBoid.getPosition());
-            currentBoid.setRadius(initBoid.getRadius());
+            currentBoid.setDetectionRadius(initBoid.getDetectionRadius());
             currentBoid.getVelocity().setX(0);
             currentBoid.getVelocity().setY(0);
             currentBoid.getAcceleration().setX(0);
             currentBoid.getAcceleration().setY(0);
         }
-
     }
 
     /**
@@ -37,7 +41,7 @@ public class BoidsBackend {
      * @param boidsArrayList : list of boids of the space
      * @return Vector corresponding to the cohesion force applied to bj
      */
-    public static Vector rule1(Boids bj, ArrayList<Boids> boidsArrayList) {
+    public Vector rule1(Boids bj, ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
         for (Boids b : boidsArrayList) {
             if (b != bj) {
@@ -60,12 +64,12 @@ public class BoidsBackend {
      * @param boidsArrayList : list of boids of the space
      * @return Vector corresponding to the separation force applied to bj
      */
-    public static Vector rule2(Boids bj, ArrayList<Boids> boidsArrayList) {
+    public Vector rule2(Boids bj, ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
         for (Boids b : boidsArrayList) {
             if (b != bj) {
                 float distance = Vector.distance(bj.getPosition(), b.getPosition());
-                if (distance < bj.getRadius()) {
+                if (distance < bj.getDetectionRadius()) {
                     f.sub(Vector.sub(b.getPosition(), bj.getPosition()));
                 }
             }
@@ -81,7 +85,7 @@ public class BoidsBackend {
      * @param boidsArrayList : list of boids of the space
      * @return Vector corresponding to the alignment force applied to bj
      */
-    public static Vector rule3(Boids bj, ArrayList<Boids> boidsArrayList) {
+    public Vector rule3(Boids bj, ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
         for (Boids b : boidsArrayList) {
             if (b != bj) {
@@ -98,19 +102,53 @@ public class BoidsBackend {
     }
 
     /**
+     * Rule of wind: apply wind force to the group
+     * @return Vector corresponding to the wind force
+     */
+    public Vector rule4() {
+        return new Vector(0.1f, 0.9f);
+    }
+
+    /**
+     * Rule of borders: keeping the flock within the area use by the gui
+     * @param boid: boid on which why apply the rule
+     * @return Vector corresponding to the replace force applied to bj
+     */
+    public Vector rule5(Boids boid) {
+        Vector f = new Vector();
+        Vector boidPosition = boid.getPosition();
+
+        if (boidPosition.getX() < 0) {
+            f.setX(10);
+        } else if (boidPosition.getX() > this.xMax) {
+            f.setX(-10);
+        }
+
+        if (boidPosition.getY() < 0) {
+            f.setY(10);
+        } else if (boidPosition.getY() > this.yMax) {
+            f.setY(-10);
+        }
+        return f;
+    }
+
+    /**
      * Move all boids by applying forces to them
      */
     public void step() {
-        // TODO: borders ? (rule or circular...)
         // Important: rules have to be independant of acceleration
         for (Boids b : this.boidsList) {
             Vector f1 = rule1(b, this.boidsList);
             Vector f2 = rule2(b, this.boidsList);
             Vector f3 = rule3(b, this.boidsList);
+            Vector f4 = rule4();
+            Vector f5 = rule5(b);
             // Calculate new acceleration
             b.setAcceleration(f1);
             b.getAcceleration().add(f2);
             b.getAcceleration().add(f3);
+            b.getAcceleration().add(f4);
+            b.getAcceleration().add(f5);
         }
 
         // Apply changes at the same time

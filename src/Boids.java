@@ -1,22 +1,19 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Boids {
     private Vector position;
     private Vector velocity;
     private Vector acceleration;
-    private float radius;
+    private float detectionRadius;
     // maxforce and maxspeed ?
 
-    public Boids(float x, float y, float radius) {
+    public Boids(float x, float y, float detectionRadius) {
         this.position = new Vector(x, y);
         this.velocity = new Vector(0, 0);
         this.acceleration = new Vector(0, 0);
 
-        if (radius <= 0) {
+        if (detectionRadius <= 0) {
             throw new IllegalArgumentException("Radius has to be positive");
         }
-        this.radius = radius;
+        this.detectionRadius = detectionRadius;
     }
 
     public Vector getPosition() {
@@ -46,12 +43,12 @@ public class Boids {
         this.acceleration.setY(acceleration.getY());
     }
 
-    public float getRadius() {
-        return this.radius;
+    public float getDetectionRadius() {
+        return this.detectionRadius;
     }
 
-    public void setRadius(float radius) {
-        this.radius = radius;
+    public void setDetectionRadius(float detectionRadius) {
+        this.detectionRadius = detectionRadius;
     }
 
     @Override
@@ -60,7 +57,7 @@ public class Boids {
                 "position=" + position +
                 ", velocity=" + velocity +
                 ", acceleration=" + acceleration +
-                ", radius=" + radius +
+                ", radius=" + detectionRadius +
                 '}';
     }
 }

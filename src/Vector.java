@@ -1,9 +1,13 @@
 import java.lang.Math;
 
 public class Vector {
-
     private float x;
     private float y;
+
+    public Vector() {
+        this.x = 0;
+        this.y = 0;
+    }
 
     public Vector(float x, float y) {
         this.x = x;
@@ -34,8 +38,8 @@ public class Vector {
      * @param v : Vector
      */
     public void add(Vector v) {
-        this.setX(this.getX() + v.getX());
-        this.setY(this.getY() + v.getY());
+        this.x += v.getX();
+        this.y += v.getY();
     }
 
     /**
@@ -44,10 +48,9 @@ public class Vector {
      * @param v : Vector
      */
     public void sub(Vector v) {
-        this.setX(this.getX() - v.getX());
-        this.setY(this.getY() - v.getY());
+        this.x -= v.getX();
+        this.y -= v.getY();
     }
-
 
     /**
      * Modify and multiply all the values of the vector by m
@@ -58,7 +61,6 @@ public class Vector {
         this.x *= m;
         this.y *= m;
     }
-
 
     /**
      * @param v1 : Vector
@@ -77,7 +79,7 @@ public class Vector {
     }
 
     public float getX() {
-        return x;
+        return this.x;
     }
 
     public void setX(float x) {
@@ -85,13 +87,12 @@ public class Vector {
     }
 
     public float getY() {
-        return y;
+        return this.y;
     }
 
     public void setY(float y) {
         this.y = y;
     }
-
 
     @Override
     public String toString() {

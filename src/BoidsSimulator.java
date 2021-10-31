@@ -16,13 +16,18 @@ public class BoidsSimulator implements Simulable {
 
     public BoidsSimulator(GUISimulator gui, Boids ...boids) {
         this.gui = gui;
-        this.boidsBackend = new BoidsBackend(boids);
+        this.boidsBackend = new BoidsBackend(
+                this.gui.getPanelWidth() - boidSize,
+                this.gui.getPanelHeight() - boidSize,
+                boids
+        );
     }
 
     public void draw() {
         ArrayList<Boids> boidsList = this.boidsBackend.getBoidsList();
         for (Boids boid : boidsList) {
-            gui.addGraphicalElement(new Triangle(boidSize, boid.getPosition(), boid.getVelocity(), borderColor, boidColor, borderWidth));
+            gui.addGraphicalElement(new Triangle(boidSize, boid.getPosition(), boid.getVelocity(),
+                    borderColor, boidColor, borderWidth));
         }
     }
 
