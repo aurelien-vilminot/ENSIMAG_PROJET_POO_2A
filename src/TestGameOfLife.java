@@ -1,6 +1,10 @@
 import gui.GUISimulator;
 import java.awt.*;
 
+/**
+ * Class to test the game of Life of Conway composed of GridSimulator who implements
+ * the interface Simulable using GUI, Grid, CellConway and Cell.
+ */
 public class TestGameOfLife {
 
 	public static void main(String[] args) {

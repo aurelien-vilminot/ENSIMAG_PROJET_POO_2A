@@ -3,6 +3,9 @@ import gui.GUISimulator;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * Class to test the class Boids.
+ */
 public class TestBoids {
     public static void main(String[] args) {
         int guiSize = 500;

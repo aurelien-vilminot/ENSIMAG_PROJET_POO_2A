@@ -2,6 +2,10 @@ import gui.GraphicalElement;
 
 import java.awt.*;
 
+/**
+ * Class Triangle to represents boids by triangle, it implements a GraphicalElement
+ * of the inteface Simulable.
+ */
 public class Triangle implements GraphicalElement {
     private int[] x = new int[3];
     private int[] y = new int[3];
@@ -10,7 +14,7 @@ public class Triangle implements GraphicalElement {
     private float borderWidth;
 
     /**
-     * Isosceles triangle
+     * Isosceles triangle constructor
      *
      * @param startPoint  : point at the base of the triangle
      * @param endPoint    : point at the tip of the triangle
@@ -38,7 +42,7 @@ public class Triangle implements GraphicalElement {
     }
 
     /**
-     * Isosceles triangle representing a boid
+     * Isosceles triangle representing a boid constructor
      *
      * @param boidSize    : size of the boid (height of the triangle)
      * @param position    : position of the boid (tip of the triangle)

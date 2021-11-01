@@ -1,3 +1,7 @@
+
+/**
+ * Class to test the class EventManager.
+ */
 public class TestEventManager {
     public static void main(String[] args) throws InterruptedException {
         EventManager manager = new EventManager();

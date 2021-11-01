@@ -1,20 +1,32 @@
 import java.lang.Math;
 
+/**
+ * Class of vector, use to represent the 2 coordonates of a boid at each time.
+ */
 public class Vector {
     private float x;
     private float y;
 
+    /**
+     * First constructor of vector, which fill the elements with an 0.
+     */
     public Vector() {
         this.x = 0;
         this.y = 0;
     }
 
+    /**
+     * Overloeading of the constructor, which fill the elements of the vector with the parameters.
+     * @param x : value on the axis X.
+     * @param y : value on the axis Y.
+     */
     public Vector(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
     /**
+     * Sums the two vectors passed into parameters.
      * @param v1 : Vector
      * @param v2 : Vector
      * @return Sum of the 2 vectors in a new Vector
@@ -24,6 +36,7 @@ public class Vector {
     }
 
     /**
+     * Substracts the two vectors passed into parameters.
      * @param v1 : Vector
      * @param v2 : Vector
      * @return Substraction of the 2 vectors in a new Vector
@@ -33,8 +46,7 @@ public class Vector {
     }
 
     /**
-     * Sum the vector to itself and modify directly its value
-     *
+     * Sum the vector to itself and modify directly its value.
      * @param v : Vector
      */
     public void add(Vector v) {
@@ -43,8 +55,7 @@ public class Vector {
     }
 
     /**
-     * Substract the vector to itself and modify directly its value
-     *
+     * Substract the vector to itself and modify directly its value.
      * @param v : Vector
      */
     public void sub(Vector v) {
@@ -53,8 +64,7 @@ public class Vector {
     }
 
     /**
-     * Modify and multiply all the values of the vector by m
-     *
+     * Modify and multiply all the values of the vector by m.
      * @param m : float
      */
     public void mult(float m) {
@@ -63,6 +73,7 @@ public class Vector {
     }
 
     /**
+     * Calculate the distance between 2 vectors.
      * @param v1 : Vector
      * @param v2 : Vector
      * @return Distance between points represented by *v1* and *v2*
@@ -72,6 +83,7 @@ public class Vector {
     }
 
     /**
+     * Calculate the norm of the vector.
      * @return Norm of the calling Vector
      */
     public float norm() {

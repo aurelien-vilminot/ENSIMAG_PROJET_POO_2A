@@ -1,6 +1,10 @@
 import gui.GUISimulator;
 import java.awt.Color;
 
+/**
+ * Class to test the game of 'Immigration' composed of GridSimulator who implements
+ * the interface Simulable using GUI, Grid, CellImmigration and Cell.
+ */
 public class TestImmigration {
 
     public static void main(String[] args) {

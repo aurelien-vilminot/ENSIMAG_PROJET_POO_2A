@@ -2,6 +2,10 @@ import gui.GUISimulator;
 
 import java.awt.*;
 
+/**
+ * Class to test the game of Schelling composed of GridSimulator who implements
+ * the interface Simulable using GUI, Grid, CellISchelling and Cell.
+ */
 public class TestSchelling {
     public static void main(String[] args) {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);

@@ -1,5 +1,8 @@
 import java.awt.*;
 
+/**
+ * Class to test the class Balls.
+ */
 public class TestBalls {
     public static void main(String[] args) {
         Balls balls = new Balls(
