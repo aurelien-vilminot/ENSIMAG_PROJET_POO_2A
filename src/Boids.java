@@ -1,10 +1,18 @@
+/**
+ * Creation of boids.
+ */
 public class Boids {
     private Vector position;
     private Vector velocity;
     private Vector acceleration;
     private float detectionRadius;
-    // maxforce and maxspeed ?
 
+    /**
+     * Constructor of boids
+     * @param x : initial position of boids on the axis X.
+     * @param y : initial position of boids on the axis Y.
+     * @param detectionRadius : how the boid detects tis environnment.
+     */
     public Boids(float x, float y, float detectionRadius) {
         this.position = new Vector(x, y);
         this.velocity = new Vector(0, 0);

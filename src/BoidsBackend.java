@@ -2,12 +2,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Create the Backend where boids evolve.
+ */
 public class BoidsBackend {
     private ArrayList<Boids> boidsList = new ArrayList<>();
     private ArrayList<Boids> boidsInitList = new ArrayList<>();
     // Width of area
     private int xMax, yMax;
 
+    /**
+     * Constructor of the backend.
+     * @param xMax : maximum size of X.
+     * @param yMax : maximum size of Y.
+     * @param boids
+     */
     public BoidsBackend(int xMax, int yMax, Boids... boids) {
         this.boidsList.addAll(Arrays.asList(boids));
         for (Boids b : boids) {
@@ -21,6 +30,9 @@ public class BoidsBackend {
         return this.boidsList;
     }
 
+    /**
+     * Re initialize the boids, by changing their position, speed ans acceleration.
+     */
     public void reInit() {
         for (int i = 0; i < boidsList.size(); i++) {
             Boids currentBoid = boidsList.get(i);

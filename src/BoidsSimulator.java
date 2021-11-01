@@ -5,6 +5,12 @@ import gui.Simulable;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ /**
+ * Management of the display of BoidsBackend.
+ * Implements the interface Simulable which cares of the display.
+ */
+ */
 public class BoidsSimulator implements Simulable {
     private static final Color borderColor = Color.decode("#FFFFFF");
     private static final Color boidColor = Color.decode("#0000FF");
@@ -14,6 +20,11 @@ public class BoidsSimulator implements Simulable {
     private GUISimulator gui;
     private BoidsBackend boidsBackend;
 
+    /**
+     * Constructor of an object who will display BoidsBackend, using the GUISimulator.
+     * @param gui : an instance of GUISimulator
+     * @param boids : boid composing the BoidsBackend
+     */
     public BoidsSimulator(GUISimulator gui, Boids ...boids) {
         this.gui = gui;
         this.boidsBackend = new BoidsBackend(
@@ -23,6 +34,9 @@ public class BoidsSimulator implements Simulable {
         );
     }
 
+    /**
+     * 	 * Draw the boids with different colors.
+     */
     public void draw() {
         ArrayList<Boids> boidsList = this.boidsBackend.getBoidsList();
         for (Boids boid : boidsList) {

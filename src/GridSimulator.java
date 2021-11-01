@@ -4,9 +4,10 @@ import gui.Simulable;
 
 import java.awt.*;
 
-/*
-Gestion de l'affichage de la grille commune à tous les jeux
-*/
+/**
+ * Management of the grid display common to all games.
+ * Implements the interface Simulable which cares of the display.
+ */
 public class GridSimulator implements Simulable {
 	private static final String BORDERCOLOR = "#FCBACB";
 
@@ -19,10 +20,13 @@ public class GridSimulator implements Simulable {
 
 	private String gameName;
 
-	/*
-	Construction de l'affichage de la grille grâce à la librairie GUI.
-	
-	*/
+	/**
+	 * Cnstructor of an object which will display the grid, using the GUISimulator
+	 * @param gui : an instance of GUISimulator
+	 * @param gameName : name of the game.
+	 * @param cellSize : size of the cell
+	 * @param cells : cells used to fill the grid.
+	 */
 	public GridSimulator(GUISimulator gui, String gameName, int cellSize, Cell... cells) {
 		this.gui = gui;
 
@@ -46,6 +50,9 @@ public class GridSimulator implements Simulable {
 		this.grid = new Grid(this.linesCell, this.columCell, this.gameName, cells);
 	}
 
+	/**
+	 * Draw the cells with different colors.
+	 */
 	public void draw() {
 		Cell[][] cellArray = this.grid.getCellArray();
 		int padding = (this.cellSize / 2);

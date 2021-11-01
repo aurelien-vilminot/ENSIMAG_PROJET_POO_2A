@@ -14,6 +14,14 @@ public class Grid {
 	String gameName = nom du jeu, utiliser les créer le bon type de cellules, règles du jeu ...
 	Cell... cells = cellules constituants la grille
 	*/
+
+	/**
+	 * Constructor of a grid containing specifiec cells of the game choose.
+	 * @param height : height of the grid
+	 * @param width : width of the grid
+	 * @param gameName : choicd of the game
+	 * @param cells : cells used in the grid
+	 */
 	public Grid(int height, int width, String gameName, Cell... cells) {
 		this.cellArray = new Cell[height][width];
 		this.initArray = new Cell[height][width];
@@ -59,7 +67,10 @@ public class Grid {
 		return this.width;
 	}
 
-	/* Réinitialisation de la grille contenant les cellules du jeu souhaité */
+
+	/**
+	 * Re initialize the grid by changing the state of the cells.
+	 */
 	public void reInit() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
@@ -68,11 +79,12 @@ public class Grid {
 		}
 	}
 
-	/*
-	Returns the list of neighbours of a given cell, paying attention whether the cell is on the edges or not.
-	int x = position of the cell on the grid
-	int y = position of the cell on the grid
-	*/
+	/**
+	 * Gives the list of neighbours of a cell.
+	 * @param x : position of the cell on the grid on the axis X
+	 * @param y : position of the cell on the grid on the axis Y
+	 * @return the list of neighbours of a given cell, paying attention whether the cell is on the edges or not.
+	 */
 	public ArrayList<Cell> getNeighbours(int x, int y) {
 		ArrayList<Cell> nArray = new ArrayList<Cell>();
 		int w = this.width - 1;
@@ -88,8 +100,8 @@ public class Grid {
 		return nArray;
 	}
 
-	/*
-	Step forward the current game, updating the states of the different cells.
+	/**
+	 * Step forward the current game, updating the states of the different cells.
 	*/
 	public void step() {
 		ArrayList<int[]> stateList = new ArrayList<int[]>();
@@ -115,6 +127,12 @@ public class Grid {
 		}
 	}
 
+	/**
+	 * Give the color of a cell
+	 * @param x : position of the cell on the grid on the axis X.
+	 * @param y : position of the cell on the grid on the axis Y.
+	 * @return the color of the cell
+	 */
 	public String getCellColor(int x, int y) {
 		return this.cellArray[x][y].getCellColor();
 	}
