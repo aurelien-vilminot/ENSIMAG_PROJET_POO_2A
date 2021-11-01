@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.lang.Math;
 
-public class Grid {
+public class Grid implements Backend {
 	private Cell[][] cellArray;
 	private Cell[][] initArray;
 	private int height;

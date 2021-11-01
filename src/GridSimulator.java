@@ -8,19 +8,13 @@ import java.awt.*;
  * Management of the grid display common to all games.
  * Implements the interface Simulable which cares of the display.
  */
-public class GridSimulator implements Simulable {
+public class GridSimulator extends Simulator {
 	private static final String BORDERCOLOR = "#FCBACB";
-
-	private GUISimulator gui;
-
-	private Grid grid;
 	private int cellSize;
 	private int linesCell;
 	private int columCell;
 
 	private String gameName;
-
-	private EventManager eventManager = new EventManager();
 
 	/**
 	 * Constructor of an object which will display the grid, using the GUISimulator
@@ -30,7 +24,7 @@ public class GridSimulator implements Simulable {
 	 * @param cells : cells used to fill the grid.
 	 */
 	public GridSimulator(GUISimulator gui, String gameName, int cellSize, Cell... cells) {
-		this.gui = gui;
+		super(gui);
 
 		// Calculate the colums and lines number depending on cell size
 		this.cellSize = cellSize;
@@ -49,16 +43,15 @@ public class GridSimulator implements Simulable {
 
 		// Init the game
 		this.gameName = gameName;
-		this.grid = new Grid(this.linesCell, this.columCell, this.gameName, cells);
-
-		this.eventManager.addEvent(new CellEvent(1, this));
+		this.backend = new Grid(this.linesCell, this.columCell, this.gameName, cells);
 	}
 
 	/**
 	 * Draw the cells with different colors.
 	 */
 	public void draw() {
-		Cell[][] cellArray = this.grid.getCellArray();
+		Grid grid = (Grid) this.backend;
+		Cell[][] cellArray = grid.getCellArray();
 		int padding = (this.cellSize / 2);
 
 		for (int i = 0; i < this.linesCell; i++) {
@@ -68,29 +61,5 @@ public class GridSimulator implements Simulable {
 						Color.decode(BORDERCOLOR), Color.decode(cellColor), this.cellSize));
 			}
 		}
-	}
-
-	public GUISimulator getGui() {
-		return this.gui;
-	}
-
-	public Grid getGrid() {
-		return this.grid;
-	}
-
-	public EventManager getEventManager() {
-		return this.eventManager;
-	}
-
-	@Override
-	public void next() {
-		this.eventManager.next();
-	}
-
-	@Override
-	public void restart() {
-		this.grid.reInit();
-		gui.reset();
-		this.draw();
 	}
 }

@@ -13,11 +13,13 @@ import java.lang.Math;
  *
  *
  */
-public class Balls {
+public class Balls implements Backend{
     private ArrayList<Point> ballsList = new ArrayList<Point>();
     private ArrayList<float[]> velList = new ArrayList<float[]>();
     private ArrayList<int[]> posInit = new ArrayList<int[]>();
 
+    // Width of area
+    private int xMax, yMax;
 
     private int velX = 10;
     private int velY = 5;
@@ -37,7 +39,9 @@ public class Balls {
      * overloading of the constructor of Balls taking coordonates of the ball we will create in parameters
      * @param tab : List of coordonates with value on X et Y.
      */
-    public Balls(Point... tab) {
+    public Balls(int xMax, int yMax, Point... tab) {
+        this.xMax = xMax;
+        this.yMax = yMax;
         for (Point ball : tab) {
             ballsList.add(ball);
             velList.add(new float[]{velX, velY});
@@ -54,7 +58,7 @@ public class Balls {
      * @param dx : value of the translation on X
      * @param dy : value of the translation on Y
      */
-    void translate(int dx, int dy) {
+    public void translate(int dx, int dy) {
         for (Point ball : this.ballsList) {
             ball.translate(dx, dy);
         }
@@ -64,7 +68,7 @@ public class Balls {
      * Initialized the coordonates of the List of Balls with the initial the values of
      * the list "posInit".
      */
-    void reInit() {
+    public void reInit() {
         for (int i = 0; i < this.ballsList.size(); i++) {
             translateInit(ballsList.get(i), posInit.get(i));
         }
@@ -77,7 +81,8 @@ public class Balls {
      * @param width : width of the window where balls move
      * @param height : height of the window where balls move
      */
-    void step(float dt, int width, int height) {
+    public void step() {
+        float dt = 5;
         for (int i = 0; i < this.ballsList.size(); i++) {
             Point pos = this.ballsList.get(i);
             float[] vel = this.velList.get(i);
@@ -85,11 +90,11 @@ public class Balls {
             int dy = Math.round(dt * vel[1]);
 
             // Si on tape les murs, on oppose la vélocité des balles
-            if (pos.x + dx > width || pos.x + dx < 0) {
+            if (pos.x + dx > this.xMax || pos.x + dx < 0) {
                 vel[0] = -vel[0];
                 dx = -dx;
             }
-            if (pos.y + dy > height || pos.y + dy < 0) {
+            if (pos.y + dy > this.yMax || pos.y + dy < 0) {
                 vel[1] = -vel[1];
                 dy = -dy;
             }

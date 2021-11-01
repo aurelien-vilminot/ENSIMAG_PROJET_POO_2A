@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Create the Backend where boids evolve.
  */
-public class BoidsBackend {
+public class BoidsBackend implements Backend {
     private ArrayList<Boids> boidsList = new ArrayList<>();
     private ArrayList<Boids> boidsInitList = new ArrayList<>();
     // Width of area
