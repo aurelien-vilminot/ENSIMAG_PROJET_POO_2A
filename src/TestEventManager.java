@@ -1,4 +1,3 @@
-
 /**
  * Class to test the class EventManager.
  */
@@ -18,7 +17,5 @@ public class TestEventManager {
             manager.next();
             Thread.sleep(1000);
         }
-
-
     }
 }

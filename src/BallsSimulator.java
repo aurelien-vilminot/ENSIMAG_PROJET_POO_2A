@@ -9,13 +9,13 @@ import gui.Oval;
 /**
  * Class BallsSimulator :
  *  Definition of the class who implements the interface Simulable for the game composed of balls.
- *   ??????
  */
 public class BallsSimulator implements Simulable {
     private Balls balls;
     private GUISimulator gui;
     private int width;
     private int height;
+    private EventManager eventManager = new EventManager();
 
     /**
      * Constructor of the interface we will simulate.
@@ -25,7 +25,7 @@ public class BallsSimulator implements Simulable {
         this.gui = window;
         this.width = window.getPanelWidth();
         this.height = window.getPanelHeight();
-        // On initialise les boules ici
+
         this.balls = new Balls(
                 new Point(50,100),
                 new Point(60, 10),
@@ -37,6 +37,7 @@ public class BallsSimulator implements Simulable {
                 new Point(340,180),
                 new Point(400,0)
                 );
+        this.eventManager.addEvent(new BallsEvent(1, this));
     }
 
     public ArrayList<Point> getBallsList() {
@@ -54,20 +55,36 @@ public class BallsSimulator implements Simulable {
         }
     }
 
+    public Balls getBalls() {
+        return this.balls;
+    }
+
+    public GUISimulator getGui() {
+        return this.gui;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public EventManager getEventManager() {
+        return this.eventManager;
+    }
+
     @Override
     public void next() {
-        System.out.println(this.balls);
-        gui.reset();
-        this.balls.step(5, this.width, this.height);
-        this.draw();
+        this.eventManager.next();
     }
 
     @Override
     public void restart() {
         this.balls.reInit();
-        gui.reset();
+        this.gui.reset();
         this.draw();
-        System.out.println(this.balls);
     }
 
 }

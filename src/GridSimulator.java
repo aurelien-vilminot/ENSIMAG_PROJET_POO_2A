@@ -20,8 +20,10 @@ public class GridSimulator implements Simulable {
 
 	private String gameName;
 
+	private EventManager eventManager = new EventManager();
+
 	/**
-	 * Cnstructor of an object which will display the grid, using the GUISimulator
+	 * Constructor of an object which will display the grid, using the GUISimulator
 	 * @param gui : an instance of GUISimulator
 	 * @param gameName : name of the game.
 	 * @param cellSize : size of the cell
@@ -48,6 +50,8 @@ public class GridSimulator implements Simulable {
 		// Init the game
 		this.gameName = gameName;
 		this.grid = new Grid(this.linesCell, this.columCell, this.gameName, cells);
+
+		this.eventManager.addEvent(new CellEvent(1, this));
 	}
 
 	/**
@@ -66,11 +70,21 @@ public class GridSimulator implements Simulable {
 		}
 	}
 
+	public GUISimulator getGui() {
+		return this.gui;
+	}
+
+	public Grid getGrid() {
+		return this.grid;
+	}
+
+	public EventManager getEventManager() {
+		return this.eventManager;
+	}
+
 	@Override
 	public void next() {
-		gui.reset();
-		this.grid.step();
-		this.draw();
+		this.eventManager.next();
 	}
 
 	@Override

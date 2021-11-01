@@ -4,11 +4,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Create a class to manage the events.
+ * Create a class to manage events.
  */
 public class EventManager {
     private long currentDate = 0;
-    private HashMap<Event, Long> eventList = new HashMap<>() {};
+    private HashMap<Event, Long> eventList = new HashMap<>(){};
 
     /**
      * Add Events to a list of Events
@@ -24,9 +24,9 @@ public class EventManager {
     public void next() {
         this.currentDate++;
         Set<Map.Entry<Event, Long>> couples = this.eventList.entrySet();
-
         ArrayList<Event> eventsToRemove = new ArrayList<>();
 
+        // Execute all events which date is lower or equal than currentDate
         for (Map.Entry<Event, Long> couple : couples) {
             if (couple.getValue() <= this.currentDate) {
                 couple.getKey().execute();
@@ -34,8 +34,9 @@ public class EventManager {
             }
         }
 
+        // Remove these events from the eventList
         for (Event eventToRemove: eventsToRemove) {
-            eventList.remove(eventToRemove);
+            this.eventList.remove(eventToRemove);
         }
     }
 
@@ -43,6 +44,5 @@ public class EventManager {
         return this.eventList.isEmpty();
     }
 
-    public void restart() {
-    }
+    public void restart() {}
 }

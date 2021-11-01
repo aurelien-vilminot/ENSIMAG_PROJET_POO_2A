@@ -6,10 +6,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- /**
  * Management of the display of BoidsBackend.
  * Implements the interface Simulable which cares of the display.
- */
  */
 public class BoidsSimulator implements Simulable {
     private static final Color borderColor = Color.decode("#FFFFFF");
@@ -19,6 +17,7 @@ public class BoidsSimulator implements Simulable {
 
     private GUISimulator gui;
     private BoidsBackend boidsBackend;
+    private EventManager eventManager = new EventManager();
 
     /**
      * Constructor of an object who will display BoidsBackend, using the GUISimulator.
@@ -32,6 +31,7 @@ public class BoidsSimulator implements Simulable {
                 this.gui.getPanelHeight() - boidSize,
                 boids
         );
+        this.eventManager.addEvent(new BoidsEvent(1, this));
     }
 
     /**
@@ -45,11 +45,21 @@ public class BoidsSimulator implements Simulable {
         }
     }
 
+    public GUISimulator getGui() {
+        return this.gui;
+    }
+
+    public BoidsBackend getBoidsBackend() {
+        return this.boidsBackend;
+    }
+
+    public EventManager getEventManager() {
+        return this.eventManager;
+    }
+
     @Override
     public void next() {
-        gui.reset();
-        this.boidsBackend.step();
-        this.draw();
+        this.eventManager.next();
     }
 
     @Override
