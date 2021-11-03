@@ -1,7 +1,7 @@
 import java.lang.Math;
 
 /**
- * Class of vector, use to represent the 2 coordonates of a boid at each time.
+ * Class of vector, used to represent the 2 coordinates of a boid at each time.
  */
 public class Vector {
     private float x;
@@ -16,7 +16,7 @@ public class Vector {
     }
 
     /**
-     * Overloeading of the constructor, which fill the elements of the vector with the parameters.
+     * Overloading of the constructor, which fill the elements with the vector with the parameters.
      * @param x : value on the axis X.
      * @param y : value on the axis Y.
      */
@@ -36,10 +36,10 @@ public class Vector {
     }
 
     /**
-     * Substracts the two vectors passed into parameters.
+     * Subtracts the two vectors passed into parameters.
      * @param v1 : Vector
      * @param v2 : Vector
-     * @return Substraction of the 2 vectors in a new Vector
+     * @return Subtraction of the 2 vectors in a new Vector
      */
     public static Vector sub(Vector v1, Vector v2) {
         return new Vector(v1.getX() - v2.getX(), v1.getY() - v2.getY());
@@ -55,7 +55,7 @@ public class Vector {
     }
 
     /**
-     * Substract the vector to itself and modify directly its value.
+     * Subtract the vector to itself and modify directly its value.
      * @param v : Vector
      */
     public void sub(Vector v) {
@@ -64,7 +64,7 @@ public class Vector {
     }
 
     /**
-     * Modify and multiply all the values of the vector by m.
+     * Multiply all the values of the vector by m.
      * @param m : float
      */
     public void mult(float m) {

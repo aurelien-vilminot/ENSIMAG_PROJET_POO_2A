@@ -36,8 +36,8 @@ public class Balls implements Backend{
     }
 
     /**
-     * overloading of the constructor of Balls taking coordonates of the ball we will create in parameters
-     * @param tab : List of coordonates with value on X et Y.
+     * overloading of the constructor of Balls taking coordinates of the ball we will create in parameters
+     * @param tab : List of coordinates with value on X et Y.
      */
     public Balls(int xMax, int yMax, Point... tab) {
         this.xMax = xMax;
@@ -54,7 +54,7 @@ public class Balls implements Backend{
     }
 
     /**
-     * Translate a ball from the coordonates given in parameters.
+     * Translate a ball from the coordinates given in parameters.
      * @param dx : value of the translation on X
      * @param dy : value of the translation on Y
      */
@@ -65,7 +65,7 @@ public class Balls implements Backend{
     }
 
     /**
-     * Initialized the coordonates of the List of Balls with the initial the values of
+     * Initialized the coordinates of the List of Balls with the initial the values of
      * the list "posInit".
      */
     public void reInit() {
@@ -77,7 +77,7 @@ public class Balls implements Backend{
     /**
      * Take a step forward of the all the balls in the list of balls.
      * Corresponding to the changement applied on the balls with the button next of the simulation.
-     * @param dt : step of time used to adavance
+     * @param dt : step of time used to advance
      * @param width : width of the window where balls move
      * @param height : height of the window where balls move
      */
@@ -89,7 +89,7 @@ public class Balls implements Backend{
             int dx = Math.round(dt * vel[0]);
             int dy = Math.round(dt * vel[1]);
 
-            // Si on tape les murs, on oppose la vélocité des balles
+            // Reverse velocity if the ball hits the wall
             if (pos.x + dx > this.xMax || pos.x + dx < 0) {
                 vel[0] = -vel[0];
                 dx = -dx;
@@ -103,10 +103,10 @@ public class Balls implements Backend{
     }
 
     /**
-     * Initialise the position the postition of the ball given in paramameter on the position
+     * Initialise the position of the ball given in parameter on the position
      * choose also given in parameter.
      * @param ball : Ball which coordinates will change.
-     * @param pos : integer coordonate on X et on Y of the new position.
+     * @param pos : integer coordinate on X et on Y of the new position.
      */
     private void translateInit(Point ball, int[] pos) {
         ball.move(pos[0], pos[1]);

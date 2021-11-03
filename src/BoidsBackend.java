@@ -31,7 +31,7 @@ public class BoidsBackend implements Backend {
     }
 
     /**
-     * Re initialize the boids, by changing their position, speed ans acceleration.
+     * Reinitialize the boids, by changing their position, speed and acceleration.
      */
     public void reInit() {
         for (int i = 0; i < boidsList.size(); i++) {
@@ -148,7 +148,7 @@ public class BoidsBackend implements Backend {
      * Move all boids by applying forces to them
      */
     public void step() {
-        // Important: rules have to be independant of acceleration
+        // Important: rules have to be independent of acceleration
         for (Boids b : this.boidsList) {
             Vector f1 = rule1(b, this.boidsList);
             Vector f2 = rule2(b, this.boidsList);

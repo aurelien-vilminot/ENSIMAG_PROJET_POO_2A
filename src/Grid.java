@@ -7,19 +7,11 @@ public class Grid implements Backend {
 	private int height;
 	private int width;
 
-	/*
-	Création d'une grille contenant les cellules spécifique au jeu souhaité
-	int height = hauteur  de la grille
-	int width = largeur de la grille
-	String gameName = nom du jeu, utiliser les créer le bon type de cellules, règles du jeu ...
-	Cell... cells = cellules constituants la grille
-	*/
-
 	/**
-	 * Constructor of a grid containing specifiec cells of the game choose.
+	 * Constructor of a grid containing specific cells of the game choose.
 	 * @param height : height of the grid
 	 * @param width : width of the grid
-	 * @param gameName : choicd of the game
+	 * @param gameName : choice of the game
 	 * @param cells : cells used in the grid
 	 */
 	public Grid(int height, int width, String gameName, Cell... cells) {
@@ -69,7 +61,7 @@ public class Grid implements Backend {
 
 
 	/**
-	 * Re initialize the grid by changing the state of the cells.
+	 * Reinitialize the grid by changing the state of the cells.
 	 */
 	public void reInit() {
 		for (int i = 0; i < height; i++) {
@@ -125,16 +117,6 @@ public class Grid implements Backend {
 			int state = cell[2];
 			this.cellArray[xCoord][yCoord].setState(state);
 		}
-	}
-
-	/**
-	 * Give the color of a cell
-	 * @param x : position of the cell on the grid on the axis X.
-	 * @param y : position of the cell on the grid on the axis Y.
-	 * @return the color of the cell
-	 */
-	public String getCellColor(int x, int y) {
-		return this.cellArray[x][y].getCellColor();
 	}
 
 	@Override

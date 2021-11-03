@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Creation of a celule of the grid
+ * Creation of a cell of the grid
  * Reused for the game of Conway, Immigration and Schelling.
  */
 public class Cell {
@@ -11,8 +11,8 @@ public class Cell {
 
 	/**
 	 * First constructor of a cell
-	 * @param x : coordonate on axis X.
-	 * @param y : coordonate on axis Y.
+	 * @param x : coordinate on axis X.
+	 * @param y : coordinate on axis Y.
 	 */
 	public Cell(int x, int y) {
 		this.x = x;
@@ -20,9 +20,9 @@ public class Cell {
 	}
 
 	/**
-	 * overloading of the constructor of cell takink into account the state of the cell create
-	 * @param x : coordonate on axis X.
-	 * @param y : coordonate on axis Y.
+	 * Overloading of the constructor of cell taking into account the state of the cell created
+	 * @param x : coordinate on axis X.
+	 * @param y : coordinate on axis Y.
 	 * @param state : state of the cell create.
 	 */
 	public Cell(int x, int y, int state) {
@@ -55,15 +55,10 @@ public class Cell {
 		this.state = state;
 	}
 
-	/*
-        Donne le prochain état de la cellule sur laquelle on appelle la méthode, méthode créee pour être override par les classes héritées
-        ArrayList<Cell> neighbours = la liste de cellule des voisins
-         */
-
 	/**
-	 * Abstract method which gives the next state of the cells, depending of the game.
-	 * @param neighbours : list the the neighbours of the cells
-	 * @throws : if the methods is called directly, it will throw an Exception because it's an
+	 * Abstract method which gives the next state of the cells, depending on the game.
+	 * @param neighbours : list the neighbours of the cells
+	 * @throws IllegalCallerException : if the methods is called directly, it will throw an Exception because it's an
 	 * abstract method
 	 * @return : List of the new state of the cells after a step of the game.
 	 */
@@ -73,7 +68,7 @@ public class Cell {
 
 	/**
 	 * Abstract method which return the color of the cell
-	 * @throws : if the methods is called directly, it will throw an Exception because it's an
+	 * @throws IllegalCallerException : if the methods is called directly, it will throw an Exception because it's an
 	 * abstract method
 	 * @return : Color of the cell ( a String)
 	 */
@@ -82,7 +77,7 @@ public class Cell {
 	}
 
 	@Override
-	public String toString() {
+	public final String toString() {
 		return "Cell [x=" + x + ", y=" + y + ", state=" + state + "]";
 	}
 }

@@ -11,7 +11,7 @@ public class Boids {
      * Constructor of boids
      * @param x : initial position of boids on the axis X.
      * @param y : initial position of boids on the axis Y.
-     * @param detectionRadius : how the boid detects tis environnment.
+     * @param detectionRadius : how the boid detects this environment.
      */
     public Boids(float x, float y, float detectionRadius) {
         this.position = new Vector(x, y);
@@ -60,7 +60,7 @@ public class Boids {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "Boids{" +
                 "position=" + position +
                 ", velocity=" + velocity +
