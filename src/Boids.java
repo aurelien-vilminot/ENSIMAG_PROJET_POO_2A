@@ -194,6 +194,10 @@ public class Boids {
         this.position.add(this.velocity);
     }
 
+    public void addEvent(EventManager eventManager) {
+        eventManager.addEvent(new BoidsEvent(eventManager.getCurrentDate(), this));
+    }
+
     @Override
     public final String toString() {
         return "Boids{" +

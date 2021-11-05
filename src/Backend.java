@@ -1,4 +1,4 @@
 public interface Backend {
     void reInit();
-    void step();
+    void step(EventManager eventManager);
 }

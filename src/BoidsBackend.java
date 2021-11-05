@@ -49,14 +49,13 @@ public class BoidsBackend implements Backend {
     /**
      * Move all boids by applying forces to them
      */
-    public void step() {
+    public void step(EventManager eventManager) {
         // Important: rules have to be independent of acceleration
         for (Boids b : this.boidsList) {
             b.applyRules(this.boidsList);
         }
         for (Boids b : this.boidsList) {
-            b.updateVelocity();
-            b.updatePosition();
+            b.addEvent(eventManager);
         }
     }
 

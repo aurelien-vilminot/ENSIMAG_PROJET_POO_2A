@@ -8,8 +8,8 @@ public class BoidsEvent extends Event {
 
     public void execute() {
         // Calculate new velocity
-        this.boid.getVelocity().add(this.boid.getAcceleration());
+        this.boid.updateVelocity();
         // Calculate new position
-        this.boid.getPosition().add(this.boid.getVelocity());
+        this.boid.updatePosition();
     }
 }

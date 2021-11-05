@@ -81,7 +81,7 @@ public class Balls implements Backend{
      * @param width : width of the window where balls move
      * @param height : height of the window where balls move
      */
-    public void step() {
+    public void step(EventManager eventManager) {
         float dt = 5;
         for (int i = 0; i < this.ballsList.size(); i++) {
             Point pos = this.ballsList.get(i);

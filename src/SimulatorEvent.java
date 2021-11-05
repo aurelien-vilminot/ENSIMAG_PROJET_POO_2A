@@ -14,7 +14,7 @@ public class SimulatorEvent extends Event {
     @Override
     public void execute() {
         this.simulator.getGui().reset();
-        this.simulator.getBackend().step();
+        this.simulator.getBackend().step(this.simulator.getEventManager());
         this.simulator.draw();
         this.simulator.getEventManager().addEvent(new SimulatorEvent(this.getDate() + 1, this.simulator));
     }

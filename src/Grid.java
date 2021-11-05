@@ -95,7 +95,7 @@ public class Grid implements Backend {
 	/**
 	 * Step forward the current game, updating the states of the different cells.
 	*/
-	public void step() {
+	public void step(EventManager eventManager) {
 		ArrayList<int[]> stateList = new ArrayList<int[]>();
 
 		// For each cell, add to stateList the modified states
