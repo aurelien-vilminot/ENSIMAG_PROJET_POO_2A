@@ -9,35 +9,43 @@ import java.util.Set;
 public class EventManager {
     private long currentDate = 0;
     private HashMap<Event, Long> eventList = new HashMap<>(){};
+    private ArrayList<Event> eventsToAdd = new ArrayList<>();
+    private ArrayList<Event> eventsToRemove = new ArrayList<>();
 
     /**
      * Add Events to a list of Events
      * @param e : an Event
      */
     public void addEvent(Event e) {
-        eventList.put(e, e.getDate());
+        eventsToAdd.add(e);
     }
 
     /**
      * Move to the next event of the list.
      */
     public void next() {
-        this.currentDate++;
-        Set<Map.Entry<Event, Long>> couples = this.eventList.entrySet();
-        ArrayList<Event> eventsToRemove = new ArrayList<>();
+        // Add events that were added before loop
+        for (Event e : eventsToAdd) {
+            this.eventList.put(e, e.getDate());
+        }
+
+        eventsToAdd.clear();
+        eventsToRemove.clear();
 
         // Execute all events which date is lower or equal than currentDate
-        for (Map.Entry<Event, Long> couple : couples) {
+        for (Map.Entry<Event, Long> couple : this.eventList.entrySet()) {
             if (couple.getValue() <= this.currentDate) {
                 couple.getKey().execute();
                 eventsToRemove.add(couple.getKey());
             }
         }
 
-        // Remove these events from the eventList
-        for (Event eventToRemove: eventsToRemove) {
-            this.eventList.remove(eventToRemove);
+        // Remove events executed from the eventList
+        for (Event e: eventsToRemove) {
+            this.eventList.remove(e);
         }
+
+        this.currentDate++;
     }
 
     public boolean isFinished() {
