@@ -63,6 +63,9 @@ public class EventManager {
     }
 
     public void restart() {
+        if (!isStarted) {
+            return;
+        }
         isStarted = false;
         this.currentDate = 0;
         this.eventList.clear();
