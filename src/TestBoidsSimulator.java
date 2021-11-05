@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Class to test the class Boids.
  */
-public class TestBoids {
+public class TestBoidsSimulator {
     public static void main(String[] args) {
         int guiSize = 500;
         GUISimulator gui = new GUISimulator(guiSize, guiSize, Color.decode("#B1EEFE"));
@@ -20,7 +20,7 @@ public class TestBoids {
             // Generate random coords, the range is inclusive
             int x = random.nextInt((maxRange - minRange) + 1) + minRange;
             int y = random.nextInt((maxRange - minRange) + 1) + minRange;
-            boids[i] = new Boids(x, y, 50);
+            boids[i] = new Boids(x, y, 50, guiSize, guiSize);
         }
 
         gui.setSimulable(new BoidsSimulator(gui, boids));
