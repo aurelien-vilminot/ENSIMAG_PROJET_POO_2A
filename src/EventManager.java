@@ -9,8 +9,10 @@ import java.util.Set;
 public class EventManager {
     private long currentDate = 0;
     private HashMap<Event, Long> eventList = new HashMap<>(){};
+    private ArrayList<Event> eventsInit = new ArrayList<>();
     private ArrayList<Event> eventsToAdd = new ArrayList<>();
     private ArrayList<Event> eventsToRemove = new ArrayList<>();
+    private boolean isStarted = false;
 
     /**
      * Add Events to a list of Events
@@ -24,6 +26,10 @@ public class EventManager {
      * Move to the next event of the list.
      */
     public void next() {
+        if (!isStarted) {
+            this.eventsInit.addAll(this.eventsToAdd);
+            isStarted = true;
+        }
         // Add events that were added before loop
         for (Event e : eventsToAdd) {
             this.eventList.put(e, e.getDate());
@@ -49,8 +55,17 @@ public class EventManager {
     }
 
     public boolean isFinished() {
-        return this.eventList.isEmpty();
+        return (this.eventList.isEmpty() && this.eventsToAdd.isEmpty());
     }
 
-    public void restart() {}
+    public void restart() {
+        isStarted = false;
+        this.currentDate = 0;
+        this.eventList.clear();
+        this.eventsToAdd.clear();
+        this.eventsToRemove.clear();
+        for (Event e : this.eventsInit) {
+            eventList.put(e, e.getDate());
+        }
+    }
 }

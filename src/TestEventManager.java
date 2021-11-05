@@ -15,7 +15,19 @@ public class TestEventManager {
 
         while (!manager.isFinished()) {
             manager.next();
-            Thread.sleep(1000);
+            Thread.sleep(100);
+        }
+        manager.restart();
+        manager.addEvent(new MessageEvent(0, " [I am restarting !]"));
+        while (!manager.isFinished()) {
+            manager.next();
+            Thread.sleep(100);
+        }
+        manager.restart();
+        manager.addEvent(new MessageEvent(0, " [I am restarting once again, sorry]"));
+        while (!manager.isFinished()) {
+            manager.next();
+            Thread.sleep(100);
         }
     }
 }
