@@ -15,7 +15,7 @@ public class Boids {
      * Constructor of boids
      * @param x : initial position of boids on the axis X.
      * @param y : initial position of boids on the axis Y.
-     * @param detectionRadius : how the boid detects its environnment.
+     * @param detectionRadius : how the boid detects its environment.
      * @param xMax : maximum position of boids on the axis X.
      * @param yMax : maximum position of boids on the axis Y.
      */
@@ -195,7 +195,7 @@ public class Boids {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "Boids{" +
                 "position=" + position +
                 ", velocity=" + velocity +

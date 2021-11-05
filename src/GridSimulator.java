@@ -1,6 +1,5 @@
 import gui.GUISimulator;
 import gui.Rectangle;
-import gui.Simulable;
 
 import java.awt.*;
 
@@ -12,7 +11,7 @@ public class GridSimulator extends Simulator {
 	private static final String BORDERCOLOR = "#FCBACB";
 	private int cellSize;
 	private int linesCell;
-	private int columCell;
+	private int columnCell;
 
 	private String gameName;
 
@@ -26,13 +25,13 @@ public class GridSimulator extends Simulator {
 	public GridSimulator(GUISimulator gui, String gameName, int cellSize, Cell... cells) {
 		super(gui);
 
-		// Calculate the colums and lines number depending on cell size
+		// Calculate the columns and lines number depending on cell size
 		this.cellSize = cellSize;
-		this.columCell = this.gui.getPanelWidth() / this.cellSize;
+		this.columnCell = this.gui.getPanelWidth() / this.cellSize;
 		this.linesCell = this.gui.getPanelHeight() / this.cellSize;
 
 		// Check dimensions
-		if (this.cellSize < 1 || this.columCell < 1 || this.linesCell < 1) {
+		if (this.cellSize < 1 || this.columnCell < 1 || this.linesCell < 1) {
 			throw new IllegalArgumentException("You must enter correct sizes for cells and window");
 		}
 
@@ -43,7 +42,7 @@ public class GridSimulator extends Simulator {
 
 		// Init the game
 		this.gameName = gameName;
-		this.backend = new Grid(this.linesCell, this.columCell, this.gameName, cells);
+		this.backend = new Grid(this.linesCell, this.columnCell, this.gameName, cells);
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class GridSimulator extends Simulator {
 		int padding = (this.cellSize / 2);
 
 		for (int i = 0; i < this.linesCell; i++) {
-			for (int j = 0; j < this.columCell; j++) {
+			for (int j = 0; j < this.columnCell; j++) {
 				String cellColor = cellArray[i][j].getCellColor();
 				gui.addGraphicalElement(new Rectangle(i * this.cellSize + padding, j * this.cellSize + padding,
 						Color.decode(BORDERCOLOR), Color.decode(cellColor), this.cellSize));

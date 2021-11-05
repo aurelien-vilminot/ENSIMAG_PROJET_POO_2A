@@ -4,7 +4,7 @@ import java.awt.*;
 
 /**
  * Class Triangle to represents boids by triangle, it implements a GraphicalElement
- * of the inteface Simulable.
+ * of the interface Simulable.
  */
 public class Triangle implements GraphicalElement {
     private int[] x = new int[3];

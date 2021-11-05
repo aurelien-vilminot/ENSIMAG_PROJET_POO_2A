@@ -10,8 +10,8 @@ public class CellImmigration extends Cell {
 	/**
 	 * Constructor of a cell for to the game of 'Immigration', using one of the constructor
 	 * of the mother class.
-	 * @param x : coordonate on axis X.
-	 * @param y : coordonate on axis Y.
+	 * @param x : coordinate on axis X.
+	 * @param y : coordinate on axis Y.
 	 * @param state : state of the cell create.
 	 */
 	public CellImmigration(int x, int y, int state) {

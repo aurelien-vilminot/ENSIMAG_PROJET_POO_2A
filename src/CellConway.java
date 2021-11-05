@@ -5,10 +5,10 @@ import java.util.ArrayList;
  */
 public class CellConway extends Cell {
 	/**
-	 * 1st constructor of a cell for to the game of life on Conway, using one of the constructor
+	 * First constructor of a cell for to the game of life on Conway, using one of the constructor
 	 * of the mother class.
-	 * @param x : coordonate on axis X.
-	 * @param y : coordonate on axis Y.
+	 * @param x : coordinate on axis X.
+	 * @param y : coordinate on axis Y.
 	 */
 	public CellConway(int x, int y) {
 		super(x, y);
@@ -17,8 +17,8 @@ public class CellConway extends Cell {
 	/**
 	 * Another constructor overload of a cell for to the game of life on Conway,
 	 * using one of the constructor of the mother class.
-	 * @param x : coordonate on axis X.
-	 * @param y : coordonate on axis Y.
+	 * @param x : coordinate on axis X.
+	 * @param y : coordinate on axis Y.
 	 * @param state : state of the cell create.
 	 */
 	public CellConway(int x, int y, int state) {
@@ -44,7 +44,7 @@ public class CellConway extends Cell {
 			// Rule 2: Any dead cell with three live neighbours becomes a live cell
 			newState = 1;
 		} else {
-			// Rule 3: All other live cells die in the next generation. Similarly, all other
+			// Rule 3: All others lived cells die in the next generation. Similarly, all other
 			// dead cells stay dead
 			newState = 0;
 		}

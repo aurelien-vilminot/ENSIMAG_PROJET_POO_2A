@@ -11,9 +11,9 @@ public class CellSchelling extends Cell {
     /**
      * 1st constructor of a cell for to the game of Schelling, using one of the constructor
      * of the mother class.
-     * State is not specified, the cell is considered as free, so add the the list of free lodgement.
-     * @param x : coordonate on axis X.
-     * @param y : coordonate on axis Y.
+     * State is not specified, the cell is considered as free, so add the list of free lodgement.
+     * @param x : coordinate on axis X.
+     * @param y : coordinate on axis Y.
      * @throws Exception if the number K of the class is 0 or if the list of color is Null.
      */
     public CellSchelling(int x, int y) {
@@ -32,8 +32,8 @@ public class CellSchelling extends Cell {
     /**
      * 1st constructor of a cell for to the game of Schelling, using one of the constructor
      * of the mother class.
-     * @param x : coordonate on axis X.
-     * @param y : coordonate on axis Y.
+     * @param x : coordinate on axis X.
+     * @param y : coordinate on axis Y.
      * @param state : state of the cell create, if the state is 0, we add the lodgment to the list
      *              of free lodgement.
      * @throws Exception if the number K of the class is 0 or if the list of color is Null.
@@ -79,7 +79,7 @@ public class CellSchelling extends Cell {
     }
 
     /**
-     * Define the colors of the different lodgements and fill a list of the colors.
+     * Define the colors of the different lodgements and fill a list with the colors.
      * @param c : number of colors.
      */
     public static void setColors(int c) {
