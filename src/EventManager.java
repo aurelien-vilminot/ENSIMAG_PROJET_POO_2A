@@ -1,14 +1,11 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Create a class to manage events.
  */
 public class EventManager {
     private long currentDate = 0;
-    private HashMap<Event, Long> eventList = new HashMap<>(){};
+    private ArrayList<Event> eventList = new ArrayList<>();
     private ArrayList<Event> eventsInit = new ArrayList<>();
     private ArrayList<Event> eventsToAdd = new ArrayList<>();
     private ArrayList<Event> eventsToRemove = new ArrayList<>();
@@ -35,18 +32,16 @@ public class EventManager {
             isStarted = true;
         }
         // Add events that were added before loop
-        for (Event e : eventsToAdd) {
-            this.eventList.put(e, e.getDate());
-        }
+        this.eventList.addAll(eventsToAdd);
 
         eventsToAdd.clear();
         eventsToRemove.clear();
 
         // Execute all events which date is lower or equal than currentDate
-        for (Map.Entry<Event, Long> couple : this.eventList.entrySet()) {
-            if (couple.getValue() <= this.currentDate) {
-                couple.getKey().execute();
-                eventsToRemove.add(couple.getKey());
+        for (Event e : this.eventList) {
+            if (e.getDate() <= this.currentDate) {
+                e.execute();
+                eventsToRemove.add(e);
             }
         }
 
@@ -72,7 +67,7 @@ public class EventManager {
         this.eventsToAdd.clear();
         this.eventsToRemove.clear();
         for (Event e : this.eventsInit) {
-            eventList.put(e, e.getDate());
+            this.eventList.add(e);
         }
     }
 }
