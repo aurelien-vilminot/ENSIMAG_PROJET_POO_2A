@@ -93,13 +93,6 @@ public abstract class Boids {
 
     public abstract int getTimeStep();
 
-    public boolean canApproach(Boids b) {
-        if (this.type.equals("kind")) {
-            return (b.type.equals("evil"));
-        }
-        return true;
-    }
-
     /**
      * Rule of wind: apply wind force to the group
      *
