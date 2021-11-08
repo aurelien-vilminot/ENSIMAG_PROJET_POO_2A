@@ -52,12 +52,12 @@ public class BoidsKind extends Boids {
         for (Boids b : boidsArrayList) {
             if (b != this) {
                 float distance = Vector.distance(this.position, b.getPosition());
-                if (distance < this.detectionRadius || !this.canApproach(b)) {
+                if (distance < this.detectionRadius) {
                     f.sub(Vector.sub(b.getPosition(), this.position));
                 }
             }
         }
-        f.mult(1 / (float) 1000);
+        f.mult(1 / (float) 50);
         return f;
     }
 
@@ -86,6 +86,36 @@ public class BoidsKind extends Boids {
     }
 
     /**
+     * Rule of fear: move away from the nearest unapproachable boid
+     *
+     * @param boidsArrayList : list of boids of the space
+     * @return Vector corresponding to the fear force applied to this boid
+     */
+    public Vector fearRule(ArrayList<Boids> boidsArrayList) {
+        Vector f = new Vector(0, 0);
+        Boids nearest = null;
+        float minDistance = 0;
+        for (Boids b : boidsArrayList) {
+            if (b != this) {
+                if (!this.canApproach(b)) {
+                    float distance = Vector.distance(this.position, b.getPosition());
+                    if (distance < minDistance || minDistance == 0) {
+                        nearest = b;
+                        minDistance = distance;
+                    }
+                }
+            }
+        }
+        if (minDistance == 0) {
+            return f;
+        }
+        f.add(this.position);
+        f.sub(nearest.getPosition());
+        f.mult((float) 1 / 100);
+        return f;
+    }
+
+    /**
      * Apply this boid's rules to modify its acceleration
      *
      * @param boidsArrayList : list of boids of the space
@@ -97,10 +127,12 @@ public class BoidsKind extends Boids {
         Vector f1 = this.cohesionRule(boidsArrayList);
         Vector f2 = this.separationRule(boidsArrayList);
         Vector f3 = this.alignmentRule(boidsArrayList);
+        Vector f4 = this.fearRule(boidsArrayList);
         // Calculate new acceleration
-        this.getAcceleration().add(f1);
-        this.getAcceleration().add(f2);
-        this.getAcceleration().add(f3);
+        this.acceleration.add(f1);
+        this.acceleration.add(f2);
+        this.acceleration.add(f3);
+        this.acceleration.add(f4);
     }
 
     @Override

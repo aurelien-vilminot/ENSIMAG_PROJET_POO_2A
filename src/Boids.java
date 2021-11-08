@@ -76,7 +76,7 @@ public abstract class Boids {
 
     public boolean canApproach(Boids b) {
         if (this.type.equals("kind")) {
-            return (b.type.equals("evil"));
+            return (!b.type.equals("evil"));
         }
         return true;
     }
