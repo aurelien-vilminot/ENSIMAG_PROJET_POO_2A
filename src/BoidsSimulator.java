@@ -1,9 +1,10 @@
 import gui.GUISimulator;
-import gui.Rectangle;
-import gui.Simulable;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Management of the display of BoidsBackend.
@@ -11,7 +12,6 @@ import java.util.ArrayList;
  */
 public class BoidsSimulator extends Simulator {
     private static final Color borderColor = Color.decode("#FFFFFF");
-    private static final Color boidColor = Color.decode("#0000FF");
     private static final int boidSize = 20;
     private static final float borderWidth = 3;
 
@@ -27,6 +27,10 @@ public class BoidsSimulator extends Simulator {
                 this.gui.getPanelHeight() - boidSize,
                 boids
         );
+
+        // Create an event for each type of boids with its time step
+        BoidsBackend boidsBackend = (BoidsBackend) this.backend;
+        boidsBackend.getTypeOfBoids().forEach((key, value) -> this.eventManager.addEvent(new SimulatorEvent(0, this, value, key)));
     }
 
     /**

@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -64,9 +65,9 @@ public abstract class Cell {
 
 	/**
 	 * Abstract method which return the color of the cell
-	 * @return : Color of the cell ( a String)
+	 * @return : Color of the cell
 	 */
-	public abstract String getCellColor();
+	public abstract Color getCellColor();
 
 	@Override
 	public final String toString() {

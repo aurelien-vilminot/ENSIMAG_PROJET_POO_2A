@@ -8,7 +8,7 @@ import java.awt.*;
  * Implements the interface Simulable which cares of the display.
  */
 public class GridSimulator extends Simulator {
-	private static final String BORDERCOLOR = "#FCBACB";
+	private static final Color borderColor = Color.decode("#FCBACB");
 	private int cellSize;
 	private int linesCell;
 	private int columnCell;
@@ -24,6 +24,7 @@ public class GridSimulator extends Simulator {
 	 */
 	public GridSimulator(GUISimulator gui, String gameName, int cellSize, Cell... cells) {
 		super(gui);
+		this.eventManager.addEvent(new SimulatorEvent(0, this, 1, null));
 
 		// Calculate the columns and lines number depending on cell size
 		this.cellSize = cellSize;
@@ -55,9 +56,8 @@ public class GridSimulator extends Simulator {
 
 		for (int i = 0; i < this.linesCell; i++) {
 			for (int j = 0; j < this.columnCell; j++) {
-				String cellColor = cellArray[i][j].getCellColor();
 				gui.addGraphicalElement(new Rectangle(i * this.cellSize + padding, j * this.cellSize + padding,
-						Color.decode(BORDERCOLOR), Color.decode(cellColor), this.cellSize));
+						borderColor, cellArray[i][j].getCellColor(), this.cellSize));
 			}
 		}
 	}

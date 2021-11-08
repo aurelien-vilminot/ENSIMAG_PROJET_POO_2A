@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -5,7 +6,7 @@ import java.util.ArrayList;
  */
 public class CellImmigration extends Cell {
 	private static int n = 0;
-	private static String[] stateColor;
+	private static Color[] stateColor;
 
 	/**
 	 * Constructor of a cell for to the game of 'Immigration', using one of the constructor
@@ -34,11 +35,11 @@ public class CellImmigration extends Cell {
 		n = n0;
 
 		// Define colors depending steps
-		stateColor = new String[n];
+		stateColor = new Color[n];
 		int stepAlpha = 255 / (n-1);
 		for (int i = 0 ; i < n ; i++) {
 			int scaledColor = 255 - (i*stepAlpha);
-			stateColor[i] = String.format("#%02x%02x%02x", scaledColor, scaledColor, scaledColor);
+			stateColor[i] = Color.decode(String.format("#%02x%02x%02x", scaledColor, scaledColor, scaledColor));
 		}
 	}
 
@@ -64,7 +65,7 @@ public class CellImmigration extends Cell {
 	}
 
 	@Override
-	public String getCellColor() {
+	public Color getCellColor() {
 		return stateColor[this.state];
 	}
 }

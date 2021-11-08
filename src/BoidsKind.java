@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BoidsKind extends Boids {
-    private final int step = 1;
+    private static final int timeStep = 1;
 
     /**
      * Constructor of boids
@@ -109,7 +109,7 @@ public class BoidsKind extends Boids {
     }
 
     @Override
-    public int getStep() {
-        return this.step;
+    public int getTimeStep() {
+        return timeStep;
     }
 }

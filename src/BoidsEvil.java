@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BoidsEvil extends Boids {
-    private final int step = 2;
+    private static final int timeStep = 4;
 
     /**
      * Constructor of boids
@@ -33,8 +33,8 @@ public class BoidsEvil extends Boids {
     }
 
     @Override
-    public int getStep() {
-        return this.step;
+    public int getTimeStep() {
+        return timeStep;
     }
 
 //    @Override

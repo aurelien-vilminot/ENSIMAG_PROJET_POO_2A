@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -6,7 +7,7 @@ import java.util.*;
 public class CellSchelling extends Cell {
     private static int K=0;
     private static ArrayList<int[]> freeLodgment = new ArrayList<>();
-    private static ArrayList<String> colors;
+    private static ArrayList<Color> colors;
 
     /**
      * 1st constructor of a cell for to the game of Schelling, using one of the constructor
@@ -69,7 +70,7 @@ public class CellSchelling extends Cell {
     /**
      * User has to define K the number of different colors of lodgemet.
      * @param k : number of color of the game.
-     * @throws exception if the number is strictly superior to 8.
+     * @throws IllegalCallerException if the number is strictly superior to 8.
      */
     public static void setK(int k) {
         if (k > 8) {
@@ -83,9 +84,9 @@ public class CellSchelling extends Cell {
      * @param c : number of colors.
      */
     public static void setColors(int c) {
-        colors = new ArrayList<String>();
+        colors = new ArrayList<Color>();
         // First color corresponds to a free lodgment
-        colors.add("#FFFFFF");
+        colors.add(Color.decode("#FFFFFF"));
 
         // Add unique color in the color array
         Random random = new Random();
@@ -93,8 +94,8 @@ public class CellSchelling extends Cell {
             String randomColor;
             do {
                 randomColor = String.format("#%02x%02x%02x", random.nextInt(256), random.nextInt(256), random.nextInt(256));
-            } while (colors.contains(randomColor) && !Objects.equals(randomColor, "#FFFFFF"));
-            colors.add(randomColor);
+            } while (colors.contains(Color.decode(randomColor)) && !Objects.equals(randomColor, "#FFFFFF"));
+            colors.add(Color.decode(randomColor));
         }
     }
 
@@ -128,7 +129,7 @@ public class CellSchelling extends Cell {
     }
 
     @Override
-    public String getCellColor() {
+    public Color getCellColor() {
         return colors.get(this.state);
     }
 }

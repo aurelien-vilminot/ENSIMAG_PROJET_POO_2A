@@ -1,9 +1,13 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
  * Class of cells corresponding to the game of Conway, inherited from Cells.
  */
 public class CellConway extends Cell {
+	private static final Color colorSateAlive = Color.decode("#03A5FC");
+	private static final Color colorSateDead = Color.decode("#F2F2F2");
+
 	/**
 	 * First constructor of a cell for to the game of life on Conway, using one of the constructor
 	 * of the mother class.
@@ -55,11 +59,11 @@ public class CellConway extends Cell {
 	}
 
 	@Override
-	public String getCellColor() {
+	public Color getCellColor() {
 		if (this.state == 0) {
-			return "#F2F2F2";
+			return colorSateDead;
 		} else {
-			return "#03A5FC";
+			return colorSateAlive;
 		}
 	}
 }

@@ -77,11 +77,8 @@ public class Balls implements Backend{
     /**
      * Take a step forward of the all the balls in the list of balls.
      * Corresponding to the changement applied on the balls with the button next of the simulation.
-     * @param dt : step of time used to advance
-     * @param width : width of the window where balls move
-     * @param height : height of the window where balls move
      */
-    public void step(EventManager eventManager) {
+    public void step(String type) {
         float dt = 5;
         for (int i = 0; i < this.ballsList.size(); i++) {
             Point pos = this.ballsList.get(i);
@@ -114,10 +111,10 @@ public class Balls implements Backend{
 
     @Override
     public String toString() {
-        String strToReturn = "";
+        StringBuilder strToReturn = new StringBuilder();
         for (Point ball : this.ballsList) {
-            strToReturn += ball.x + ";" + ball.y + "\n";
+            strToReturn.append(ball.x).append(";").append(ball.y).append("\n");
         }
-        return strToReturn;
+        return strToReturn.toString();
     }
 }

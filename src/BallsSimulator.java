@@ -20,6 +20,7 @@ public class BallsSimulator extends Simulator {
      */
     public BallsSimulator(GUISimulator window) {
         super(window);
+        this.eventManager.addEvent(new SimulatorEvent(0, this, 1, null));
         this.width = window.getPanelWidth();
         this.height = window.getPanelHeight();
 

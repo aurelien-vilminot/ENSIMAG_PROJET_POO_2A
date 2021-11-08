@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Create the Backend where boids evolve.
@@ -9,6 +7,7 @@ public class BoidsBackend implements Backend {
     private ArrayList<Boids> boidsList = new ArrayList<>();
     private ArrayList<Vector> boidsPositionsInitList = new ArrayList<>();
     private ArrayList<Float> boidsDetectionRadiusInitList = new ArrayList<>();
+    private HashMap<String, Integer> typeOfBoids = new HashMap<>();
     // Width of area
     private int xMax, yMax;
 
@@ -23,6 +22,9 @@ public class BoidsBackend implements Backend {
         for (Boids b : boids) {
             this.boidsPositionsInitList.add(new Vector(b.getPosition()));
             this.boidsDetectionRadiusInitList.add(b.getDetectionRadius());
+            if (!this.typeOfBoids.containsKey(b.getType())) {
+                this.typeOfBoids.put(b.getType(), b.getTimeStep());
+            }
         }
         this.xMax = xMax;
         this.yMax = yMax;
@@ -51,19 +53,25 @@ public class BoidsBackend implements Backend {
     /**
      * Move all boids by applying forces to them
      */
-    public void step(EventManager eventManager) {
+    public void step(String type) {
         // Important: rules have to be independent of acceleration
         for (Boids b : this.boidsList) {
-            b.applyRules(this.boidsList);
-            // Calculate new velocity
-            b.updateVelocity();
-            // Calculate new position
-            b.updatePosition();
+            if (Objects.equals(b.getType(), type)) {
+                b.applyRules(this.boidsList);
+                // Calculate new velocity
+                b.updateVelocity();
+                // Calculate new position
+                b.updatePosition();
+            }
         }
 
 //        for (Boids b : this.boidsList) {
 //            b.addEvent(eventManager);
 //        }
+    }
+
+    public HashMap<String, Integer> getTypeOfBoids() {
+        return this.typeOfBoids;
     }
 
     @Override

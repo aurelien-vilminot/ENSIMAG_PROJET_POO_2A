@@ -91,7 +91,7 @@ public abstract class Boids {
 
     public abstract Color getColor();
 
-    public abstract int getStep();
+    public abstract int getTimeStep();
 
     /**
      * Rule of wind: apply wind force to the group
