@@ -1,26 +1,38 @@
 import gui.GUISimulator;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Class to test the class Boids.
  */
 public class TestBoidsSimulator {
+
+    private static ArrayList<int[]> generateCoordinates(int guiSize, int nbCoordinates) {
+        Random random = new Random();
+        int minRange = 1;
+        int maxRange = guiSize - 1;
+        ArrayList<int[]> listOfCoordinates = new ArrayList<>();
+        for (int i = 0 ; i < nbCoordinates ; ++i) {
+            // Generate random coords, the range is inclusive
+            int x = random.nextInt((maxRange - minRange) + 1) + minRange;
+            int y = random.nextInt((maxRange - minRange) + 1) + minRange;
+            listOfCoordinates.add(new int[]{x,y});
+        }
+        return listOfCoordinates;
+    }
+
     public static void main(String[] args) {
         int guiSize = 500;
         GUISimulator gui = new GUISimulator(guiSize, guiSize, Color.decode("#B1EEFE"));
 
-        Random random = new Random();
-        int minRange = 1;
-        int maxRange = guiSize - 1;
-        int nbBoids = 5;
+        int nbBoids = 10;
         Boids[] boids = new Boids[nbBoids];
-        for (int i = 0 ; i  < nbBoids ; ++i) {
-            // Generate random coords, the range is inclusive
-            int x = random.nextInt((maxRange - minRange) + 1) + minRange;
-            int y = random.nextInt((maxRange - minRange) + 1) + minRange;
-            boids[i] = new Boids(x, y, 50, guiSize, guiSize);
+        ArrayList<int[]> listOfCoordinates = generateCoordinates(guiSize, nbBoids);
+        for (int i = 0 ; i  < nbBoids ; i += 2) {
+            boids[i] = new BoidsEvil(listOfCoordinates.get(i)[0], listOfCoordinates.get(i)[1], 50, guiSize, guiSize);
+            boids[i+1] = new BoidsKind(listOfCoordinates.get(i+1)[0], listOfCoordinates.get(i+1)[1], 50, guiSize, guiSize);
         }
 
         gui.setSimulable(new BoidsSimulator(gui, boids));

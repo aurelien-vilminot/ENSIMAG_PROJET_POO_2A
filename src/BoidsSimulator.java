@@ -37,7 +37,7 @@ public class BoidsSimulator extends Simulator {
         ArrayList<Boids> boidsList = boidsBackend.getBoidsList();
         for (Boids boid : boidsList) {
             gui.addGraphicalElement(new Triangle(boidSize, boid.getPosition(), boid.getVelocity(),
-                    borderColor, boidColor, borderWidth));
+                    borderColor, boid.getColor(), borderWidth));
         }
     }
 }

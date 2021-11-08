@@ -7,6 +7,7 @@ public class BoidsEvent extends Event {
     }
 
     public void execute() {
+        // TODO: s'ajouter soi-même à l'eventManager
         // Calculate new velocity
         this.boid.updateVelocity();
         // Calculate new position

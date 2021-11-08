@@ -1,15 +1,18 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
  * Creation of boids.
  */
-public class Boids {
-    private Vector position;
-    private Vector velocity;
-    private Vector acceleration;
-    private float detectionRadius;
-    private float xMax;
-    private float yMax;
+public abstract class Boids {
+    protected Vector position;
+    protected Vector velocity;
+    protected Vector acceleration;
+    protected float detectionRadius;
+    protected float xMax;
+    protected float yMax;
+    protected String type;
+
 
     /**
      * Constructor of boids
@@ -19,7 +22,7 @@ public class Boids {
      * @param xMax : maximum position of boids on the axis X.
      * @param yMax : maximum position of boids on the axis Y.
      */
-    public Boids(float x, float y, float detectionRadius, float xMax, float yMax) {
+    public Boids(float x, float y, float detectionRadius, float xMax, float yMax, String type) {
         this.position = new Vector(x, y);
         this.velocity = new Vector(0, 0);
         this.acceleration = new Vector(0, 0);
@@ -30,6 +33,10 @@ public class Boids {
         this.detectionRadius = detectionRadius;
         this.xMax = xMax;
         this.yMax = yMax;
+        if (!type.equals("evil") && !type.equals("kind")) {
+            throw new IllegalArgumentException("Type has to be 'kind' or 'evil'");
+        }
+        this.type = type;
     }
 
     public Vector getPosition() {
@@ -67,69 +74,24 @@ public class Boids {
         this.detectionRadius = detectionRadius;
     }
 
-    /**
-     * Rule of cohesion: move towards the perceived center
-     *
-     * @param boidsArrayList : list of boids of the space
-     * @return Vector corresponding to the cohesion force applied to this boid
-     */
-    public Vector rule1(ArrayList<Boids> boidsArrayList) {
-        Vector f = new Vector(0, 0);
-        for (Boids b : boidsArrayList) {
-            if (b != this) {
-                f.add(b.getPosition());
-            }
+    public boolean canApproach(Boids b) {
+        if (this.type.equals("kind")) {
+            return (b.type.equals("evil"));
         }
-        // f is the center of mass, not including itself
-        float n = boidsArrayList.size();
-        f.mult(1 / (n - 1));
-        // Move 1% towards the center
-        f.sub(this.position);
-        f.mult((float) 1 / 100);
-        return f;
+        return true;
     }
 
-    /**
-     * Rule of separation: move away from other near boids
-     *
-     * @param boidsArrayList : list of boids of the space
-     * @return Vector corresponding to the separation force applied to this boid
-     */
-    public Vector rule2(ArrayList<Boids> boidsArrayList) {
-        Vector f = new Vector(0, 0);
-        for (Boids b : boidsArrayList) {
-            if (b != this) {
-                float distance = Vector.distance(this.position, b.getPosition());
-                if (distance < this.detectionRadius) {
-                    f.sub(Vector.sub(b.getPosition(), this.position));
-                }
-            }
-        }
-        f.mult(1 / (float) 20);
-        return f;
+    public String getType() {
+        return this.type;
     }
 
-    /**
-     * Rule of alignment: matching the "perceived velocity" of the group
-     *
-     * @param boidsArrayList : list of boids of the space
-     * @return Vector corresponding to the alignment force applied to this boid
-     */
-    public Vector rule3(ArrayList<Boids> boidsArrayList) {
-        Vector f = new Vector(0, 0);
-        for (Boids b : boidsArrayList) {
-            if (b != this) {
-                f.add(b.getVelocity());
-            }
-        }
-        // f is the perceived velocity
-        float n = boidsArrayList.size();
-        f.mult(1 / (n - 1));
-        // Add 1/8th to the boid's current velocity
-        f.sub(this.velocity);
-        f.mult(1 / (float) 8);
-        return f;
+    public void setType(String type) {
+        this.type = type;
     }
+
+    public abstract Color getColor();
+
+    public abstract int getStep();
 
     /**
      * Rule of wind: apply wind force to the group
@@ -137,7 +99,7 @@ public class Boids {
      * @param boidsArrayList : list of boids of the space
      * @return Vector corresponding to the wind force
      */
-    public Vector rule4(ArrayList<Boids> boidsArrayList) {
+    public Vector windRule(ArrayList<Boids> boidsArrayList) {
         return new Vector(0.1f, 0.9f);
     }
 
@@ -147,7 +109,7 @@ public class Boids {
      * @param boidsArrayList : list of boids of the space
      * @return Vector corresponding to the replace force applied to bj
      */
-    public Vector rule5(ArrayList<Boids> boidsArrayList) {
+    public Vector borderRule(ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector();
         Vector boidPosition = this.position;
 
@@ -167,30 +129,26 @@ public class Boids {
         return f;
     }
 
+    protected void applyInitRules(ArrayList<Boids> boidsArrayList) {
+        Vector vectorWindRule = this.windRule(boidsArrayList);
+        Vector vectorBorderRule = this.borderRule(boidsArrayList);
+        // Calculate new acceleration
+        this.setAcceleration(vectorWindRule);
+        this.getAcceleration().add(vectorBorderRule);
+    }
+
     /**
      * Apply this boid's rules to modify its acceleration
      *
      * @param boidsArrayList : list of boids of the space
      */
-    public void applyRules(ArrayList<Boids> boidsArrayList) {
-        Vector f1 = this.rule1(boidsArrayList);
-        Vector f2 = this.rule2(boidsArrayList);
-        Vector f3 = this.rule3(boidsArrayList);
-        Vector f4 = this.rule4(boidsArrayList);
-        Vector f5 = this.rule5(boidsArrayList);
-        // Calculate new acceleration
-        this.setAcceleration(f1);
-        this.getAcceleration().add(f2);
-        this.getAcceleration().add(f3);
-        this.getAcceleration().add(f4);
-        this.getAcceleration().add(f5);
-    }
+    public abstract void applyRules(ArrayList<Boids> boidsArrayList);
 
-    public void updateVelocity() {
+    public final void updateVelocity() {
         this.velocity.add(this.acceleration);
     }
 
-    public void updatePosition() {
+    public final void updatePosition() {
         this.position.add(this.velocity);
     }
 

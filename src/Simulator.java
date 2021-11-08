@@ -8,7 +8,7 @@ public abstract class Simulator implements Simulable {
 
     public Simulator(GUISimulator gui) {
         this.gui = gui;
-        this.eventManager.addEvent(new SimulatorEvent(0, this));
+        this.eventManager.addEvent(new SimulatorEvent(0, this, 1));
     }
 
     public abstract void draw();
@@ -28,6 +28,7 @@ public abstract class Simulator implements Simulable {
     @Override
     public void next() {
         this.eventManager.next();
+        this.draw();
     }
 
     @Override

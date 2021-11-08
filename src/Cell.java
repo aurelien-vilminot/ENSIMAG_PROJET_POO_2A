@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Creation of a cell of the grid
  * Reused for the game of Conway, Immigration and Schelling.
  */
-public class Cell {
+public abstract class Cell {
 	protected int x;
 	protected int y;
 	protected int state = 0;
@@ -58,23 +58,15 @@ public class Cell {
 	/**
 	 * Abstract method which gives the next state of the cells, depending on the game.
 	 * @param neighbours : list the neighbours of the cells
-	 * @throws IllegalCallerException : if the methods is called directly, it will throw an Exception because it's an
-	 * abstract method
 	 * @return : List of the new state of the cells after a step of the game.
 	 */
-	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
-		throw new IllegalCallerException("This method should not be using. Consider it abstract.");
-	}
+	public abstract ArrayList<int[]> nextState(ArrayList<Cell> neighbours);
 
 	/**
 	 * Abstract method which return the color of the cell
-	 * @throws IllegalCallerException : if the methods is called directly, it will throw an Exception because it's an
-	 * abstract method
 	 * @return : Color of the cell ( a String)
 	 */
-	public String getCellColor() {
-		throw new IllegalCallerException("This method should not be using. Consider it abstract.");
-	}
+	public abstract String getCellColor();
 
 	@Override
 	public final String toString() {

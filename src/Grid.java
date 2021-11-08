@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public class Grid implements Backend {
 	private Cell[][] cellArray;
-	private Cell[][] initArray;
+	private int[][] initStatesArray;
 	private int height;
 	private int width;
 
@@ -16,13 +16,13 @@ public class Grid implements Backend {
 	 */
 	public Grid(int height, int width, String gameName, Cell... cells) {
 		this.cellArray = new Cell[height][width];
-		this.initArray = new Cell[height][width];
+		this.initStatesArray = new int[height][width];
 		this.height = height;
 		this.width = width;
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				this.initArray[i][j] = new Cell(i, j, 0);
+				this.initStatesArray[i][j] = 0;
 				switch (gameName) {
 					case "Conway":
 						this.cellArray[i][j] = new CellConway(i, j, 0);
@@ -43,7 +43,7 @@ public class Grid implements Backend {
 				throw new IllegalArgumentException("Init cells must be placed into the grid");
 			}
 			this.cellArray[c.x][c.y].setState(c.getState());
-			this.initArray[c.x][c.y].setState(c.getState());
+			this.initStatesArray[c.x][c.y] = c.getState();
 		}
 	}
 
@@ -66,7 +66,7 @@ public class Grid implements Backend {
 	public void reInit() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				this.cellArray[i][j].setState(this.initArray[i][j].getState());
+				this.cellArray[i][j].setState(this.initStatesArray[i][j]);
 			}
 		}
 	}

@@ -66,8 +66,6 @@ public class EventManager {
         this.eventList.clear();
         this.eventsToAdd.clear();
         this.eventsToRemove.clear();
-        for (Event e : this.eventsInit) {
-            this.eventList.add(e);
-        }
+        this.eventList.addAll(this.eventsInit);
     }
 }

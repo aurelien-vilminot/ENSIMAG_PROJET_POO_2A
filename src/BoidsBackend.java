@@ -7,7 +7,8 @@ import java.util.Random;
  */
 public class BoidsBackend implements Backend {
     private ArrayList<Boids> boidsList = new ArrayList<>();
-    private ArrayList<Boids> boidsInitList = new ArrayList<>();
+    private ArrayList<Vector> boidsPositionsInitList = new ArrayList<>();
+    private ArrayList<Float> boidsDetectionRadiusInitList = new ArrayList<>();
     // Width of area
     private int xMax, yMax;
 
@@ -20,7 +21,8 @@ public class BoidsBackend implements Backend {
     public BoidsBackend(int xMax, int yMax, Boids... boids) {
         this.boidsList.addAll(Arrays.asList(boids));
         for (Boids b : boids) {
-            this.boidsInitList.add(new Boids(b.getPosition().getX(), b.getPosition().getY(), b.getDetectionRadius(), xMax, yMax));
+            this.boidsPositionsInitList.add(new Vector(b.getPosition()));
+            this.boidsDetectionRadiusInitList.add(b.getDetectionRadius());
         }
         this.xMax = xMax;
         this.yMax = yMax;
@@ -34,11 +36,11 @@ public class BoidsBackend implements Backend {
      * Reinitialize the boids, by changing their position, speed and acceleration.
      */
     public void reInit() {
-        for (int i = 0; i < boidsList.size(); i++) {
-            Boids currentBoid = boidsList.get(i);
-            Boids initBoid = boidsInitList.get(i);
-            currentBoid.setPosition(initBoid.getPosition());
-            currentBoid.setDetectionRadius(initBoid.getDetectionRadius());
+        for (int i = 0; i < this.boidsList.size(); i++) {
+            Boids currentBoid = this.boidsList.get(i);
+
+            currentBoid.setPosition(this.boidsPositionsInitList.get(i));
+            currentBoid.setDetectionRadius(this.boidsDetectionRadiusInitList.get(i));
             currentBoid.getVelocity().setX(0);
             currentBoid.getVelocity().setY(0);
             currentBoid.getAcceleration().setX(0);
@@ -53,10 +55,15 @@ public class BoidsBackend implements Backend {
         // Important: rules have to be independent of acceleration
         for (Boids b : this.boidsList) {
             b.applyRules(this.boidsList);
+            // Calculate new velocity
+            b.updateVelocity();
+            // Calculate new position
+            b.updatePosition();
         }
-        for (Boids b : this.boidsList) {
-            b.addEvent(eventManager);
-        }
+
+//        for (Boids b : this.boidsList) {
+//            b.addEvent(eventManager);
+//        }
     }
 
     @Override

@@ -16,13 +16,22 @@ public class Vector {
     }
 
     /**
-     * Overloading of the constructor, which fill the elements with the vector with the parameters.
+     * Overloading of the constructor, which fill the elements with the parameters.
      * @param x : value on the axis X.
      * @param y : value on the axis Y.
      */
     public Vector(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * Overloading of the constructor, which fill the elements with the vector in parameters.
+     * @param vector : the vector to copy
+     */
+    public Vector(Vector vector) {
+        this.x = vector.getX();
+        this.y = vector.getY();
     }
 
     /**
