@@ -74,13 +74,6 @@ public abstract class Boids {
         this.detectionRadius = detectionRadius;
     }
 
-    public boolean canApproach(Boids b) {
-        if (this.type.equals("kind")) {
-            return (b.type.equals("evil"));
-        }
-        return true;
-    }
-
     public String getType() {
         return this.type;
     }
@@ -92,6 +85,13 @@ public abstract class Boids {
     public abstract Color getColor();
 
     public abstract int getTimeStep();
+
+    public boolean canApproach(Boids b) {
+        if (this.type.equals("kind")) {
+            return (b.type.equals("evil"));
+        }
+        return true;
+    }
 
     /**
      * Rule of wind: apply wind force to the group
@@ -150,10 +150,6 @@ public abstract class Boids {
 
     public final void updatePosition() {
         this.position.add(this.velocity);
-    }
-
-    public void addEvent(EventManager eventManager) {
-        eventManager.addEvent(new BoidsEvent(eventManager.getCurrentDate(), this));
     }
 
     @Override

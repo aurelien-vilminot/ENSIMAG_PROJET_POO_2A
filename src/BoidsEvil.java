@@ -36,9 +36,4 @@ public class BoidsEvil extends Boids {
     public int getTimeStep() {
         return timeStep;
     }
-
-//    @Override
-//    public void addEvent(EventManager eventManager) {
-//        eventManager.addEvent(new BoidsEvent(eventManager.getCurrentDate() + 2, this));
-//    }
 }

@@ -34,7 +34,7 @@ public class BoidsSimulator extends Simulator {
     }
 
     /**
-     * 	 * Draw the boids with different colors.
+     * Draw the boids with different colors.
      */
     public void draw() {
         BoidsBackend boidsBackend = (BoidsBackend) this.backend;
