@@ -15,7 +15,7 @@ public class BoidsBackend implements Backend {
      * Constructor of the backend.
      * @param xMax : maximum size of X.
      * @param yMax : maximum size of Y.
-     * @param boids
+     * @param boids : list of inits boids
      */
     public BoidsBackend(int xMax, int yMax, Boids... boids) {
         this.boidsList.addAll(Arrays.asList(boids));
@@ -32,6 +32,10 @@ public class BoidsBackend implements Backend {
 
     public ArrayList<Boids> getBoidsList() {
         return this.boidsList;
+    }
+
+    public HashMap<String, Integer> getTypeOfBoids() {
+        return this.typeOfBoids;
     }
 
     /**
@@ -51,11 +55,11 @@ public class BoidsBackend implements Backend {
     }
 
     /**
-     * Move all boids by applying forces to them
+     * Move boids by applying forces to them
      */
     public void step(String type) {
-        // Important: rules have to be independent of acceleration
         for (Boids b : this.boidsList) {
+            // Check if this type of boids needs to be updated
             if (Objects.equals(b.getType(), type)) {
                 b.applyRules(this.boidsList);
                 // Calculate new velocity
@@ -64,14 +68,6 @@ public class BoidsBackend implements Backend {
                 b.updatePosition();
             }
         }
-
-//        for (Boids b : this.boidsList) {
-//            b.addEvent(eventManager);
-//        }
-    }
-
-    public HashMap<String, Integer> getTypeOfBoids() {
-        return this.typeOfBoids;
     }
 
     @Override
