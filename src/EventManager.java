@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Create a class to manage events.
+ * Manage events by their dates.
  */
 public class EventManager {
     private long currentDate = 0;
@@ -12,8 +12,8 @@ public class EventManager {
     private boolean isStarted = false;
 
     /**
-     * Add Events to a list of Events
-     * @param e : an Event
+     * Add Events to a list of events.
+     * @param e The event to add.
      */
     public void addEvent(Event e) {
         eventsToAdd.add(e);
@@ -49,10 +49,17 @@ public class EventManager {
         this.currentDate++;
     }
 
+    /**
+     * Check if there is no more event to execute.
+     * @return True if list of events is empty.
+     */
     public boolean isFinished() {
         return (!this.eventList.isEmpty() || !this.eventsToAdd.isEmpty());
     }
 
+    /**
+     * Clear event list and reinitialise it with init events.
+     */
     public void restart() {
         if (!isStarted) {
             return;

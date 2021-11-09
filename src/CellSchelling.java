@@ -7,15 +7,13 @@ import java.util.*;
 public class CellSchelling extends Cell {
     private static int K=0;
     private static ArrayList<int[]> freeLodgment = new ArrayList<>();
-    private static ArrayList<Color> colors;
+    private static ArrayList<Color> colors = new ArrayList<>();
 
     /**
-     * 1st constructor of a cell for to the game of Schelling, using one of the constructor
-     * of the mother class.
-     * State is not specified, the cell is considered as free, so add the list of free lodgement.
-     * @param x : coordinate on axis X.
-     * @param y : coordinate on axis Y.
-     * @throws IllegalArgumentException if the number K of the class is 0 or if the list of color is Null.
+     * Constructor of Schelling game cell. State is not specified, the cell is considered as free,
+     * so added the list of free lodgement.
+     * @see Cell for params specifications.
+     * @throws IllegalArgumentException If the number K of the class is 0 or if the list of color is NULL.
      */
     public CellSchelling(int x, int y) {
         super(x, y);
@@ -31,13 +29,10 @@ public class CellSchelling extends Cell {
     }
 
     /**
-     * 1st constructor of a cell for to the game of Schelling, using one of the constructor
-     * of the mother class.
-     * @param x : coordinate on axis X.
-     * @param y : coordinate on axis Y.
-     * @param state : state of the cell create, if the state is 0, we add the lodgment to the list
-     *              of free lodgement.
-     * @throws IllegalArgumentException if the number K of the class is 0 or if the list of color is Null.
+     * Constructor of Schelling game cell with state specification. If the state is 0, we add the lodgment to the list
+     * of free lodgement.
+     * @see Cell for params specifications.
+     * @throws IllegalArgumentException If the number K of the class is 0 or if the list of color is NULL.
      */
     public CellSchelling(int x, int y, int state) {
         super(x, y, state);
@@ -54,23 +49,27 @@ public class CellSchelling extends Cell {
         }
     }
 
+    /**
+     * Update the cell state by adding or removing it from freeLodgment list if necessary.
+     * @param state The new state of the cell.
+     */
     @Override
     public void setState(int state) {
         if (state != this.state) {
             if (state == 0) {
                 freeLodgment.add(new int[]{this.x, this.y});
             } else {
+                // Remove the cell from freeLodgment if it's contained on it
                 freeLodgment.removeIf(freeCell -> freeCell[0] == this.x && freeCell[1] == this.y);
             }
-
         }
         super.setState(state);
     }
 
     /**
-     * User has to define K the number of different colors of lodgemet.
-     * @param k : number of color of the game.
-     * @throws IllegalCallerException if the number is strictly superior to 8.
+     * User has to define K, the number of different colors of lodgment.
+     * @param k Number of color of the game.
+     * @throws IllegalCallerException If the number is strictly superior to 8.
      */
     public static void setK(int k) {
         if (k > 8) {
@@ -80,11 +79,10 @@ public class CellSchelling extends Cell {
     }
 
     /**
-     * Define the colors of the different lodgements and fill a list with the colors.
-     * @param c : number of colors.
+     * Generate random and unique colors and add them to the color static list.
+     * @param c Number of colors to be generated.
      */
     public static void setColors(int c) {
-        colors = new ArrayList<>();
         // First color corresponds to a free lodgment
         colors.add(Color.decode("#FFFFFF"));
 
@@ -99,6 +97,13 @@ public class CellSchelling extends Cell {
         }
     }
 
+    /**
+     * Give the next state of the cell using Schelling game rules.
+     * @param neighbours List of the cell's neighbours.
+     * @return List which represents the cells coordinates and their new state. The list is empty if the state
+     * 		   doesn't change.
+     * @throws IndexOutOfBoundsException If there are no more free lodgment available.
+     */
     @Override
     public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
         int nbNeighboors = 0;
@@ -128,6 +133,10 @@ public class CellSchelling extends Cell {
         return coordStateArray;
     }
 
+    /**
+     * Return the color linked to the state.
+     * @return The corresponding color.
+     */
     @Override
     public Color getCellColor() {
         return colors.get(this.state);

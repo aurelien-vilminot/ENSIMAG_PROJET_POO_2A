@@ -2,34 +2,34 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Class of cells corresponding to the game of Conway, inherited from Cells.
+ * Class of cells corresponding to the game of life, inherited from Cells.
  */
 public class CellConway extends Cell {
 	private static final Color colorSateAlive = Color.decode("#03A5FC");
 	private static final Color colorSateDead = Color.decode("#F2F2F2");
 
 	/**
-	 * First constructor of a cell for to the game of life on Conway, using one of the constructor
-	 * of the mother class.
-	 * @param x : coordinate on axis X.
-	 * @param y : coordinate on axis Y.
+	 * Constructor of life cell.
+	 * @see Cell for params specifications.
 	 */
 	public CellConway(int x, int y) {
 		super(x, y);
 	}
 
 	/**
-	 * Another constructor overload of a cell for to the game of life on Conway,
-	 * using one of the constructor of the mother class.
-	 * @param x : coordinate on axis X.
-	 * @param y : coordinate on axis Y.
-	 * @param state : state of the cell create.
+	 * Constructor of life cell with state specification.
+	 * @see Cell for params specifications.
 	 */
 	public CellConway(int x, int y, int state) {
 		super(x, y, state);
 	}
 
-
+	/**
+	 * Give the next state of the cell using game of life rules.
+	 * @param neighbours List of the cell's neighbours.
+	 * @return List which represents the cell coordinates and its new state. The list is empty if the state
+	 * 		   doesn't change.
+	 */
 	@Override
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
@@ -58,6 +58,10 @@ public class CellConway extends Cell {
 		return coordStateArray;
 	}
 
+	/**
+	 * Return the color of the cell.
+	 * @return The corresponding color.
+	 */
 	@Override
 	public Color getCellColor() {
 		if (this.state == 0) {

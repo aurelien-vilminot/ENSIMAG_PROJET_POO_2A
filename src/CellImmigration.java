@@ -2,18 +2,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Class of cells corresponding to the game of 'Immigration', inherited from Cells.
+ * Class of cells corresponding to the game of Immigration, inherited from Cells.
  */
 public class CellImmigration extends Cell {
 	private static int n = 0;
 	private static Color[] stateColor;
 
 	/**
-	 * Constructor of a cell for to the game of 'Immigration', using one of the constructor
-	 * of the mother class.
-	 * @param x : coordinate on axis X.
-	 * @param y : coordinate on axis Y.
-	 * @param state : state of the cell create.
+	 * Constructor of Immigration game cell.
+	 * @see Cell for params specifications.
+	 * @throws IllegalArgumentException If the state number is not defined or if the state of the cell is higher than n.
 	 */
 	public CellImmigration(int x, int y, int state) {
 		super(x, y, state);
@@ -25,11 +23,9 @@ public class CellImmigration extends Cell {
 		}
 	}
 
-
-
 	/**
-	 * User has to define n using this static method.
-	 * @param n0 : number of color of the game.
+	 * User has to define the attribute n using this static method. It will create a nuance of grey colors.
+	 * @param n0 Number of colors.
 	 */
 	public static void setN(int n0) {
 		n = n0;
@@ -43,7 +39,12 @@ public class CellImmigration extends Cell {
 		}
 	}
 
-
+	/**
+	 * Give the next state of the cell using Immigration game rules.
+	 * @param neighbours List of the cell's neighbours.
+	 * @return List which represents the cell coordinates and its new state. The list is empty if the state
+	 * 		   doesn't change.
+	 */
 	@Override
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
@@ -64,6 +65,10 @@ public class CellImmigration extends Cell {
 		return coordStateArray;
 	}
 
+	/**
+	 * Return the color linked to the state.
+	 * @return The corresponding color.
+	 */
 	@Override
 	public Color getCellColor() {
 		return stateColor[this.state];
