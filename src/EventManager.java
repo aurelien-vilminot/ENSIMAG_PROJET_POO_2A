@@ -54,7 +54,7 @@ public class EventManager {
     }
 
     public boolean isFinished() {
-        return (this.eventList.isEmpty() && this.eventsToAdd.isEmpty());
+        return (!this.eventList.isEmpty() || !this.eventsToAdd.isEmpty());
     }
 
     public void restart() {

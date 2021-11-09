@@ -122,7 +122,7 @@ public class BoidsKind extends Boids {
      */
     @Override
     public void applyRules(ArrayList<Boids> boidsArrayList) {
-        this.applyInitRules(boidsArrayList);
+        super.applyRules(boidsArrayList);
         // Apply its own rules
         Vector f1 = this.cohesionRule(boidsArrayList);
         Vector f2 = this.separationRule(boidsArrayList);

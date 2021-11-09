@@ -106,10 +106,9 @@ public abstract class Boids {
     /**
      * Rule of borders: keeping the flock within the area use by the gui
      *
-     * @param boidsArrayList : list of boids of the space
      * @return Vector corresponding to the replace force applied to bj
      */
-    public Vector borderRule(ArrayList<Boids> boidsArrayList) {
+    public Vector borderRule() {
         Vector f = new Vector();
         Vector boidPosition = this.position;
 
@@ -129,20 +128,18 @@ public abstract class Boids {
         return f;
     }
 
-    protected void applyInitRules(ArrayList<Boids> boidsArrayList) {
-        Vector vectorWindRule = this.windRule(boidsArrayList);
-        Vector vectorBorderRule = this.borderRule(boidsArrayList);
-        // Calculate new acceleration
-        this.setAcceleration(vectorWindRule);
-        this.getAcceleration().add(vectorBorderRule);
-    }
-
     /**
      * Apply this boid's rules to modify its acceleration
      *
      * @param boidsArrayList : list of boids of the space
      */
-    public abstract void applyRules(ArrayList<Boids> boidsArrayList);
+    public void applyRules(ArrayList<Boids> boidsArrayList) {
+        Vector vectorWindRule = this.windRule(boidsArrayList);
+        Vector vectorBorderRule = this.borderRule();
+        // Calculate new acceleration
+        this.setAcceleration(vectorWindRule);
+        this.getAcceleration().add(vectorBorderRule);
+    }
 
     public final void updateVelocity() {
         this.velocity.add(this.acceleration);
@@ -155,10 +152,11 @@ public abstract class Boids {
     @Override
     public final String toString() {
         return "Boids{" +
-                "position=" + position +
-                ", velocity=" + velocity +
-                ", acceleration=" + acceleration +
-                ", radius=" + detectionRadius +
+                "position=" + this.position +
+                ", velocity=" + this.velocity +
+                ", acceleration=" + this.acceleration +
+                ", radius=" + this.detectionRadius +
+                ", type=" + this.type +
                 '}';
     }
 }

@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BoidsEvil extends Boids {
-    private static final int timeStep = 4;
+    private static final int timeStep = 2;
 
     /**
      * Constructor of boids
@@ -54,7 +54,7 @@ public class BoidsEvil extends Boids {
      */
     @Override
     public void applyRules(ArrayList<Boids> boidsArrayList) {
-        this.applyInitRules(boidsArrayList);
+        super.applyRules(boidsArrayList);
         // Apply its own rules
         Vector f1 = chaseRule(boidsArrayList);
         // Calculate new acceleration

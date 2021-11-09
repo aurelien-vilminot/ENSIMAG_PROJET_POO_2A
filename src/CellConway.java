@@ -34,7 +34,7 @@ public class CellConway extends Cell {
 	public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
 		int nbLivingN = 0;
 		int newState;
-		ArrayList<int[]> coordStateArray = new ArrayList<int[]>();
+		ArrayList<int[]> coordStateArray = new ArrayList<>();
 
 		for (Cell c : neighbours) {
 			if (c.state == 1) {

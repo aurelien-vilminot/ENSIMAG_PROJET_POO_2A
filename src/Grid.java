@@ -78,7 +78,7 @@ public class Grid implements Backend {
 	 * @return the list of neighbours of a given cell, paying attention whether the cell is on the edges or not.
 	 */
 	public ArrayList<Cell> getNeighbours(int x, int y) {
-		ArrayList<Cell> nArray = new ArrayList<Cell>();
+		ArrayList<Cell> nArray = new ArrayList<>();
 		int w = this.width - 1;
 		int h = this.height - 1;
 		nArray.add(this.cellArray[Math.floorMod(x-1, h)][Math.floorMod(y-1, w)]); // topLeft
@@ -96,7 +96,7 @@ public class Grid implements Backend {
 	 * Step forward the current game, updating the states of the different cells.
 	*/
 	public void step(String type) {
-		ArrayList<int[]> stateList = new ArrayList<int[]>();
+		ArrayList<int[]> stateList = new ArrayList<>();
 
 		// For each cell, add to stateList the modified states
 		for (int i = 0; i < this.height; i++) {

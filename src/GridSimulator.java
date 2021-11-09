@@ -13,8 +13,6 @@ public class GridSimulator extends Simulator {
 	private int linesCell;
 	private int columnCell;
 
-	private String gameName;
-
 	/**
 	 * Constructor of an object which will display the grid, using the GUISimulator
 	 * @param gui : an instance of GUISimulator
@@ -42,8 +40,7 @@ public class GridSimulator extends Simulator {
 		}
 
 		// Init the game
-		this.gameName = gameName;
-		this.backend = new Grid(this.linesCell, this.columnCell, this.gameName, cells);
+		this.backend = new Grid(this.linesCell, this.columnCell, gameName, cells);
 	}
 
 	/**

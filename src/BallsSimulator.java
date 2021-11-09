@@ -1,8 +1,6 @@
 import java.awt.Point;
 import java.awt.Color;
-import java.util.ArrayList;
 
-import gui.Simulable;
 import gui.GUISimulator;
 import gui.Oval;
 
@@ -11,9 +9,6 @@ import gui.Oval;
  *  Definition of the class who implements the interface Simulable for the game composed of balls.
  */
 public class BallsSimulator extends Simulator {
-    private int width;
-    private int height;
-
     /**
      * Constructor of the interface we will simulate.
      * @param window : window of simulation.
@@ -21,10 +16,8 @@ public class BallsSimulator extends Simulator {
     public BallsSimulator(GUISimulator window) {
         super(window);
         this.eventManager.addEvent(new SimulatorEvent(0, this, 1, null));
-        this.width = window.getPanelWidth();
-        this.height = window.getPanelHeight();
 
-        this.backend = new Balls(this.width, this.height,
+        this.backend = new Balls(window.getPanelWidth(), window.getPanelHeight(),
                 new Point(50,100),
                 new Point(60, 10),
                 new Point(10, 200),
@@ -47,13 +40,5 @@ public class BallsSimulator extends Simulator {
         for (Point point : balls.getBallsList()) {
             gui.addGraphicalElement(new Oval(point.x, point.y, Color.decode("#0f2a1a"), Color.decode(tab[(i++)%3]), 50));
         }
-    }
-
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
     }
 }

@@ -8,8 +8,6 @@ public class BoidsBackend implements Backend {
     private ArrayList<Vector> boidsPositionsInitList = new ArrayList<>();
     private ArrayList<Float> boidsDetectionRadiusInitList = new ArrayList<>();
     private HashMap<String, Integer> typeOfBoids = new HashMap<>();
-    // Width of area
-    private int xMax, yMax;
 
     /**
      * Constructor of the backend.
@@ -26,8 +24,6 @@ public class BoidsBackend implements Backend {
                 this.typeOfBoids.put(b.getType(), b.getTimeStep());
             }
         }
-        this.xMax = xMax;
-        this.yMax = yMax;
     }
 
     public ArrayList<Boids> getBoidsList() {

@@ -71,6 +71,6 @@ public abstract class Cell {
 
 	@Override
 	public final String toString() {
-		return "Cell [x=" + x + ", y=" + y + ", state=" + state + "]";
+		return "Cell [x=" + this.x + ", y=" + this.y + ", state=" + this.state + "]";
 	}
 }

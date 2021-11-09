@@ -7,22 +7,19 @@ import java.lang.Math;
  * Definition of the Balls which will be used by BallsSimulator .
  * Here, we decide that the balls have a speed of 10 on X and 5 on y.
  *
- * @param ballsList : An ArrayList of Point which gives the position of all the Balls of the list.
- * @param velList : An ArrayList which gives the speed of the balls of the list.
- * @param posInit : An ArrayList used to initialize of the position of the Balls at the beginning.
  *
  *
  */
 public class Balls implements Backend{
-    private ArrayList<Point> ballsList = new ArrayList<Point>();
-    private ArrayList<float[]> velList = new ArrayList<float[]>();
-    private ArrayList<int[]> posInit = new ArrayList<int[]>();
+    private ArrayList<Point> ballsList = new ArrayList<>();
+    private ArrayList<float[]> velList = new ArrayList<>();
+    private ArrayList<int[]> posInit = new ArrayList<>();
 
     // Width of area
     private int xMax, yMax;
 
-    private int velX = 10;
-    private int velY = 5;
+    private final int velX = 10;
+    private final int velY = 5;
 
     /**
      * 1st constructor of Balls without any parameters.

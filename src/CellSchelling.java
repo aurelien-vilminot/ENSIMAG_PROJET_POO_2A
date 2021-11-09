@@ -15,7 +15,7 @@ public class CellSchelling extends Cell {
      * State is not specified, the cell is considered as free, so add the list of free lodgement.
      * @param x : coordinate on axis X.
      * @param y : coordinate on axis Y.
-     * @throws Exception if the number K of the class is 0 or if the list of color is Null.
+     * @throws IllegalArgumentException if the number K of the class is 0 or if the list of color is Null.
      */
     public CellSchelling(int x, int y) {
         super(x, y);
@@ -37,7 +37,7 @@ public class CellSchelling extends Cell {
      * @param y : coordinate on axis Y.
      * @param state : state of the cell create, if the state is 0, we add the lodgment to the list
      *              of free lodgement.
-     * @throws Exception if the number K of the class is 0 or if the list of color is Null.
+     * @throws IllegalArgumentException if the number K of the class is 0 or if the list of color is Null.
      */
     public CellSchelling(int x, int y, int state) {
         super(x, y, state);
@@ -84,7 +84,7 @@ public class CellSchelling extends Cell {
      * @param c : number of colors.
      */
     public static void setColors(int c) {
-        colors = new ArrayList<Color>();
+        colors = new ArrayList<>();
         // First color corresponds to a free lodgment
         colors.add(Color.decode("#FFFFFF"));
 
@@ -102,7 +102,7 @@ public class CellSchelling extends Cell {
     @Override
     public ArrayList<int[]> nextState(ArrayList<Cell> neighbours) {
         int nbNeighboors = 0;
-        ArrayList<int[]> coordStateArray = new ArrayList<int[]>();
+        ArrayList<int[]> coordStateArray = new ArrayList<>();
 
         for (Cell c : neighbours) {
             if (c.state != this.state && c.state != 0) {
