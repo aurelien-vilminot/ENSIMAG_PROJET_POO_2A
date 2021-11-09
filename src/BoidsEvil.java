@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BoidsEvil extends Boids {
-    private static final int timeStep = 2;
+    private static final int timeStep = 1;
 
     /**
      * Constructor of boids

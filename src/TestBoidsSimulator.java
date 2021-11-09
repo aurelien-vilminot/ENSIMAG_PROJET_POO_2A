@@ -27,7 +27,7 @@ public class TestBoidsSimulator {
         int guiSize = 500;
         GUISimulator gui = new GUISimulator(guiSize, guiSize, Color.decode("#B1EEFE"));
 
-        int nbBoids = 10;
+        int nbBoids = 40;
         Boids[] boids = new Boids[nbBoids];
         ArrayList<int[]> listOfCoordinates = generateCoordinates(guiSize, nbBoids);
         for (int i = 0 ; i  < nbBoids ; i += 2) {

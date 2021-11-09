@@ -11,10 +11,6 @@ public class EventManager {
     private ArrayList<Event> eventsToRemove = new ArrayList<>();
     private boolean isStarted = false;
 
-    public long getCurrentDate() {
-        return currentDate;
-    }
-
     /**
      * Add Events to a list of Events
      * @param e : an Event

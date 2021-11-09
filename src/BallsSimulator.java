@@ -5,8 +5,7 @@ import gui.GUISimulator;
 import gui.Oval;
 
 /**
- * Class BallsSimulator :
- *  Definition of the class who implements the interface Simulable for the game composed of balls.
+ * Definition of the class who implements the interface Simulable for the game composed of balls.
  */
 public class BallsSimulator extends Simulator {
     /**

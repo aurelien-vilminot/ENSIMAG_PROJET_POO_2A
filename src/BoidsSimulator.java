@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class BoidsSimulator extends Simulator {
     private static final Color borderColor = Color.decode("#FFFFFF");
-    private static final int boidSize = 20;
-    private static final float borderWidth = 3;
+    private static final int boidSize = 10;
+    private static final float borderWidth = 1;
 
     /**
      * Constructor of an object who will display BoidsBackend, using the GUISimulator.

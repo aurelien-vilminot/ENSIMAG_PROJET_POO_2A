@@ -3,12 +3,8 @@ import java.util.ArrayList;
 import java.lang.Math;
 
 /**
- * Class Balls :
- * Definition of the Balls which will be used by BallsSimulator .
- * Here, we decide that the balls have a speed of 10 on X and 5 on y.
- *
- *
- *
+ * Definition of the balls backend which will be used by BallsSimulator.
+ * @implNote  The balls have a speed of 10 on x-axis and 5 on y-axis.
  */
 public class Balls implements Backend{
     private ArrayList<Point> ballsList = new ArrayList<>();
@@ -22,7 +18,7 @@ public class Balls implements Backend{
     private final int velY = 5;
 
     /**
-     * 1st constructor of Balls without any parameters.
+     * This constructor, without any parameters, create 10 balls to initialize the game.
      */
     public Balls() {
         for (int i = 0; i < 10; ++i) {
@@ -33,8 +29,8 @@ public class Balls implements Backend{
     }
 
     /**
-     * overloading of the constructor of Balls taking coordinates of the ball we will create in parameters
-     * @param tab : List of coordinates with value on X et Y.
+     * This constructor overloads by taking coordinates of balls
+     * @param tab List of coordinates with value on x-axis and y-axis.
      */
     public Balls(int xMax, int yMax, Point... tab) {
         this.xMax = xMax;
@@ -51,9 +47,9 @@ public class Balls implements Backend{
     }
 
     /**
-     * Translate a ball from the coordinates given in parameters.
-     * @param dx : value of the translation on X
-     * @param dy : value of the translation on Y
+     * Translate all balls from the coordinates given in parameters.
+     * @param dx : value of the translation on x-axis
+     * @param dy : value of the translation on y-axis
      */
     public void translate(int dx, int dy) {
         for (Point ball : this.ballsList) {
@@ -62,8 +58,8 @@ public class Balls implements Backend{
     }
 
     /**
-     * Initialized the coordinates of the List of Balls with the initial the values of
-     * the list "posInit".
+     * Initialize coordinates of the balls list with the initial the values of the list "posInit".
+     * @see Backend
      */
     public void reInit() {
         for (int i = 0; i < this.ballsList.size(); i++) {
@@ -74,6 +70,7 @@ public class Balls implements Backend{
     /**
      * Take a step forward of the all the balls in the list of balls.
      * Corresponding to the changement applied on the balls with the button next of the simulation.
+     * @see Backend
      */
     public void step(String type) {
         float dt = 5;
@@ -97,10 +94,9 @@ public class Balls implements Backend{
     }
 
     /**
-     * Initialise the position of the ball given in parameter on the position
-     * choose also given in parameter.
-     * @param ball : Ball which coordinates will change.
-     * @param pos : integer coordinate on X et on Y of the new position.
+     * Initialize the position of the ball given in parameter on the position choose also given in parameter.
+     * @param ball ball which coordinates will change.
+     * @param pos coordinates of the new position.
      */
     private void translateInit(Point ball, int[] pos) {
         ball.move(pos[0], pos[1]);
