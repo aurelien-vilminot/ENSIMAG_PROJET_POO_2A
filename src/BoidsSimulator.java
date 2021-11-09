@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Management of the display of BoidsBackend.
- * Implements the interface Simulable which cares of the display.
+ * Definition of the class which manages the boids simulation by drawing them.
+ * @see Simulator
  */
 public class BoidsSimulator extends Simulator {
     private static final Color borderColor = Color.decode("#FFFFFF");
@@ -13,25 +13,24 @@ public class BoidsSimulator extends Simulator {
     private static final float borderWidth = 1;
 
     /**
-     * Constructor of an object who will display BoidsBackend, using the GUISimulator.
-     * @param gui : an instance of GUISimulator
-     * @param boids : boid composing the BoidsBackend
+     * Initialisation of the interface which will simulate by adding an event per type of boids.
+     * @param gui Window where the simulation takes place.
+     * @param boids Boids which composed the space.
      */
     public BoidsSimulator(GUISimulator gui, Boids ...boids) {
         super(gui);
-        this.backend = new BoidsBackend(
-                this.gui.getPanelWidth() - boidSize,
-                this.gui.getPanelHeight() - boidSize,
-                boids
-        );
+        this.backend = new BoidsBackend(boids);
 
         // Create an event for each type of boids with its time step
         BoidsBackend boidsBackend = (BoidsBackend) this.backend;
-        boidsBackend.getTypeOfBoids().forEach((key, value) -> this.eventManager.addEvent(new SimulatorEvent(0, this, value, key)));
+        boidsBackend.getTypesOfBoids().forEach((key, value) -> this.eventManager.addEvent(
+                new SimulatorEvent(0, this, value, key)
+        ));
     }
 
     /**
-     * Draw the boids with different colors.
+     * Draw all boids.
+     * @see Triangle
      */
     public void draw() {
         BoidsBackend boidsBackend = (BoidsBackend) this.backend;

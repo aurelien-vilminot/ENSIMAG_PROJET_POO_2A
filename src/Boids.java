@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Creation of boids.
+ * Abstract class which represents the skeleton for boids.
  */
 public abstract class Boids {
     protected Vector position;
@@ -13,26 +13,26 @@ public abstract class Boids {
     protected float yMax;
     protected String type;
 
-
     /**
-     * Constructor of boids
-     * @param x : initial position of boids on the axis X.
-     * @param y : initial position of boids on the axis Y.
-     * @param detectionRadius : how the boid detects its environment.
-     * @param xMax : maximum position of boids on the axis X.
-     * @param yMax : maximum position of boids on the axis Y.
+     * Constructor of boids.
+     * @param x Initial position of boids on the x-axis.
+     * @param y Initial position of boids on the y-axis.
+     * @param detectionRadius Radius where the boids repel each other.
+     * @param xMax Maximum position of boids on the x-axis.
+     * @param yMax Maximum position of boids on the y-axis.
      */
     public Boids(float x, float y, float detectionRadius, float xMax, float yMax, String type) {
         this.position = new Vector(x, y);
         this.velocity = new Vector(0, 0);
         this.acceleration = new Vector(0, 0);
+        this.xMax = xMax;
+        this.yMax = yMax;
 
         if (detectionRadius <= 0) {
             throw new IllegalArgumentException("Radius has to be positive");
         }
         this.detectionRadius = detectionRadius;
-        this.xMax = xMax;
-        this.yMax = yMax;
+
         if (!type.equals("evil") && !type.equals("kind")) {
             throw new IllegalArgumentException("Type has to be 'kind' or 'evil'");
         }
@@ -74,13 +74,6 @@ public abstract class Boids {
         this.detectionRadius = detectionRadius;
     }
 
-    public boolean canApproach(Boids b) {
-        if (this.type.equals("kind")) {
-            return (!b.type.equals("evil"));
-        }
-        return true;
-    }
-
     public String getType() {
         return this.type;
     }
@@ -89,24 +82,33 @@ public abstract class Boids {
         this.type = type;
     }
 
+    /**
+     * Determine if boids can approach another depending on its family.
+     * @param b The target boids.
+     * @return True if the boids can approach boids b, else False.
+     */
+    public boolean canApproach(Boids b) {
+        if (this.type.equals("kind")) {
+            return (!b.type.equals("evil"));
+        }
+        return true;
+    }
+
     public abstract Color getColor();
 
     public abstract int getTimeStep();
 
     /**
-     * Rule of wind: apply wind force to the group
-     *
-     * @param boidsArrayList : list of boids of the space
+     * Rule of wind: apply wind force to the group.
      * @return Vector corresponding to the wind force
      */
-    public Vector windRule(ArrayList<Boids> boidsArrayList) {
+    public Vector windRule() {
         return new Vector(0.1f, 0.9f);
     }
 
     /**
-     * Rule of borders: keeping the flock within the area use by the gui
-     *
-     * @return Vector corresponding to the replace force applied to bj
+     * Rule of borders: keeping the flock within the area used by the gui.
+     * @return Vector corresponding to the force applied on the boids.
      */
     public Vector borderRule() {
         Vector f = new Vector();
@@ -129,12 +131,11 @@ public abstract class Boids {
     }
 
     /**
-     * Apply this boid's rules to modify its acceleration
-     *
-     * @param boidsArrayList : list of boids of the space
+     * Apply the rules to modify boids' acceleration.
+     * @param boidsArrayList List of boids of the space.
      */
     public void applyRules(ArrayList<Boids> boidsArrayList) {
-        Vector vectorWindRule = this.windRule(boidsArrayList);
+        Vector vectorWindRule = this.windRule();
         Vector vectorBorderRule = this.borderRule();
         // Calculate new acceleration
         this.setAcceleration(vectorWindRule);

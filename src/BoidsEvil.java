@@ -1,27 +1,25 @@
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Evil boids class which extends Boids.
+ * @see Boids
+ */
 public class BoidsEvil extends Boids {
     private static final int timeStep = 1;
 
     /**
-     * Constructor of boids
-     *
-     * @param x               : initial position of boids on the axis X.
-     * @param y               : initial position of boids on the axis Y.
-     * @param detectionRadius : how the boid detects its environment.
-     * @param xMax            : maximum position of boids on the axis X.
-     * @param yMax            : maximum position of boids on the axis Y.
+     * Constructor of evil boids.
+     * @see Boids for params specifications.
      */
     public BoidsEvil(float x, float y, float detectionRadius, float xMax, float yMax) {
         super(x, y, detectionRadius, xMax, yMax, "evil");
     }
 
     /**
-     * Rule of chase: move towards the nearest approachable different-typed boid
-     *
-     * @param boidsArrayList : list of boids of the space
-     * @return Vector corresponding to the chase force applied to this boid
+     * Rule of chase: move towards the nearest approachable different-typed boids.
+     * @param boidsArrayList List of boids of the space.
+     * @return Vector corresponding to the chase force applied to this boids.
      */
     public Vector chaseRule(ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
@@ -48,17 +46,16 @@ public class BoidsEvil extends Boids {
     }
 
     /**
-     * Apply this boid's rules to modify its acceleration
-     *
-     * @param boidsArrayList : list of boids of the space
+     * Apply specific evil boids rules to modify its acceleration.
+     * @param boidsArrayList List of boids of the space.
      */
     @Override
     public void applyRules(ArrayList<Boids> boidsArrayList) {
         super.applyRules(boidsArrayList);
         // Apply its own rules
-        Vector f1 = chaseRule(boidsArrayList);
+        Vector vectorChaseRule = chaseRule(boidsArrayList);
         // Calculate new acceleration
-        this.acceleration.add(f1);
+        this.acceleration.add(vectorChaseRule);
     }
 
     @Override

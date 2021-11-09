@@ -5,12 +5,14 @@ import gui.GUISimulator;
 import gui.Oval;
 
 /**
- * Definition of the class who implements the interface Simulable for the game composed of balls.
+ * Definition of the class which manages the balls simulation by drawing them.
+ * @see Simulator
  */
 public class BallsSimulator extends Simulator {
+
     /**
-     * Constructor of the interface we will simulate.
-     * @param window : window of simulation.
+     * Initialisation of the interface which will simulate by adding an event and creating balls.
+     * @param window Window where the simulation takes place.
      */
     public BallsSimulator(GUISimulator window) {
         super(window);
@@ -30,14 +32,16 @@ public class BallsSimulator extends Simulator {
     }
 
     /**
-     * Draw the balls with different colors.
+     * Draw the balls with three different colors.
      */
     public void draw() {
-        String[] tab = {"#ff0000", "#00ff00", "#0000ff"};
+        String[] colors = {"#ff0000", "#00ff00", "#0000ff"};
         int i = 0;
         Balls balls = (Balls) this.backend;
         for (Point point : balls.getBallsList()) {
-            gui.addGraphicalElement(new Oval(point.x, point.y, Color.decode("#0f2a1a"), Color.decode(tab[(i++)%3]), 50));
+            this.gui.addGraphicalElement(new Oval(
+                    point.x, point.y, Color.decode("#0f2a1a"), Color.decode(colors[(i++)%3]), 50
+            ));
         }
     }
 }

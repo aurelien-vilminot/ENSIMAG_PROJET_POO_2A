@@ -2,8 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Creation of a cell of the grid
- * Reused for the game of Conway, Immigration and Schelling.
+ * Abstract class which represents the skeleton for a cell.
  */
 public abstract class Cell {
 	protected int x;
@@ -11,9 +10,9 @@ public abstract class Cell {
 	protected int state = 0;
 
 	/**
-	 * First constructor of a cell
-	 * @param x : coordinate on axis X.
-	 * @param y : coordinate on axis Y.
+	 * First constructor of a cell.
+	 * @param x Coordinate on x-axis.
+	 * @param y Coordinate on y-axis.
 	 */
 	public Cell(int x, int y) {
 		this.x = x;
@@ -21,10 +20,10 @@ public abstract class Cell {
 	}
 
 	/**
-	 * Overloading of the constructor of cell taking into account the state of the cell created
-	 * @param x : coordinate on axis X.
-	 * @param y : coordinate on axis Y.
-	 * @param state : state of the cell create.
+	 * Overloading of the constructor of cell taking into account the state of the cell created.
+	 * @param x Coordinate on x-axis.
+	 * @param y Coordinate on y-axis.
+	 * @param state State of the cell created.
 	 */
 	public Cell(int x, int y, int state) {
 		this.x = x;
@@ -57,15 +56,15 @@ public abstract class Cell {
 	}
 
 	/**
-	 * Abstract method which gives the next state of the cells, depending on the game.
-	 * @param neighbours : list the neighbours of the cells
-	 * @return : List of the new state of the cells after a step of the game.
+	 * Abstract method which gives the next state of the cell, depending on the game.
+	 * @param neighbours List of the cell's neighbours.
+	 * @return List of new states of the cells after a step of the game.
 	 */
 	public abstract ArrayList<int[]> nextState(ArrayList<Cell> neighbours);
 
 	/**
-	 * Abstract method which return the color of the cell
-	 * @return : Color of the cell
+	 * Abstract method which return the color of the cell.
+	 * @return Color of the cell.
 	 */
 	public abstract Color getCellColor();
 

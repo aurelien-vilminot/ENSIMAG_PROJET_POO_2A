@@ -1,27 +1,25 @@
 import java.util.*;
 
 /**
- * Create the Backend where boids evolve.
+ * Definition of the boids backend which will be used by BoidsSimulator.
  */
 public class BoidsBackend implements Backend {
     private ArrayList<Boids> boidsList = new ArrayList<>();
     private ArrayList<Vector> boidsPositionsInitList = new ArrayList<>();
     private ArrayList<Float> boidsDetectionRadiusInitList = new ArrayList<>();
-    private HashMap<String, Integer> typeOfBoids = new HashMap<>();
+    private HashMap<String, Integer> typesOfBoids = new HashMap<>();
 
     /**
      * Constructor of the backend.
-     * @param xMax : maximum size of X.
-     * @param yMax : maximum size of Y.
-     * @param boids : list of inits boids
+     * @param boids List of inits boids.
      */
-    public BoidsBackend(int xMax, int yMax, Boids... boids) {
+    public BoidsBackend(Boids... boids) {
         this.boidsList.addAll(Arrays.asList(boids));
         for (Boids b : boids) {
             this.boidsPositionsInitList.add(new Vector(b.getPosition()));
             this.boidsDetectionRadiusInitList.add(b.getDetectionRadius());
-            if (!this.typeOfBoids.containsKey(b.getType())) {
-                this.typeOfBoids.put(b.getType(), b.getTimeStep());
+            if (!this.typesOfBoids.containsKey(b.getType())) {
+                this.typesOfBoids.put(b.getType(), b.getTimeStep());
             }
         }
     }
@@ -30,12 +28,13 @@ public class BoidsBackend implements Backend {
         return this.boidsList;
     }
 
-    public HashMap<String, Integer> getTypeOfBoids() {
-        return this.typeOfBoids;
+    public HashMap<String, Integer> getTypesOfBoids() {
+        return this.typesOfBoids;
     }
 
     /**
-     * Reinitialize the boids, by changing their position, speed and acceleration.
+     * Reinitialize the boids by changing their position, speed and acceleration.
+     * @see Backend
      */
     public void reInit() {
         for (int i = 0; i < this.boidsList.size(); i++) {
@@ -51,7 +50,7 @@ public class BoidsBackend implements Backend {
     }
 
     /**
-     * Move boids by applying forces to them
+     * Move boids by applying forces to them.
      */
     public void step(String type) {
         for (Boids b : this.boidsList) {
