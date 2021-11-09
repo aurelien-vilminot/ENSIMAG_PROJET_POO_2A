@@ -3,12 +3,6 @@ public class SimulatorEvent extends Event {
     private int timeStep;
     private String typeToUpdate;
 
-    /**
-     * Constructor of an event.
-     *
-     * @param date
-     * @param typeToUpdate
-     */
     public SimulatorEvent(long date, Simulator simulator, int timeStep, String typeToUpdate) {
         super(date);
         this.simulator = simulator;
