@@ -18,7 +18,7 @@ public class Balls implements Backend{
     private final int velY = 5;
 
     /**
-     * This constructor, without any parameters, create 10 balls to initialize the game.
+     * This constructor, without any parameters, creates 10 balls to initialize the game.
      */
     public Balls() {
         for (int i = 0; i < 10; ++i) {
@@ -48,8 +48,8 @@ public class Balls implements Backend{
 
     /**
      * Translate all balls from the coordinates given in parameters.
-     * @param dx : value of the translation on x-axis
-     * @param dy : value of the translation on y-axis
+     * @param dx Value of the translation on x-axis
+     * @param dy Value of the translation on y-axis
      */
     public void translate(int dx, int dy) {
         for (Point ball : this.ballsList) {
@@ -69,7 +69,7 @@ public class Balls implements Backend{
 
     /**
      * Take a step forward of the all the balls in the list of balls.
-     * Corresponding to the changement applied on the balls with the button next of the simulation.
+     * Corresponding to the change applied on the balls with the button next of the simulation.
      * @see Backend
      */
     public void step(String type) {
@@ -95,8 +95,8 @@ public class Balls implements Backend{
 
     /**
      * Initialize the position of the ball given in parameter on the position choose also given in parameter.
-     * @param ball ball which coordinates will change.
-     * @param pos coordinates of the new position.
+     * @param ball Ball which coordinates will change.
+     * @param pos Coordinates of the new position.
      */
     private void translateInit(Point ball, int[] pos) {
         ball.move(pos[0], pos[1]);
