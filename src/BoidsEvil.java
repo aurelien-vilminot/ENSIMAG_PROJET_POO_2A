@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @see Boids
  */
 public class BoidsEvil extends Boids {
-    private static final int TIME_STEP = 1;
+    private final int TIME_STEP = 1;
 
     /**
      * Constructor of evil boids.
