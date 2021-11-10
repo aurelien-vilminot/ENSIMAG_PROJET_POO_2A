@@ -5,7 +5,14 @@ import java.util.ArrayList;
  * Class of cells corresponding to the game of Immigration, inherited from Cells.
  */
 public class CellImmigration extends Cell {
+	/**
+	 * The number of states.
+	 */
 	private static int n = 0;
+
+	/**
+	 * Array of colors, ordered by state.
+	 */
 	private static Color[] stateColor;
 
 	/**
