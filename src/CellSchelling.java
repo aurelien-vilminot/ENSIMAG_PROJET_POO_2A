@@ -5,8 +5,19 @@ import java.util.*;
  * Class of cells corresponding to the game of Schelling, inherited from Cells.
  */
 public class CellSchelling extends Cell {
-    private static int K=0;
+    /**
+     * The number of different colors of lodgment.
+     */
+    private static int k = 0;
+
+    /**
+     * List of free lodgments.
+     */
     private static ArrayList<int[]> freeLodgment = new ArrayList<>();
+
+    /**
+     * List of colors, ordered by state.
+     */
     private static ArrayList<Color> colors = new ArrayList<>();
 
     /**
@@ -17,7 +28,7 @@ public class CellSchelling extends Cell {
      */
     public CellSchelling(int x, int y) {
         super(x, y);
-        if (K == 0) {
+        if (k == 0) {
             throw new IllegalArgumentException("Neighbors number must be defined with setK() static method");
         }
         if (colors == null) {
@@ -36,7 +47,7 @@ public class CellSchelling extends Cell {
      */
     public CellSchelling(int x, int y, int state) {
         super(x, y, state);
-        if (K == 0) {
+        if (k == 0) {
             throw new IllegalArgumentException("Neighbors number must be defined with setK() static method");
         }
         if (colors == null) {
@@ -75,7 +86,7 @@ public class CellSchelling extends Cell {
         if (k > 8) {
             throw new IllegalArgumentException("Neighbors number must be lower than 9");
         }
-        K = k;
+        CellSchelling.k = k;
     }
 
     /**
@@ -115,7 +126,7 @@ public class CellSchelling extends Cell {
             }
         }
 
-        if (nbNeighboors > K) {
+        if (nbNeighboors > k) {
             try {
                 // Get the first free lodgement and remove it of freeLodgment static variable
                 int[] newCellLodgementCoord = freeLodgment.get(0);
