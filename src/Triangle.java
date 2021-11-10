@@ -3,8 +3,8 @@ import gui.GraphicalElement;
 import java.awt.*;
 
 /**
- * Class Triangle to represents boids by triangle, it implements a GraphicalElement
- * of the interface Simulable.
+ * Class Triangle to represents boids by triangle.
+ * It implements a GraphicalElement from the gui package.
  */
 public class Triangle implements GraphicalElement {
     private int[] x = new int[3];
@@ -14,13 +14,12 @@ public class Triangle implements GraphicalElement {
     private float borderWidth;
 
     /**
-     * Isosceles triangle constructor
-     *
-     * @param startPoint  : point at the base of the triangle
-     * @param endPoint    : point at the tip of the triangle
-     * @param drawColor   : outline color (can be null)
-     * @param fillColor   : fill color (can be null)
-     * @param borderWidth : border width
+     * Isosceles triangle constructor.
+     * @param startPoint Point at the base of the triangle.
+     * @param endPoint Point at the tip of the triangle.
+     * @param drawColor Outline color (can be null).
+     * @param fillColor Fill color (can be null).
+     * @param borderWidth Border width.
      */
     public Triangle(Vector startPoint, Vector endPoint, Color drawColor, Color fillColor, float borderWidth) {
         super();
@@ -42,14 +41,13 @@ public class Triangle implements GraphicalElement {
     }
 
     /**
-     * Isosceles triangle representing a boid constructor
-     *
-     * @param boidSize    : size of the boid (height of the triangle)
-     * @param position    : position of the boid (tip of the triangle)
-     * @param velocity    : velocity of the boid (height direction of the triangle)
-     * @param drawColor   : outline color (can be null)
-     * @param fillColor   : fill color (can be null)
-     * @param borderWidth : border width
+     * Isosceles triangle representing a boid constructor.
+     * @param boidSize Size of the boid (height of the triangle).
+     * @param position Position of the boid (tip of the triangle).
+     * @param velocity Velocity of the boid (height direction of the triangle).
+     * @param drawColor Outline color (can be null).
+     * @param fillColor Fill color (can be null).
+     * @param borderWidth Border width.
      */
     public Triangle(int boidSize, Vector position, Vector velocity, Color drawColor, Color fillColor, float borderWidth) {
         super();
@@ -76,6 +74,10 @@ public class Triangle implements GraphicalElement {
         this.borderWidth = borderWidth;
     }
 
+    /**
+     * Paints the triangle.
+     * @param g2d Graphics2D element.
+     */
     public void paint(Graphics2D g2d) {
         Stroke currentStroke = g2d.getStroke();
         g2d.setStroke(new BasicStroke(this.borderWidth));

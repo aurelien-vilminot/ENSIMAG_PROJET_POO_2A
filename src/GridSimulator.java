@@ -4,8 +4,9 @@ import gui.Rectangle;
 import java.awt.*;
 
 /**
- * Management of the grid display common to all games.
- * Implements the interface Simulable which cares of the display.
+ * Management of the grid display common to all cell games.
+ * Implements the interface Simulable which takes care of the display.
+ * @see Simulator
  */
 public class GridSimulator extends Simulator {
 	private static final Color borderColor = Color.decode("#FCBACB");
@@ -14,11 +15,11 @@ public class GridSimulator extends Simulator {
 	private int columnCell;
 
 	/**
-	 * Constructor of an object which will display the grid, using the GUISimulator
-	 * @param gui : an instance of GUISimulator
-	 * @param gameName : name of the game.
-	 * @param cellSize : size of the cell
-	 * @param cells : cells used to fill the grid.
+	 * Constructor of an object which will display the grid, using the GUISimulator.
+	 * @param gui An instance of GUISimulator.
+	 * @param gameName Name of the game.
+	 * @param cellSize Size of the cell.
+	 * @param cells Cells used to fill the grid.
 	 */
 	public GridSimulator(GUISimulator gui, String gameName, int cellSize, Cell... cells) {
 		super(gui);

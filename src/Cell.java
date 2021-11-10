@@ -10,7 +10,7 @@ public abstract class Cell {
 	protected int state = 0;
 
 	/**
-	 * First constructor of a cell.
+	 * Constructor of cell.
 	 * @param x Coordinate on x-axis.
 	 * @param y Coordinate on y-axis.
 	 */
@@ -20,7 +20,7 @@ public abstract class Cell {
 	}
 
 	/**
-	 * Overloading of the constructor of cell taking into account the state of the cell created.
+	 * Constructor of cell with initial state.
 	 * @param x Coordinate on x-axis.
 	 * @param y Coordinate on y-axis.
 	 * @param state State of the cell created.

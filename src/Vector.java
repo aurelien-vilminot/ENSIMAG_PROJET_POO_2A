@@ -1,24 +1,16 @@
 import java.lang.Math;
 
 /**
- * Class of vector, used to represent the 2 coordinates of a boid at each time.
+ * Class Vector, which implements a 2D math vector.
  */
 public class Vector {
     private float x;
     private float y;
 
     /**
-     * First constructor of vector, which fill the elements with an 0.
-     */
-    public Vector() {
-        this.x = 0;
-        this.y = 0;
-    }
-
-    /**
-     * Overloading of the constructor, which fill the elements with the parameters.
-     * @param x : value on the axis X.
-     * @param y : value on the axis Y.
+     * Constructor of vector.
+     * @param x Value on the axis X.
+     * @param y Value on the axis Y.
      */
     public Vector(float x, float y) {
         this.x = x;
@@ -26,19 +18,25 @@ public class Vector {
     }
 
     /**
-     * Overloading of the constructor, which fill the elements with the vector in parameters.
-     * @param vector : the vector to copy
+     * Constructor of vector, which fills the elements with an 0.
+     */
+    public Vector() {
+        this(0, 0);
+    }
+
+    /**
+     * Constructor of vector, which fills the elements with the vector in parameters.
+     * @param vector The vector to copy.
      */
     public Vector(Vector vector) {
-        this.x = vector.getX();
-        this.y = vector.getY();
+        this(vector.getX(), vector.getY());
     }
 
     /**
      * Sums the two vectors passed into parameters.
-     * @param v1 : Vector
-     * @param v2 : Vector
-     * @return Sum of the 2 vectors in a new Vector
+     * @param v1 Vector.
+     * @param v2 Vector.
+     * @return Sum of the 2 vectors in a new Vector.
      */
     public static Vector add(Vector v1, Vector v2) {
         return new Vector(v1.getX() + v2.getX(), v1.getY() + v2.getY());
@@ -46,9 +44,9 @@ public class Vector {
 
     /**
      * Subtracts the two vectors passed into parameters.
-     * @param v1 : Vector
-     * @param v2 : Vector
-     * @return Subtraction of the 2 vectors in a new Vector
+     * @param v1 Vector.
+     * @param v2 Vector.
+     * @return Subtraction of the 2 vectors in a new Vector.
      */
     public static Vector sub(Vector v1, Vector v2) {
         return new Vector(v1.getX() - v2.getX(), v1.getY() - v2.getY());
@@ -56,7 +54,7 @@ public class Vector {
 
     /**
      * Sum the vector to itself and modify directly its value.
-     * @param v : Vector
+     * @param v Vector.
      */
     public void add(Vector v) {
         this.x += v.getX();
@@ -65,7 +63,7 @@ public class Vector {
 
     /**
      * Subtract the vector to itself and modify directly its value.
-     * @param v : Vector
+     * @param v Vector.
      */
     public void sub(Vector v) {
         this.x -= v.getX();
@@ -73,8 +71,8 @@ public class Vector {
     }
 
     /**
-     * Multiply all the values of the vector by m.
-     * @param m : float
+     * Multiply all the values of the vector by a coefficient.
+     * @param m float.
      */
     public void mult(float m) {
         this.x *= m;
@@ -83,9 +81,9 @@ public class Vector {
 
     /**
      * Calculate the distance between 2 vectors.
-     * @param v1 : Vector
-     * @param v2 : Vector
-     * @return Distance between points represented by *v1* and *v2*
+     * @param v1 Vector.
+     * @param v2 Vector.
+     * @return Distance between the points represented by the vectors.
      */
     public static float distance(Vector v1, Vector v2) {
         return (float) Math.sqrt(Math.pow(v1.getX() - v2.getX(), 2) + Math.pow(v1.getY() - v2.getY(), 2));
@@ -93,7 +91,7 @@ public class Vector {
 
     /**
      * Calculate the norm of the vector.
-     * @return Norm of the calling Vector
+     * @return Norm of the calling Vector.
      */
     public float norm() {
         return (float) Math.sqrt(Math.pow(this.getX(), 2) + Math.pow(this.getY(), 2));

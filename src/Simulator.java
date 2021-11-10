@@ -1,11 +1,19 @@
 import gui.GUISimulator;
 import gui.Simulable;
 
+/**
+ * Abstract class for the management of the display for all games.
+ * Implements the interface Simulable which takes care of the display.
+ */
 public abstract class Simulator implements Simulable {
     protected GUISimulator gui;
     protected Backend backend;
     protected EventManager eventManager = new EventManager();
 
+    /**
+     * Constructor of a simulator.
+     * @param gui An instance of GUISimulator.
+     */
     public Simulator(GUISimulator gui) {
         this.gui = gui;
     }

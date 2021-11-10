@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.lang.Math;
 
+/**
+ * Management of the grid backend common to all cell games.
+ * Implements the interface Backend.
+ */
 public class Grid implements Backend {
 	private Cell[][] cellArray;
 	private int[][] initStatesArray;
@@ -9,10 +13,10 @@ public class Grid implements Backend {
 
 	/**
 	 * Constructor of a grid containing specific cells of the game choose.
-	 * @param height : height of the grid
-	 * @param width : width of the grid
-	 * @param gameName : choice of the game
-	 * @param cells : cells used in the grid
+	 * @param height Height of the grid.
+	 * @param width Width of the grid.
+	 * @param gameName Choice of the game.
+	 * @param cells Cells used in the grid.
 	 */
 	public Grid(int height, int width, String gameName, Cell... cells) {
 		this.cellArray = new Cell[height][width];
@@ -73,9 +77,9 @@ public class Grid implements Backend {
 
 	/**
 	 * Gives the list of neighbours of a cell.
-	 * @param x : position of the cell on the grid on the axis X
-	 * @param y : position of the cell on the grid on the axis Y
-	 * @return the list of neighbours of a given cell, paying attention whether the cell is on the edges or not.
+	 * @param x Position of the cell on the grid on the axis X.
+	 * @param y Position of the cell on the grid on the axis Y.
+	 * @return The list of neighbours of a given cell, with interconnected edges.
 	 */
 	public ArrayList<Cell> getNeighbours(int x, int y) {
 		ArrayList<Cell> nArray = new ArrayList<>();
@@ -94,6 +98,7 @@ public class Grid implements Backend {
 
 	/**
 	 * Step forward the current game, updating the states of the different cells.
+     * @param type Type of the cell. Can be null.
 	*/
 	public void step(String type) {
 		ArrayList<int[]> stateList = new ArrayList<>();
@@ -104,7 +109,6 @@ public class Grid implements Backend {
 				// coordStates[0][0] = x coord of the first cell
 				// coordStates[0][1] = y coord of the first cell
 				// coordStates[0][2] = state of the first cell
-				// ...
 				ArrayList<int[]> coordStates = this.cellArray[i][j].nextState(getNeighbours(i, j));
 				stateList.addAll(coordStates);
 			}
