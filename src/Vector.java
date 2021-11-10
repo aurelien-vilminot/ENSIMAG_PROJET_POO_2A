@@ -9,8 +9,8 @@ public class Vector {
 
     /**
      * Constructor of vector.
-     * @param x Value on the axis X.
-     * @param y Value on the axis Y.
+     * @param x Value on the x-axis.
+     * @param y Value on the y-axis.
      */
     public Vector(float x, float y) {
         this.x = x;

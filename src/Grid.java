@@ -62,8 +62,8 @@ public class Grid implements Backend {
 
 	/**
 	 * Gives the list of neighbours of a cell.
-	 * @param x Position of the cell on the grid on the axis X.
-	 * @param y Position of the cell on the grid on the axis Y.
+	 * @param x Position of the cell on the grid on the x-axis.
+	 * @param y Position of the cell on the grid on the y-axis.
 	 * @return The list of neighbours of a given cell, with interconnected edges.
 	 */
 	public ArrayList<Cell> getNeighbours(int x, int y) {
