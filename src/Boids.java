@@ -133,10 +133,16 @@ public abstract class Boids {
         this.getAcceleration().add(vectorBorderRule);
     }
 
+    /**
+     * Update velocity by adding the acceleration.
+     */
     public final void updateVelocity() {
         this.velocity.add(this.acceleration);
     }
 
+    /**
+     * Update position by adding the velocity.
+     */
     public final void updatePosition() {
         this.position.add(this.velocity);
     }

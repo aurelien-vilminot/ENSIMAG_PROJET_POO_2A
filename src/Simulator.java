@@ -18,6 +18,9 @@ public abstract class Simulator implements Simulable {
         this.gui = gui;
     }
 
+    /**
+     * Draw graphical elements.
+     */
     public abstract void draw();
 
     public GUISimulator getGui() {
@@ -32,11 +35,18 @@ public abstract class Simulator implements Simulable {
         return this.eventManager;
     }
 
+    /**
+     * Call eventManager to execute all next events.
+     * @see EventManager
+     */
     @Override
     public void next() {
         this.eventManager.next();
     }
 
+    /**
+     * Puts simulator in its initial state.
+     */
     @Override
     public void restart() {
         this.eventManager.restart();
