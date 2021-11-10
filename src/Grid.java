@@ -28,17 +28,10 @@ public class Grid implements Backend {
 			for (int j = 0; j < width; j++) {
 				this.initStatesArray[i][j] = 0;
 				switch (gameName) {
-					case "Conway":
-						this.cellArray[i][j] = new CellConway(i, j, 0);
-						break;
-					case "Immigration":
-						this.cellArray[i][j] = new CellImmigration(i, j, 0);
-						break;
-					case "Schelling":
-						this.cellArray[i][j] = new CellSchelling(i, j, 0);
-						break;
-					default:
-						throw new IllegalArgumentException("!!! THE GAME DOESN'T EXIST !!!");
+					case "Conway" -> this.cellArray[i][j] = new CellConway(i, j, 0);
+					case "Immigration" -> this.cellArray[i][j] = new CellImmigration(i, j, 0);
+					case "Schelling" -> this.cellArray[i][j] = new CellSchelling(i, j, 0);
+					default -> throw new IllegalArgumentException("!!! THE GAME DOESN'T EXIST !!!");
 				}
 			}
 		}
@@ -53,14 +46,6 @@ public class Grid implements Backend {
 
 	public Cell[][] getCellArray() {
 		return this.cellArray;
-	}
-
-	public int getHeight() {
-		return this.height;
-	}
-
-	public int getWidth() {
-		return this.width;
 	}
 
 

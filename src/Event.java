@@ -2,7 +2,7 @@
  * Abstract class to create events.
  */
 public abstract class Event {
-    private final long date;
+    private long date;
 
     /**
      * Constructor of an event.

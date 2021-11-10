@@ -14,8 +14,8 @@ public class Balls implements Backend{
     // Width of area
     private int xMax, yMax;
 
-    private final int velX = 10;
-    private final int velY = 5;
+    private final int VEL_X = 10;
+    private final int VEL_Y = 5;
 
     /**
      * This constructor, without any parameters, creates 10 balls to initialize the game.
@@ -23,7 +23,7 @@ public class Balls implements Backend{
     public Balls() {
         for (int i = 0; i < 10; ++i) {
             ballsList.add(new Point(i, 0));
-            velList.add(new float[]{velX, velY});
+            velList.add(new float[]{VEL_X, VEL_Y});
             posInit.add(new int[]{i, 0});
         }
     }
@@ -37,7 +37,7 @@ public class Balls implements Backend{
         this.yMax = yMax;
         for (Point ball : tab) {
             ballsList.add(ball);
-            velList.add(new float[]{velX, velY});
+            velList.add(new float[]{VEL_X, VEL_Y});
             posInit.add(new int[]{ball.x, ball.y});
         }
     }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
  * Class of cells corresponding to the game of life, inherited from Cells.
  */
 public class CellConway extends Cell {
-	private static final Color colorSateAlive = Color.decode("#03A5FC");
-	private static final Color colorSateDead = Color.decode("#F2F2F2");
+	private final Color COLOR_STATE_ALIVE = Color.decode("#03A5FC");
+	private final Color COLOR_STATE_DEAD = Color.decode("#F2F2F2");
 
 	/**
 	 * Constructor of life cell.
@@ -65,9 +65,9 @@ public class CellConway extends Cell {
 	@Override
 	public Color getCellColor() {
 		if (this.state == 0) {
-			return colorSateDead;
+			return this.COLOR_STATE_DEAD;
 		} else {
-			return colorSateAlive;
+			return this.COLOR_STATE_ALIVE;
 		}
 	}
 }

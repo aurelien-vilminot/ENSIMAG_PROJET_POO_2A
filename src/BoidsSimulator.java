@@ -8,9 +8,9 @@ import java.util.ArrayList;
  * @see Simulator
  */
 public class BoidsSimulator extends Simulator {
-    private static final Color borderColor = Color.decode("#FFFFFF");
-    private static final int boidSize = 10;
-    private static final float borderWidth = 1;
+    private final Color BORDER_COLOR = Color.decode("#FFFFFF");
+    private final float BORDER_WIDTH = 1;
+    private final int BOIDS_SIZE = 10;
 
     /**
      * Initialisation of the interface which will simulate by adding an event per type of boids.
@@ -36,8 +36,8 @@ public class BoidsSimulator extends Simulator {
         BoidsBackend boidsBackend = (BoidsBackend) this.backend;
         ArrayList<Boids> boidsList = boidsBackend.getBoidsList();
         for (Boids boid : boidsList) {
-            gui.addGraphicalElement(new Triangle(boidSize, boid.getPosition(), boid.getVelocity(),
-                    borderColor, boid.getColor(), borderWidth));
+            gui.addGraphicalElement(new Triangle(this.BOIDS_SIZE, boid.getPosition(), boid.getVelocity(),
+                    this.BORDER_COLOR, boid.getColor(), this.BORDER_WIDTH));
         }
     }
 }

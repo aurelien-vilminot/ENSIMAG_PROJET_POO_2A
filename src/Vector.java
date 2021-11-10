@@ -33,16 +33,6 @@ public class Vector {
     }
 
     /**
-     * Sums the two vectors passed into parameters.
-     * @param v1 Vector.
-     * @param v2 Vector.
-     * @return Sum of the 2 vectors in a new Vector.
-     */
-    public static Vector add(Vector v1, Vector v2) {
-        return new Vector(v1.getX() + v2.getX(), v1.getY() + v2.getY());
-    }
-
-    /**
      * Subtracts the two vectors passed into parameters.
      * @param v1 Vector.
      * @param v2 Vector.
@@ -87,14 +77,6 @@ public class Vector {
      */
     public static float distance(Vector v1, Vector v2) {
         return (float) Math.sqrt(Math.pow(v1.getX() - v2.getX(), 2) + Math.pow(v1.getY() - v2.getY(), 2));
-    }
-
-    /**
-     * Calculate the norm of the vector.
-     * @return Norm of the calling Vector.
-     */
-    public float norm() {
-        return (float) Math.sqrt(Math.pow(this.getX(), 2) + Math.pow(this.getY(), 2));
     }
 
     public float getX() {

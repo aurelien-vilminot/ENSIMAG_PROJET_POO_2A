@@ -52,11 +52,6 @@ public abstract class Boids {
         return this.velocity;
     }
 
-    public void setVelocity(Vector velocity) {
-        this.velocity.setX(velocity.getX());
-        this.velocity.setY(velocity.getY());
-    }
-
     public Vector getAcceleration() {
         return this.acceleration;
     }
@@ -76,10 +71,6 @@ public abstract class Boids {
 
     public String getType() {
         return this.type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**

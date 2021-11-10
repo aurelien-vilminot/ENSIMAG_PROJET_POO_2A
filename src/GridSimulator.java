@@ -9,7 +9,7 @@ import java.awt.*;
  * @see Simulator
  */
 public class GridSimulator extends Simulator {
-	private static final Color borderColor = Color.decode("#FCBACB");
+	private final Color BORDER_COLOR = Color.decode("#FCBACB");
 	private int cellSize;
 	private int linesCell;
 	private int columnCell;
@@ -55,7 +55,7 @@ public class GridSimulator extends Simulator {
 		for (int i = 0; i < this.linesCell; i++) {
 			for (int j = 0; j < this.columnCell; j++) {
 				gui.addGraphicalElement(new Rectangle(i * this.cellSize + padding, j * this.cellSize + padding,
-						borderColor, cellArray[i][j].getCellColor(), this.cellSize));
+						this.BORDER_COLOR, cellArray[i][j].getCellColor(), this.cellSize));
 			}
 		}
 	}
