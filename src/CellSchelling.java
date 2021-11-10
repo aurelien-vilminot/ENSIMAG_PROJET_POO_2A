@@ -120,6 +120,11 @@ public class CellSchelling extends Cell {
         int nbNeighboors = 0;
         ArrayList<int[]> coordStateArray = new ArrayList<>();
 
+        if (this.state == 0) {
+            // If the cell is a freeLodgement, it will don't move anyway
+            return coordStateArray;
+        }
+
         for (Cell c : neighbours) {
             if (c.state != this.state && c.state != 0) {
                 ++nbNeighboors;
