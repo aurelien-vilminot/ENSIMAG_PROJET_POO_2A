@@ -67,11 +67,10 @@ public class CellSchelling extends Cell {
     @Override
     public void setState(int state) {
         if (state != this.state) {
+            // Remove the cell from freeLodgment if it's contained on it
+            freeLodgment.removeIf(freeCell -> freeCell[0] == this.x && freeCell[1] == this.y);
             if (state == 0) {
                 freeLodgment.add(new int[]{this.x, this.y});
-            } else {
-                // Remove the cell from freeLodgment if it's contained on it
-                freeLodgment.removeIf(freeCell -> freeCell[0] == this.x && freeCell[1] == this.y);
             }
         }
         super.setState(state);

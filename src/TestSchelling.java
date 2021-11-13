@@ -25,7 +25,7 @@ public class TestSchelling {
     }
 
     public static void main(String[] args) {
-        int width = 1000;
+        int width = 500;
         int height = 500;
         int cellSize = 20;
         int nbStates = 4;
