@@ -36,7 +36,7 @@ public class Grid implements Backend {
 			}
 		}
 		for (Cell c : cells) {
-			if (c.x > this.width - 1 || c.y > this.height - 1) {
+			if (c.x > this.height - 1 || c.y > this.width - 1) {
 				throw new IllegalArgumentException("Init cells must be placed into the grid");
 			}
 			this.cellArray[c.x][c.y].setState(c.getState());

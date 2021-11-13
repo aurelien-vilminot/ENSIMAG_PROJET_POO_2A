@@ -9,13 +9,14 @@ import java.util.Random;
  * the interface Simulable using GUI, Grid, CellISchelling and Cell.
  */
 public class TestSchelling {
-    private static CellSchelling[] generateSchellingCells(int nbStates, int nbCells, int guiSize, int cellSize) {
+    private static CellSchelling[] generateSchellingCells(int nbStates, int nbCells, int width, int height, int cellSize) {
         Random random = new Random();
-        int maxRange = (guiSize / cellSize) - 1;
+        int maxX = (height / cellSize) - 1;
+        int maxY = (width / cellSize) - 1;
         ArrayList<CellSchelling> listOfCells = new ArrayList<>();
         for (int i = 0; i < nbCells; i++) {
-            int x = random.nextInt(maxRange);
-            int y = random.nextInt(maxRange);
+            int x = random.nextInt(maxX);
+            int y = random.nextInt(maxY);
             int state = random.nextInt(nbStates - 1) + 1;
             listOfCells.add(new CellSchelling(x, y, state));
         }
@@ -24,7 +25,8 @@ public class TestSchelling {
     }
 
     public static void main(String[] args) {
-        int guiSize = 500;
+        int width = 500;
+        int height = 1000;
         int cellSize = 20;
         int nbStates = 4;
         int nbCells = 100;
@@ -32,7 +34,7 @@ public class TestSchelling {
         GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
         CellSchelling.setK(k);
         CellSchelling.setColors(nbStates);
-        CellSchelling[] cellSchellings = generateSchellingCells(nbStates, nbCells, guiSize, cellSize);
+        CellSchelling[] cellSchellings = generateSchellingCells(nbStates, nbCells, width, height, cellSize);
         gui.setSimulable(new GridSimulator(gui, "Schelling", cellSize, cellSchellings));
     }
 }

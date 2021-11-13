@@ -54,7 +54,7 @@ public class GridSimulator extends Simulator {
 
 		for (int i = 0; i < this.linesCell; i++) {
 			for (int j = 0; j < this.columnCell; j++) {
-				gui.addGraphicalElement(new Rectangle(i * this.cellSize + padding, j * this.cellSize + padding,
+				gui.addGraphicalElement(new Rectangle(j * this.cellSize + padding, i * this.cellSize + padding,
 						this.BORDER_COLOR, cellArray[i][j].getCellColor(), this.cellSize));
 			}
 		}
