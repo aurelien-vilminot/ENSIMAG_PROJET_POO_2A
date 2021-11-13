@@ -25,13 +25,13 @@ public class TestSchelling {
     }
 
     public static void main(String[] args) {
-        int width = 500;
-        int height = 1000;
+        int width = 1000;
+        int height = 500;
         int cellSize = 20;
         int nbStates = 4;
         int nbCells = 100;
         int k = 1;
-        GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
+        GUISimulator gui = new GUISimulator(width, height, Color.BLACK);
         CellSchelling.setK(k);
         CellSchelling.setColors(nbStates);
         CellSchelling[] cellSchellings = generateSchellingCells(nbStates, nbCells, width, height, cellSize);
