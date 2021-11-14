@@ -93,7 +93,7 @@ public abstract class Boids {
      * Rule of wind: apply wind force to the group.
      * @return Vector corresponding to the wind force
      */
-    public Vector windRule() {
+    private Vector windRule() {
         return new Vector(0.1f, 0.9f);
     }
 
@@ -101,7 +101,7 @@ public abstract class Boids {
      * Rule of borders: keeping the flock within the area used by the gui.
      * @return Vector corresponding to the force applied on the boids.
      */
-    public Vector borderRule() {
+    private Vector borderRule() {
         Vector f = new Vector();
         Vector boidPosition = this.position;
 
@@ -122,15 +122,36 @@ public abstract class Boids {
     }
 
     /**
+     * Rule of separation: move away from other near boids.
+     * @param boidsArrayList List of boids of the space.
+     * @return Vector corresponding to the separation force applied to this boids.
+     */
+    private Vector separationRule(ArrayList<Boids> boidsArrayList) {
+        Vector f = new Vector(0, 0);
+        for (Boids b : boidsArrayList) {
+            if (b != this) {
+                float distance = Vector.distance(this.position, b.getPosition());
+                if (distance < this.detectionRadius) {
+                    f.sub(Vector.sub(b.getPosition(), this.position));
+                }
+            }
+        }
+        f.mult(1 / (float) 50);
+        return f;
+    }
+
+    /**
      * Apply the rules to modify boids' acceleration.
      * @param boidsArrayList List of boids of the space.
      */
     public void applyRules(ArrayList<Boids> boidsArrayList) {
         Vector vectorWindRule = this.windRule();
         Vector vectorBorderRule = this.borderRule();
+        Vector vectorSeparationRule = this.separationRule(boidsArrayList);
         // Calculate new acceleration
         this.setAcceleration(vectorWindRule);
-        this.getAcceleration().add(vectorBorderRule);
+        this.acceleration.add(vectorBorderRule);
+        this.acceleration.add(vectorSeparationRule);
     }
 
     /**

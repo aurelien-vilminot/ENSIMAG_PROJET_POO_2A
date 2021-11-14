@@ -21,7 +21,7 @@ public class BoidsEvil extends Boids {
      * @param boidsArrayList List of boids of the space.
      * @return Vector corresponding to the chase force applied to this boids.
      */
-    public Vector chaseRule(ArrayList<Boids> boidsArrayList) {
+    private Vector chaseRule(ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
         Boids nearest = null;
         float minDistance = 0;

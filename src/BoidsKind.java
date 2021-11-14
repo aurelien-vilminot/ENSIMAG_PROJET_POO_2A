@@ -21,7 +21,7 @@ public class BoidsKind extends Boids {
      * @param boidsArrayList List of boids of the space.
      * @return Vector corresponding to the cohesion force applied to this boids.
      */
-    public Vector cohesionRule(ArrayList<Boids> boidsArrayList) {
+    private Vector cohesionRule(ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
         for (Boids b : boidsArrayList) {
             if (b != this) {
@@ -40,30 +40,11 @@ public class BoidsKind extends Boids {
     }
 
     /**
-     * Rule of separation: move away from other near boids.
-     * @param boidsArrayList List of boids of the space.
-     * @return Vector corresponding to the separation force applied to this boids.
-     */
-    public Vector separationRule(ArrayList<Boids> boidsArrayList) {
-        Vector f = new Vector(0, 0);
-        for (Boids b : boidsArrayList) {
-            if (b != this) {
-                float distance = Vector.distance(this.position, b.getPosition());
-                if (distance < this.detectionRadius) {
-                    f.sub(Vector.sub(b.getPosition(), this.position));
-                }
-            }
-        }
-        f.mult(1 / (float) 50);
-        return f;
-    }
-
-    /**
      * Rule of alignment: matching the "perceived velocity" of the group.
      * @param boidsArrayList List of boids of the space.
      * @return Vector corresponding to the alignment force applied to this boids.
      */
-    public Vector alignmentRule(ArrayList<Boids> boidsArrayList) {
+    private Vector alignmentRule(ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
         for (Boids b : boidsArrayList) {
             if (b != this) {
@@ -86,7 +67,7 @@ public class BoidsKind extends Boids {
      * @param boidsArrayList List of boids of the space.
      * @return Vector corresponding to the fear force applied to this boids.
      */
-    public Vector fearRule(ArrayList<Boids> boidsArrayList) {
+    private Vector fearRule(ArrayList<Boids> boidsArrayList) {
         Vector f = new Vector(0, 0);
         Boids nearest = null;
         float minDistance = 0;
@@ -119,12 +100,10 @@ public class BoidsKind extends Boids {
         super.applyRules(boidsArrayList);
         // Apply its own rules
         Vector vectorCohesionRule = this.cohesionRule(boidsArrayList);
-        Vector vectorSeparationRule = this.separationRule(boidsArrayList);
         Vector vectorAlignmentRule = this.alignmentRule(boidsArrayList);
         Vector vectorFearRule = this.fearRule(boidsArrayList);
         // Calculate new acceleration
         this.acceleration.add(vectorCohesionRule);
-        this.acceleration.add(vectorSeparationRule);
         this.acceleration.add(vectorAlignmentRule);
         this.acceleration.add(vectorFearRule);
     }
