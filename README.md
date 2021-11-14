@@ -1,7 +1,7 @@
 Ensimag 2A POO - TPL
 ============================
 
-#Exécution
+# Exécution
 
 - Lors du développement du projet, la version 17.0.1 de la JDK a été utilisée. Ceci est la dernière version présente 
 sur le site d'Oracle ([lien de téléchargement](https://www.oracle.com/java/technologies/downloads/)).
