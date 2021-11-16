@@ -27,12 +27,15 @@ public class TestBoidsSimulator {
         int guiSize = 500;
         GUISimulator gui = new GUISimulator(guiSize, guiSize, Color.decode("#B1EEFE"));
 
-        int nbBoids = 40;
+        int nbBoids = 100;
         Boids[] boids = new Boids[nbBoids];
         ArrayList<int[]> listOfCoordinates = generateCoordinates(guiSize, nbBoids);
-        for (int i = 0 ; i  < nbBoids ; i += 2) {
-            boids[i] = new BoidsEvil(listOfCoordinates.get(i)[0], listOfCoordinates.get(i)[1], 50, guiSize, guiSize);
-            boids[i+1] = new BoidsKind(listOfCoordinates.get(i+1)[0], listOfCoordinates.get(i+1)[1], 50, guiSize, guiSize);
+        for (int i = 0 ; i  < nbBoids ; i += 1) {
+            if (i%10 != 0) {
+                boids[i] = new BoidsKind(listOfCoordinates.get(i)[0], listOfCoordinates.get(i)[1], 50, guiSize, guiSize);
+            } else {
+                boids[i] = new BoidsEvil(listOfCoordinates.get(i)[0], listOfCoordinates.get(i)[1], 50, guiSize, guiSize);
+            }
         }
 
         gui.setSimulable(new BoidsSimulator(gui, boids));
