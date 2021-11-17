@@ -11,9 +11,9 @@ public class CellSchelling extends Cell {
     private static int k = 0;
 
     /**
-     * List of free lodgments.
+     * Linked-list of free lodgments.
      */
-    private static ArrayList<int[]> freeLodgment = new ArrayList<>();
+    private static Queue<int[]> freeLodgment = new LinkedList<>();
 
     /**
      * List of colors, ordered by state.
@@ -133,8 +133,7 @@ public class CellSchelling extends Cell {
         if (nbNeighboors > k) {
             try {
                 // Get the first free lodgement and remove it of freeLodgment static variable
-                int[] newCellLodgementCoord = freeLodgment.get(0);
-                freeLodgment.remove(0);
+                int[] newCellLodgementCoord = freeLodgment.remove();
 
                 // Add the current cell to freeLodgment
                 freeLodgment.add(new int[]{this.x, this.y});

@@ -29,7 +29,7 @@ public class TestSchelling {
         int height = 500;
         int cellSize = 20;
         int nbStates = 4;
-        int nbCells = 100;
+        int nbCells = 90;
         int k = 1;
         GUISimulator gui = new GUISimulator(width, height, Color.BLACK);
         CellSchelling.setK(k);

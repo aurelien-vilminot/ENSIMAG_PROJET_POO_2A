@@ -68,8 +68,8 @@ public class Grid implements Backend {
 	 */
 	public ArrayList<Cell> getNeighbours(int x, int y) {
 		ArrayList<Cell> nArray = new ArrayList<>();
-		int w = this.width - 1;
-		int h = this.height - 1;
+		int w = this.width;
+		int h = this.height;
 		nArray.add(this.cellArray[Math.floorMod(x-1, h)][Math.floorMod(y-1, w)]); // topLeft
 		nArray.add(this.cellArray[Math.floorMod(x-1, h)][y]); // top
 		nArray.add(this.cellArray[Math.floorMod(x-1, h)][Math.floorMod(y+1, w)]); // topRight
