@@ -933,7 +933,7 @@
 											"width": 326.244140625,
 											"height": 13,
 											"underline": true,
-											"text": "-freeLodgment: ArrayList<int[][]>",
+											"text": "-freeLodgment: Queue<int[][]>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9555,7 +9555,7 @@
 							"name": "freeLodgment",
 							"visibility": "private",
 							"isStatic": true,
-							"type": "ArrayList<int[][]>"
+							"type": "Queue<int[][]>"
 						},
 						{
 							"_type": "UMLAttribute",
